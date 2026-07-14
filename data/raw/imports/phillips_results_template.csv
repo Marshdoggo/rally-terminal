@@ -1,0 +1,2 @@
+comp_id,asset_id,category,title,brand,model,reference,year,configuration,condition,box_papers,auction_name,lot_id,venue,source_url,sale_date,realized_price_usd,currency,estimate_low_usd,estimate_high_usd,buyer_premium_included,price_type,source_access,notes
+phillips-001,rally-rolex-daytona,watches,Rolex Daytona 116500LN,Rolex,Daytona,116500LN,2020,white dial,excellent,yes,Watch Auction,1,Geneva,https://www.phillips.com/calendar/upcoming,2026-01-01,195000,USD,170000,220000,TRUE,realized_with_premium,user_export,Replace with user-reviewed result row.

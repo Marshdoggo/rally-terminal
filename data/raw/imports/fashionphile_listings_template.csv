@@ -1,0 +1,2 @@
+comp_id,asset_id,title,brand,model,size,material,color,condition,status,listing_id,source_url,listing_date,list_price_usd,currency,price_type,source_access,notes
+fashionphile-001,rally-hermes-birkin-35,Hermes Birkin 35,Hermes,Birkin,35,Togo,Black,excellent,active,FP-001,https://www.fashionphile.com/,2026-01-01,175000,USD,ask,user_export,Replace with user-reviewed listing row.

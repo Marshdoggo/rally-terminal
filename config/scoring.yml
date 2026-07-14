@@ -1,0 +1,22 @@
+weights:
+  valuation_score: 0.30
+  liquidity_score: 0.20
+  category_momentum_score: 0.15
+  rarity_score: 0.15
+  data_quality_score: 0.10
+  exit_probability_score: 0.10
+
+category_modifiers:
+  handbags: 1.00
+  watches: 1.02
+  cars: 0.98
+  wine: 0.97
+  cards: 0.99
+  memorabilia: 0.99
+  comics: 0.96
+  books: 0.96
+  fossils: 0.92
+  natural_history: 0.92
+  art: 0.95
+  instruments: 0.94
+  other: 0.90

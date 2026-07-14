@@ -1,0 +1,4 @@
+asset_id,ticker,name,category,subcategory,issuer_cik,series_name,offering_date,offering_price,shares,market_cap_usd,last_price_usd,source_url,source_confidence,rarity_score,status,notes
+rally-hermes-birkin-35,HERMES35,2012 Hermes Birkin 35 Handbag,handbags,hermes_birkin,,Series #HermesBirkin35,2021-05-14,10.00,14000,168000,12.00,manual_seed,0.70,0.86,active,Seed asset for MVP dashboard.
+rally-chanel-flap,CHANELCF,Classic Chanel Double Flap Bag,handbags,chanel_flap,,Series #ChanelClassicFlap,2021-09-10,5.00,18000,99000,5.50,manual_seed,0.65,0.72,active,Manual values are illustrative and require verification.
+rally-rolex-daytona,DAYTONA,Rolex Daytona Reference 116500LN,watches,rolex_daytona,,Series #RolexDaytona116500,2020-11-20,20.00,8000,188000,23.50,manual_seed,0.68,0.80,active,Watch seed for cross-category testing.

@@ -1,0 +1,2 @@
+date,asset_id,ticker,price,bid,ask,volume,market_cap_usd,source,source_confidence
+2026-07-01,rally-hermes-birkin-35,HERMES35,12.00,11.50,12.50,100,168000,user_export,0.80

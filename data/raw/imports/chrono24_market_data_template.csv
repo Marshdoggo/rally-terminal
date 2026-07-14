@@ -1,0 +1,2 @@
+source,source_url,date,brand,model,reference,metric_name,metric_value,currency,source_access,source_confidence,notes
+Chrono24,https://www.chrono24.com/chronopulse.htm,2026-01-01,Rolex,Daytona,116500LN,chrono24_index_or_estimated_value,1000,USD,public_page,0.75,Replace with ChronoPulse/account/appraisal export row.

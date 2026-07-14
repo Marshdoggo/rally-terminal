@@ -1,0 +1,7 @@
+comp_id,category,subcategory,asset_id,source,source_url,date,price_usd,currency,condition,exactness_score,source_confidence,notes
+comp-hermes-001,handbags,hermes_birkin,rally-hermes-birkin-35,Sothebys,manual_seed,2026-01-15,182000,USD,excellent,0.90,0.82,Similar size and leather; provenance unverified in seed.
+comp-hermes-002,handbags,hermes_birkin,rally-hermes-birkin-35,Christies,manual_seed,2025-08-30,165000,USD,very_good,0.82,0.80,Older sale; condition slightly below target.
+comp-hermes-003,handbags,hermes_birkin,rally-hermes-birkin-35,Rebag Report,manual_seed,2025-12-01,176000,USD,excellent,0.74,0.72,Retail-market estimate rather than auction result.
+comp-chanel-001,handbags,chanel_flap,rally-chanel-flap,Fashionphile,manual_seed,2026-02-03,104000,USD,excellent,0.78,0.70,Manual seed comp.
+comp-chanel-002,handbags,chanel_flap,rally-chanel-flap,The RealReal,manual_seed,2025-10-01,96000,USD,very_good,0.70,0.66,Manual seed comp.
+comp-daytona-001,watches,rolex_daytona,rally-rolex-daytona,Phillips,manual_seed,2026-01-20,196000,USD,excellent,0.86,0.84,Manual seed comp.

@@ -1,0 +1,8 @@
+CATEGORY = "cars"
+
+
+def load_manual_template():
+    """Return an empty manual-import shape for car comps."""
+    from alt_asset_explorer.normalization import empty_comps_frame
+
+    return empty_comps_frame(category=CATEGORY)

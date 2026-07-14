@@ -1,0 +1,26 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.streamlit/secrets.toml
+
+# Large, source-derived, or researcher-local inputs are intentionally not versioned.
+data/raw/sec/
+data/raw/captures/*.txt
+data/raw/imports/rally_assets.csv
+data/raw/imports/rally_snapshots.csv
+data/raw/imports/sothebys_results.csv
+data/manual_imports/incoming/
+data/manual_imports/archive/
+data/manual_imports/quarantine/
+
+# Local custom indexes are not durable or shared.
+data/custom_indices/local/*.json
+
