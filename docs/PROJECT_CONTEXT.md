@@ -1,7 +1,7 @@
 # Rally Terminal Project Context
 
 Last audited: 2026-07-14  
-Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 5.1.0, 91 tests passing
+Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1, 91 tests passing
 
 ## Purpose And Product State
 

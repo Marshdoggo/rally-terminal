@@ -1,5 +1,5 @@
 pandas==2.3.3
-lxml==5.1.0
+lxml==6.1.1
 pydantic==2.12.3
 python-dotenv==1.2.1
 PyYAML==6.0.1
