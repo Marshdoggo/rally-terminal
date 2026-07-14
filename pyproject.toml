@@ -2,7 +2,7 @@
 name = "alt-asset-explorer"
 version = "0.1.0"
 description = "Standalone quantitative research dashboard for collectible assets."
-requires-python = ">=3.10"
+requires-python = ">=3.11,<3.12"
 dependencies = [
   "pandas>=2.0",
   "pydantic>=2.0",
