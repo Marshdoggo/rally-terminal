@@ -37,10 +37,10 @@ Current generated snapshot:
 | Canonical asset master | 550 |
 | Rally asset decision universe | 550 |
 | Normalized manual assets | 40 |
-| Normalized manual price observations | 489 |
-| Processed price history | 483 |
-| General Rally index rows | 296 |
-| Quarterly Rally index rows | 238 |
+| Normalized manual price observations | 536 |
+| Processed price history | 527 |
+| General Rally index rows | 322 |
+| Quarterly Rally index rows | 248 |
 | SEC series context | 1,565 |
 | Rally exits | 190 |
 | Comparable sales universe | 67 |
