@@ -43,7 +43,8 @@ EVENT_TYPES = {
 PRICE_EVENT_TYPES = {"executed_trade", "daily_close", "chart_observation"}
 PRECISION_STATUSES = {"exact", "rounded", "chart_estimate", "unverified"}
 SOURCE_TYPES = {"rally_app", "rally_app_chart", "rally_website", "sec_filing", "manual_research", "other"}
-EXIT_TYPES = {"asset_sale", "liquidation", "buyout", "buyout_offer", "distribution", "delisting", "unknown"}
+EXIT_TYPES = {"buyout", "asset_sale", "redemption", "liquidation", "delisting", "issuer_repurchase", "auction_sale", "private_sale", "other", "distribution", "unknown"}
+EXIT_STATUSES = {"active", "exit_announced", "pending_approval", "pending_settlement", "settled", "exited", "cancelled_exit", "unknown"}
 
 ASSET_COLUMNS = [
     "asset_id",

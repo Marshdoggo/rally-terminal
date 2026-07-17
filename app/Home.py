@@ -62,6 +62,9 @@ prices = load_processed_csv("price_history", required=True)
 manual_price_observations = load_normalized_csv("price_observations")
 liquidity = load_processed_csv("liquidity_metrics")
 coverage = load_report_csv("research_coverage")
+index_portfolio = load_processed_csv("index_portfolio_history")
+exit_analytics = load_processed_csv("exit_analytics")
+exchange_market_cap = load_processed_csv("exchange_market_cap_history")
 
 st.title("Rally Terminal")
 st.caption("Market intelligence for Rally collectibles. Research only, not financial advice.")
@@ -85,6 +88,48 @@ metric_cols[0].metric("Current Listed Assets", f"{len(current):,}")
 metric_cols[1].metric("Research Universe Rows", f"{len(market):,}")
 metric_cols[2].metric("Current Market Cap", format_money(current["current_market_cap_usd"].sum() if not current.empty else None))
 metric_cols[3].metric("Assets With Experimental FV", f"{int(current['experimental_estimated_fair_value_usd'].notna().sum()):,}")
+
+st.subheader("Market Size and Exit-Aware Total Return")
+if not exchange_market_cap.empty:
+    exchange_market_cap["date"] = pd.to_datetime(exchange_market_cap["date"], errors="coerce")
+    latest_exchange = exchange_market_cap.sort_values("date").iloc[-1]
+    size_cols = st.columns(6)
+    size_cols[0].metric("Tradable Exchange Market Cap", format_money(latest_exchange.get("total_market_cap")), help="Active tradable represented value only; exits leave this series.")
+    size_cols[1].metric("Active Tradable Assets", f"{int(latest_exchange.get('active_asset_count', 0)):,}")
+    size_cols[2].metric("Active Categories", f"{int(exchange_market_cap.get('active_category_count', pd.Series([0])).iloc[-1] if 'active_category_count' in exchange_market_cap else current['category'].nunique()):,}")
+    size_cols[3].metric("Pending Settlement Value", format_money(index_portfolio['pending_settlement_value'].max() if not index_portfolio.empty and 'pending_settlement_value' in index_portfolio else 0))
+    size_cols[4].metric("New Issuance YTD", format_money(exchange_market_cap.loc[exchange_market_cap['date'].dt.year.eq(latest_exchange['date'].year), 'new_issuance'].sum() if 'new_issuance' in exchange_market_cap else 0))
+    size_cols[5].metric("Capital Removed Through Exits YTD", format_money(exchange_market_cap.loc[exchange_market_cap['date'].dt.year.eq(latest_exchange['date'].year), 'removed_capital'].sum() if 'removed_capital' in exchange_market_cap else 0))
+if not index_portfolio.empty:
+    index_portfolio["date"] = pd.to_datetime(index_portfolio["date"], errors="coerce")
+    tr_categories = ["all"] + sorted([c for c in index_portfolio["category"].dropna().astype(str).unique() if c != "all"])
+    tr_cols = st.columns([1.8, 1.2, 1.2])
+    tr_category = tr_cols[0].selectbox("Total-return universe", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="home_tr_category")
+    tr_rebal = tr_cols[1].selectbox("Rebalance frequency", sorted(index_portfolio["rebalance_frequency"].dropna().unique()), key="home_tr_rebalance")
+    tr_range = tr_cols[2].selectbox("Total-return date range", ["Entire history", "Last 3 years", "Last year"], key="home_tr_range")
+    tr = index_portfolio[index_portfolio["category"].astype(str).eq(tr_category) & index_portfolio["rebalance_frequency"].astype(str).eq(tr_rebal)].copy()
+    if tr_range != "Entire history" and not tr.empty:
+        years = 3 if tr_range == "Last 3 years" else 1
+        tr = tr[tr["date"] >= tr["date"].max() - pd.DateOffset(years=years)]
+    tr_plot = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-Weighted Total Return Index", "market_cap_weight":"Market-Cap-Weighted Total Return Index"})
+    st.plotly_chart(px.line(tr_plot, x="date", y=[c for c in tr_plot.columns if c != "date"], title="What $100 Became (realized exits reinvested on schedule)"), use_container_width=True)
+    latest_tr = tr.sort_values("date").groupby("weighting_method").tail(1)
+    ret_cols = st.columns(6)
+    for idx, method in enumerate(["equal_weight", "market_cap_weight"]):
+        row = latest_tr[latest_tr["weighting_method"].eq(method)]
+        if not row.empty:
+            r = row.iloc[0]; label = "Equal-weighted" if method == "equal_weight" else "Cap-weighted"
+            ret_cols[idx*3].metric(label + " return", format_pct(r.get("cumulative_return")))
+            ret_cols[idx*3+1].metric(label + " CAGR", format_pct((float(r.get("index_level", 100))/100) ** (365.25 / max((tr["date"].max()-tr["date"].min()).days, 1)) - 1))
+            ret_cols[idx*3+2].metric(label + " max drawdown", format_pct(tr[tr["weighting_method"].eq(method)]["drawdown"].min()))
+if not exit_analytics.empty:
+    ex_cols = st.columns(6)
+    ex_cols[0].metric("Total Exited Assets", f"{exit_analytics['asset_id'].nunique():,}")
+    ex_cols[1].metric("Total Realized Exit Proceeds", format_money(exit_analytics.get("exit_market_cap", pd.Series(dtype=float)).sum()))
+    ex_cols[2].metric("Realized Exit P/L", format_money(exit_analytics.get("realized_pl", pd.Series(dtype=float)).sum()))
+    ex_cols[3].metric("Median Exit Return", format_pct(exit_analytics.get("total_return", pd.Series(dtype=float)).median()))
+    ex_cols[4].metric("Median Holding Period", f"{pd.to_numeric(exit_analytics.get('holding_period_days'), errors='coerce').median():,.0f} days")
+    ex_cols[5].metric("Premium vs Last Trade", format_pct(exit_analytics.get("premium_vs_last_trade", pd.Series(dtype=float)).median()))
 
 quarterly_observations = prepare_quarterly_observations(prices, canonical)
 complete_categories = completed_categories(coverage, canonical)

@@ -34,6 +34,8 @@ Streamlit Dashboard and CSV Exports
 
 ## Calculation methodology
 
+For exit-aware investor index methodology, see `docs/TOTAL_RETURN_EXIT_METHODOLOGY.md`. The exchange market-cap series is now explicitly a tradable exchange-size series, while investment performance is written to the `index_*` artifacts.
+
 - **Asset market cap** = selected price × shares outstanding.
 - **Price selection** uses direct same-date observations first. Reporting dates between observations use the most recent prior valid observation. Future observations are never used.
 - **Offering dates** add an offering-price observation when no same-date secondary observation exists.
@@ -43,8 +45,8 @@ Streamlit Dashboard and CSV Exports
 - **Removed capital** is reserved for terminal-event removals. Current committed exit linkage is sparse, so most removals are zero until asset-level exit dates are linked.
 - **Other adjustments** captures explicit reconciliation adjustments. The v1 pipeline keeps this zero unless future share-count adjustments or corrections are modeled.
 - **Flow-adjusted return** is `(ending market cap - net external flow) / prior market cap - 1` where net external flow is new issuance minus removed capital plus adjustments.
-- **Market-cap-weighted index** chains the flow-adjusted exchange return from 100.
-- **Equal-weighted index** averages active asset returns for each reporting date and chains from 100.
+- **Legacy flow-adjusted index fields** remain in the exchange market-cap artifact for backward compatibility. First-class investment performance now comes from `index_portfolio_history.csv` and includes realized exits, pending settlement, cash, and scheduled reinvestment.
+- **Exit removals** reduce tradable exchange market cap and are reported as removed capital rather than ordinary negative price performance.
 - **Category decomposition** dynamically groups by the canonical category field and reconciles category market caps to total exchange market cap.
 - **Coverage** distinguishes direct observations, carried-forward prices, observation age, stale assets, and direct/carried market-cap coverage.
 
@@ -72,6 +74,10 @@ The rebuild writes:
 - `data/processed/exchange_data_quality_report.csv`
 - `data/processed/exchange_reconciliation_report.csv`
 - `data/processed/exchange_validation_warnings.csv`
+- `data/processed/rally_exit_events.csv`
+- `data/processed/index_portfolio_history.csv`
+- `data/processed/index_constituent_history.csv`
+- `data/processed/exit_analytics.csv`
 
 ## Troubleshooting reconciliation errors
 

@@ -84,3 +84,68 @@ def test_frequency_outputs(tmp_path):
     for freq in ["native", "weekly", "monthly", "quarterly"]:
         result = rebuild_exchange_history(assets(), prices(), pd.DataFrame(), frequency=freq, output_dir=tmp_path / freq)
         assert set(result.market_cap_history["frequency"]) == {freq}
+
+from alt_asset_explorer.total_return import TotalReturnConfig, build_total_return_indexes, normalize_exit_events
+
+
+def two_asset_example_assets() -> pd.DataFrame:
+    return pd.DataFrame([
+        {"asset_id": "a", "ticker": "A", "name": "Alpha", "category": "cars", "share_count": 1, "offering_date": "2020-01-01", "offering_price_usd": 50, "status": "trading"},
+        {"asset_id": "b", "ticker": "B", "name": "Beta", "category": "cars", "share_count": 1, "offering_date": "2020-01-01", "offering_price_usd": 50, "status": "trading"},
+    ])
+
+
+def test_two_asset_hand_calculated_exit_total_return_vs_tradable_market_cap(tmp_path):
+    a = two_asset_example_assets()
+    p = pd.DataFrame([
+        {"asset_id": "a", "date": "2020-01-01", "last": 50, "event_type": "offering_price"},
+        {"asset_id": "b", "date": "2020-01-01", "last": 50, "event_type": "offering_price"},
+        {"asset_id": "a", "date": "2020-02-01", "last": 100, "event_type": "chart_observation"},
+        {"asset_id": "b", "date": "2020-02-01", "last": 50, "event_type": "chart_observation"},
+    ])
+    e = pd.DataFrame([{"asset_id": "a", "sale_date": "2020-02-01", "exit_price_per_share": 100, "exit_status": "settled", "exit_type": "buyout"}])
+    port, const, exits, analytics = build_total_return_indexes(a, p, e, frequency="native")
+    full_eq = port[(port["category"].eq("all")) & (port["weighting_method"].eq("equal_weight"))].sort_values("date")
+    assert full_eq.iloc[0]["index_level"] == 100
+    assert round(float(full_eq.iloc[-1]["index_level"]), 6) == 150
+    result = rebuild_exchange_history(a, p, e, frequency="native", output_dir=tmp_path)
+    latest_mcap = result.market_cap_history.sort_values("date").iloc[-1]["total_market_cap"]
+    assert latest_mcap == 50
+    assert result.market_cap_history.sort_values("date").iloc[-1]["removed_capital"] == 100
+
+
+def test_exit_price_hierarchy_cancelled_and_fallback_last_trade():
+    a = assets()
+    p = prices()
+    e = pd.DataFrame([
+        {"asset_id": "a", "sale_date": "2020-01-22", "exit_total_value": 130, "shares_at_exit": 10, "exit_status": "settled"},
+        {"asset_id": "b", "sale_date": "2020-01-22", "exit_price_per_share": 50, "exit_status": "cancelled_exit"},
+        {"asset_id": "b", "sale_date": "2020-01-22", "exit_status": "settled"},
+    ])
+    norm = normalize_exit_events(a, e, p)
+    assert norm.loc[norm["asset_id"].eq("a"), "terminal_price"].iloc[0] == 13
+    assert pd.isna(norm.loc[norm["exit_status"].eq("cancelled_exit"), "terminal_price"].iloc[0])
+    fallback = norm[(norm["asset_id"].eq("b")) & (norm["exit_status"].eq("settled"))].iloc[0]
+    assert fallback["terminal_price"] == 22
+    assert fallback["terminal_price_source"] == "last_valid_secondary_market_price"
+
+
+def test_pending_settlement_cash_reinvests_at_next_monthly_rebalance():
+    a = assets()
+    p = pd.concat([prices(), pd.DataFrame([{"asset_id": "a", "date": "2020-02-28", "last": 12, "event_type": "chart_observation"}, {"asset_id": "b", "date": "2020-02-28", "last": 22, "event_type": "chart_observation"}])], ignore_index=True)
+    e = pd.DataFrame([{"asset_id": "a", "sale_date": "2020-01-22", "settlement_date": "2020-02-15", "exit_price_per_share": 12, "exit_status": "pending_settlement"}])
+    port, _, _, _ = build_total_return_indexes(a, p, e, frequency="native")
+    full = port[(port["category"].eq("all")) & (port["weighting_method"].eq("equal_weight"))].sort_values("date")
+    assert full["pending_settlement_value"].max() >= 100
+    assert full.iloc[-1]["cash_value"] == 0
+    assert full.iloc[-1]["active_constituent_count"] == 1
+
+
+def test_cap_weight_and_equal_weight_differ_with_unequal_market_caps():
+    a = assets()
+    a.loc[1, "offering_date"] = "2020-01-01"
+    a.loc[1, "share_count"] = 20
+    p = prices()
+    port, _, _, _ = build_total_return_indexes(a, p, pd.DataFrame(), frequency="weekly", config=TotalReturnConfig(rebalance_frequency="weekly"))
+    latest = port[port["category"].eq("all")].sort_values("date").groupby("weighting_method").tail(1).set_index("weighting_method")
+    assert latest.loc["equal_weight", "index_level"] != latest.loc["market_cap_weight", "index_level"]
