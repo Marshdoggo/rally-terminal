@@ -18,19 +18,22 @@ from alt_asset_explorer.exchange_history import performance_summary, rebuild_exc
 st.set_page_config(page_title="Exchange Market Cap & Performance", layout="wide")
 render_data_diagnostics()
 st.title("Exchange Market Cap & Performance")
-st.caption("Historical represented Rally exchange capitalization, flow-adjusted performance, category mix, and coverage diagnostics from committed processed artifacts.")
+st.caption("Tradable Rally exchange capitalization is separated from exit-aware investor total-return indexes. All data comes from committed processed artifacts, not live Rally listings.")
 
 @st.cache_data(show_spinner=False)
-def load_exchange_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_exchange_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     return (
         load_processed_csv("exchange_market_cap_history"),
         load_processed_csv("exchange_category_history"),
         load_processed_csv("exchange_asset_history"),
         load_processed_csv("exchange_data_quality_report"),
         load_processed_csv("exchange_reconciliation_report"),
+        load_processed_csv("index_portfolio_history"),
+        load_processed_csv("index_constituent_history"),
+        load_processed_csv("exit_analytics"),
     )
 
-market, category, asset, quality, recon = load_exchange_data()
+market, category, asset, quality, recon, portfolio, constituents, exit_analytics = load_exchange_data()
 if market.empty:
     st.warning("Exchange history has not been generated yet. Run `python3 scripts/rebuild_exchange_history.py --frequency native` or rebuild the full dataset.")
     if st.button("Build exchange history now from committed processed inputs"):
@@ -38,7 +41,7 @@ if market.empty:
         st.success(f"Built {len(result.market_cap_history):,} market-cap rows. Refresh the page to load the cached artifact.")
     st.stop()
 
-for frame in [market, category, asset, quality, recon]:
+for frame in [market, category, asset, quality, recon, portfolio, constituents, exit_analytics]:
     if not frame.empty and "date" in frame:
         frame["date"] = pd.to_datetime(frame["date"], errors="coerce")
 
@@ -71,7 +74,7 @@ if not asset_f.empty:
 latest = market_f.iloc[-1]
 summary = performance_summary(market_f, frequency=frequency_label)
 cols = st.columns(6)
-cols[0].metric("Exchange market cap", f"${latest['total_market_cap']:,.0f}")
+cols[0].metric("Tradable Exchange Market Cap", f"${latest['total_market_cap']:,.0f}", help="Active tradable represented value only; terminal exits leave this series.")
 cols[1].metric("Issued capital", f"${latest['cumulative_invested_capital']:,.0f}")
 cols[2].metric("Flow-adjusted P/L", f"${latest['cumulative_flow_adjusted_pl']:,.0f}")
 cols[3].metric("Since inception", f"{summary.get('since_inception_return', 0):.1%}")
@@ -84,16 +87,22 @@ cols2[2].metric("Latest observation", latest["date"].date().isoformat())
 cols2[3].metric("Annualized return", "n/a" if summary.get("annualized_return") is None else f"{summary['annualized_return']:.1%}")
 cols2[4].metric("Carried coverage", f"{latest['carried_forward_coverage_pct']:.1%}")
 
-st.subheader("Total Exchange Market Cap")
+st.subheader("Tradable Exchange Market Cap")
 fig = px.line(market_f, x="date", y="total_market_cap", hover_data=["active_asset_count", "direct_observation_asset_count", "carried_forward_asset_count", "direct_coverage_pct", "carried_forward_coverage_pct"], markers=True)
-fig.update_yaxes(tickprefix="$", title="Represented market cap")
+fig.update_yaxes(tickprefix="$", title="Tradable market cap")
 st.plotly_chart(fig, use_container_width=True)
 
-st.subheader("Market Cap vs Flow-Adjusted Performance")
+st.subheader("Exchange Size vs Total-Return Investment Indexes")
 fig2 = go.Figure()
 fig2.add_trace(go.Scatter(x=market_f["date"], y=market_f["total_market_cap"], name="Market cap", yaxis="y1"))
-index_col = "return_index" if weighting == "Market-cap weighted" else "equal_weighted_index"
-fig2.add_trace(go.Scatter(x=market_f["date"], y=market_f[index_col], name=weighting + " index", yaxis="y2"))
+if not portfolio.empty:
+    fullp = portfolio[(portfolio["category"].astype(str).eq("all")) & (portfolio["rebalance_frequency"].astype(str).eq("monthly"))]
+    for method, label in [("equal_weight", "Equal-weighted total return"), ("market_cap_weight", "Cap-weighted total return")]:
+        mp = fullp[fullp["weighting_method"].eq(method)]
+        fig2.add_trace(go.Scatter(x=mp["date"], y=mp["index_level"], name=label, yaxis="y2"))
+else:
+    index_col = "return_index" if weighting == "Market-cap weighted" else "equal_weighted_index"
+    fig2.add_trace(go.Scatter(x=market_f["date"], y=market_f[index_col], name=weighting + " legacy flow-adjusted index", yaxis="y2"))
 fig2.update_layout(yaxis=dict(title="Market cap", tickprefix="$"), yaxis2=dict(title="Index level", overlaying="y", side="right"), legend=dict(orientation="h"))
 st.plotly_chart(fig2, use_container_width=True)
 
@@ -120,13 +129,41 @@ with right:
     contrib = category_f.groupby("category", as_index=False).agg(price_effect=("price_effect", "sum"), new_issuance=("new_issuance", "sum"), market_cap_change=("category_market_cap", "last"))
     st.plotly_chart(px.bar(contrib.sort_values("price_effect"), x="price_effect", y="category", orientation="h", hover_data=["new_issuance", "market_cap_change"]), use_container_width=True)
 
+
+if not portfolio.empty:
+    tr_tab, exit_tab, audit_tab = st.tabs(["Total-Return Indexes", "Exit Activity", "Audit Trail"])
+    with tr_tab:
+        st.subheader("Exit-Aware Total-Return Indexes")
+        tr_categories = ["all"] + sorted([c for c in portfolio["category"].dropna().astype(str).unique() if c != "all"])
+        sel_cat = st.selectbox("Category", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="exchange_tr_category")
+        sel_rebal = st.selectbox("Rebalance", sorted(portfolio["rebalance_frequency"].dropna().unique()), key="exchange_tr_rebal")
+        tr = portfolio[portfolio["category"].astype(str).eq(sel_cat) & portfolio["rebalance_frequency"].astype(str).eq(sel_rebal)].copy()
+        wide = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-weighted total return", "market_cap_weight":"Market-cap-weighted total return"})
+        st.plotly_chart(px.line(wide, x="date", y=[c for c in wide.columns if c != "date"], markers=True), use_container_width=True)
+        st.plotly_chart(px.area(tr, x="date", y=["cash_value", "pending_settlement_value"], facet_row="weighting_method", title="Cash and pending settlement balances"), use_container_width=True)
+        st.plotly_chart(px.line(tr, x="date", y=["active_constituent_count", "eligible_constituent_count", "exited_constituent_count"], color="weighting_method", title="Constituent counts"), use_container_width=True)
+    with exit_tab:
+        st.subheader("Exit Activity")
+        if exit_analytics.empty:
+            st.info("No linked realized exit analytics are available in the current artifact.")
+        else:
+            st.plotly_chart(px.scatter(exit_analytics, x="exit_date", y="exit_price", color="category", size="exit_market_cap", hover_data=["asset_id", "total_return", "premium_vs_last_trade", "annualized_return"]), use_container_width=True)
+            st.dataframe(exit_analytics, use_container_width=True)
+    with audit_tab:
+        st.subheader("Downloadable Portfolio and Constituent Audit")
+        st.dataframe(tr.sort_values(["date", "weighting_method"]).tail(200), use_container_width=True)
+        st.download_button("Download portfolio history", portfolio.to_csv(index=False), "index_portfolio_history.csv")
+        st.download_button("Download constituent history", constituents.to_csv(index=False), "index_constituent_history.csv")
+        st.download_button("Download exit analytics", exit_analytics.to_csv(index=False), "exit_analytics.csv")
+
 with st.expander("Data quality and coverage", expanded=False):
     st.dataframe(quality[(quality["date"] >= start) & (quality["date"] <= end)], use_container_width=True)
     st.plotly_chart(px.bar(market_f, x="date", y=["direct_observation_market_cap", "carried_forward_market_cap"], title="Direct vs carried-forward market cap"), use_container_width=True)
 
 with st.expander("Methodology", expanded=False):
     st.markdown("""
-* **Market cap** is price × shares outstanding for assets active on each reporting date.
+* **Tradable exchange market cap** is price × shares outstanding for assets active and tradable on each reporting date; it is exchange size, not investor return.
+* **Total-return indexes** start at 100, hold constituent units, preserve terminal proceeds, hold pending settlement separately, and reinvest cash at the next scheduled rebalance.
 * **Price selection** uses same-date observations first, then prior observations only; offering price is used on the offering date when no secondary observation exists. Future observations are never used.
 * **Staleness** is flagged when the carried observation age exceeds the configured threshold.
 * **New issuance** is the first reconstructed market cap for assets entering the series.

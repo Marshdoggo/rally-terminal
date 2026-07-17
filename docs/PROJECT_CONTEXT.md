@@ -56,8 +56,8 @@ Counts describe the committed research snapshot and are not live market coverage
 - Validated manual research imports with dry runs, archives, quarantine outputs, conflict handling, and run records.
 - SEC filing cache/parser for offering-series and exit context.
 - Secondary comparable normalization, similarity matching, and experimental NAV estimates.
-- Equal-weighted, market-cap-weighted, quarterly, and user-defined index calculations with contribution analysis and risk metrics.
-- Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, category decomposition, flow-adjusted return indexes, reconciliation reports, and CSV exports.
+- Equal-weighted, market-cap-weighted, quarterly, exit-aware total-return, and user-defined index calculations with contribution analysis, cash/pending-settlement accounting, and risk metrics.
+- Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, tradable market-cap exit removals, category decomposition, exit-aware total-return indexes, reconciliation reports, and CSV exports.
 - Local and curated custom-index registries. Local JSON persistence is development-only; cloud saving is disabled through `RALLY_CUSTOM_INDEX_READ_ONLY=true`.
 - Market-table filters, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
 
@@ -76,7 +76,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - Sparse and category-skewed comparable-sales coverage limits valuation confidence.
 - Manual/captured trading observations can become stale and are not an official Rally market feed.
 - Regex and table-based SEC parsing can over-extract or duplicate series-like rows.
-- Historical exchange state is reconstructed from current committed asset, price, and exit artifacts rather than an append-only database, creating potential survivorship-bias and revision-history limitations.
+- Historical exchange state is reconstructed from current committed asset, price, and exit artifacts rather than an append-only database, creating revision-history limitations; first-class exit-aware total-return artifacts now reduce survivorship bias when exit records are linked.
 - Processed CSV schemas are coupled to Streamlit views and lack a versioned migration boundary.
 - Pandas emits five forward-compatibility warnings in the current test suite around concatenation with empty/all-null values.
 - There is no production health endpoint, telemetry, durable user storage, or automated data-refresh service.

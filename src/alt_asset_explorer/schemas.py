@@ -157,12 +157,28 @@ class SecFilingSeries(BaseModel):
 class ExitEvent(BaseModel):
     exit_id: str = Field(min_length=1)
     asset_id: Optional[str] = None
+    ticker: Optional[str] = None
     series_name: Optional[str] = None
-    sale_price: float = Field(gt=0)
-    sale_date: date
+    exit_type: str = "other"
+    exit_status: str = "settled"
+    sale_price: Optional[float] = Field(default=None, gt=0)
+    sale_date: Optional[date] = None
+    exit_announcement_date: Optional[date] = None
+    last_trading_date: Optional[date] = None
+    exit_valuation_date: Optional[date] = None
+    exit_effective_date: Optional[date] = None
+    settlement_date: Optional[date] = None
+    exit_price_per_share: Optional[float] = Field(default=None, gt=0)
+    exit_total_value: Optional[float] = Field(default=None, gt=0)
+    shares_at_exit: Optional[float] = Field(default=None, gt=0)
     realized_return: Optional[float] = None
+    payout_source: Optional[str] = None
     source_url: Optional[str] = None
-    source_confidence: float = Field(ge=0, le=1)
+    source_reference: Optional[str] = None
+    notes: Optional[str] = None
+    is_confirmed: bool = True
+    data_quality_flag: Optional[str] = None
+    source_confidence: float = Field(default=0.5, ge=0, le=1)
 
 
 class CategoryMetadata(BaseModel):

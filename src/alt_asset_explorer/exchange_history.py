@@ -9,9 +9,10 @@ import numpy as np
 import pandas as pd
 
 from alt_asset_explorer.paths import DATA_PROCESSED, ensure_dirs
+from alt_asset_explorer.total_return import normalize_exit_events, rebuild_total_return_indexes
 
 Frequency = Literal["native", "weekly", "monthly", "quarterly"]
-CALCULATION_VERSION = "exchange_history_v1"
+CALCULATION_VERSION = "exchange_history_v2_exit_aware"
 PRICE_EVENT_TYPES = {"chart_observation", "secondary_trade", "quote", "manual_observation", "unknown"}
 TERMINAL_STATUSES = {"sold", "redeemed", "liquidated", "exited", "delisted", "buyout"}
 FREQUENCY_RULES = {"weekly": "W-FRI", "monthly": "ME", "quarterly": "QE"}
@@ -144,9 +145,10 @@ def reconstruct_asset_history(assets: pd.DataFrame, prices: pd.DataFrame, exits:
     if grid_dates.empty:
         return pd.DataFrame()
     exit_dates = pd.Series(dtype="datetime64[ns]")
-    if exits is not None and not exits.empty and "asset_id" in exits and "sale_date" in exits:
-        e = exits.copy(); e["asset_id"] = e["asset_id"].astype(str); e["sale_date"] = pd.to_datetime(e["sale_date"], errors="coerce").dt.normalize()
-        exit_dates = e.dropna(subset=["sale_date"]).groupby("asset_id")["sale_date"].min()
+    if exits is not None and not exits.empty:
+        e = normalize_exit_events(a, exits, prices)
+        e = e[~e["exit_status"].eq("cancelled_exit")].copy()
+        exit_dates = e.dropna(subset=["exit_effective_date"]).groupby("asset_id")["exit_effective_date"].min()
     elif "status" in a:
         terminal = a[a["status"].astype(str).str.lower().isin(TERMINAL_STATUSES)]
         if "last_quote_observed_at" in terminal:
@@ -191,6 +193,25 @@ def reconstruct_asset_history(assets: pd.DataFrame, prices: pd.DataFrame, exits:
     history["new_issuance"] = np.where(first, history["market_cap"], 0.0)
     history["price_effect"] = np.where(first, 0.0, (history["price"] - history["previous_price"]) * history["shares_outstanding"])
     history["removed_capital"] = 0.0; history["other_adjustments"] = 0.0
+    if exits is not None and not exits.empty:
+        e = normalize_exit_events(a, exits, prices)
+        e = e[~e["exit_status"].eq("cancelled_exit")].dropna(subset=["asset_id", "exit_effective_date"])
+        for _, ex in e.iterrows():
+            aid = str(ex["asset_id"]); eff = pd.Timestamp(ex["exit_effective_date"]).normalize()
+            mask = history["asset_id"].astype(str).eq(aid)
+            prior = history[mask & (history["date"] <= eff)].sort_values("date")
+            if not prior.empty:
+                idx = prior.index[-1]
+                history.loc[idx, "removed_capital"] = float(prior.iloc[-1]["market_cap"])
+                history.loc[idx, "market_cap"] = 0.0
+                history.loc[idx, "is_active"] = False
+                history.loc[idx, "is_exit_effective_date"] = True
+                history.loc[idx, "terminal_price"] = ex.get("terminal_price")
+                history.loc[idx, "terminal_price_source"] = ex.get("terminal_price_source")
+    
+    if "is_exit_effective_date" not in history:
+        history["is_exit_effective_date"] = False
+    history["is_exit_effective_date"] = history["is_exit_effective_date"].fillna(False)
     return history
 
 
@@ -259,6 +280,8 @@ def rebuild_exchange_history(assets: pd.DataFrame | None = None, prices: pd.Data
     ensure_dirs(); output_dir.mkdir(parents=True, exist_ok=True)
     for name, frame in [("exchange_asset_history", result.asset_history), ("exchange_category_history", result.category_history), ("exchange_market_cap_history", result.market_cap_history), ("exchange_data_quality_report", result.data_quality_report), ("exchange_reconciliation_report", result.reconciliation_report), ("exchange_validation_warnings", result.validation_warnings)]:
         frame.to_csv(output_dir / f"{name}.csv", index=False)
+    # Keep survivorship-bias-free investment indexes in the same rebuild pipeline.
+    rebuild_total_return_indexes(assets, prices, exits, frequency="monthly", rebalance="monthly", output_dir=output_dir)
     return result
 
 
