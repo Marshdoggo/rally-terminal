@@ -18,6 +18,7 @@ The homepage is the primary product surface. It includes research coverage, sect
 - `scripts/build_research_coverage.py` creates asset-level coverage reports.
 - `scripts/fetch_sec_data.py` refreshes the local SEC cache when an appropriate SEC user agent is configured.
 - `scripts/write_report.py --date today` writes a deterministic Markdown market report.
+- `scripts/rebuild_exchange_history.py` rebuilds exchange market-cap, category, return, decomposition, coverage, and reconciliation artifacts.
 
 The application has no API server or database. Runtime storage is CSV/JSON on the local filesystem. Streamlit pages read committed artifacts from `data/processed/`, `data/normalized/`, `data/reports/`, and reviewed definitions in `data/custom_indices/curated/`.
 
@@ -56,6 +57,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - SEC filing cache/parser for offering-series and exit context.
 - Secondary comparable normalization, similarity matching, and experimental NAV estimates.
 - Equal-weighted, market-cap-weighted, quarterly, and user-defined index calculations with contribution analysis and risk metrics.
+- Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, category decomposition, flow-adjusted return indexes, reconciliation reports, and CSV exports.
 - Local and curated custom-index registries. Local JSON persistence is development-only; cloud saving is disabled through `RALLY_CUSTOM_INDEX_READ_ONLY=true`.
 - Market-table filters, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
 
@@ -74,7 +76,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - Sparse and category-skewed comparable-sales coverage limits valuation confidence.
 - Manual/captured trading observations can become stale and are not an official Rally market feed.
 - Regex and table-based SEC parsing can over-extract or duplicate series-like rows.
-- Historical constituent state is not yet an append-only database, creating potential survivorship bias.
+- Historical exchange state is reconstructed from current committed asset, price, and exit artifacts rather than an append-only database, creating potential survivorship-bias and revision-history limitations.
 - Processed CSV schemas are coupled to Streamlit views and lack a versioned migration boundary.
 - Pandas emits five forward-compatibility warnings in the current test suite around concatenation with empty/all-null values.
 - There is no production health endpoint, telemetry, durable user storage, or automated data-refresh service.
