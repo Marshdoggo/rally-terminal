@@ -65,15 +65,17 @@ coverage = load_report_csv("research_coverage")
 index_portfolio = load_processed_csv("index_portfolio_history")
 exit_analytics = load_processed_csv("exit_analytics")
 exchange_market_cap = load_processed_csv("exchange_market_cap_history")
+current_universe_artifact = load_processed_csv("current_asset_universe")
+current_universe_summary = load_processed_csv("current_universe_summary")
 
 st.title("Rally Terminal")
 st.caption("Market intelligence for Rally collectibles. Research only, not financial advice.")
 
 with st.expander("Data caveats", expanded=True):
     st.write(
-        "Current listed assets are based on imported Rally portfolio captures and local quote snapshots. "
+        "Current tradable assets use the shared canonical universe: production Rally assets with active-tradable status, shares, and a non-stale secondary valuation. "
         "Experimental estimated fair value uses secondary comparable-sales logic and should not be read as a precise appraisal. "
-        "Interactive indices and attribution are calculated only from available local price-history rows; missing observations are not imputed."
+        "Legacy interactive index diagnostics may differ from exit-aware total-return indexes when constituent, rebalance, or price-fill rules differ."
     )
 
 if canonical.empty or decision.empty:
@@ -81,21 +83,23 @@ if canonical.empty or decision.empty:
     st.stop()
 
 market = build_market_table(canonical, decision, prices, liquidity)
-current = market[market["is_current_listed"].fillna(False)]
+current = current_universe_artifact.copy() if not current_universe_artifact.empty else market[market["is_current_listed"].fillna(False)]
+summary_row = current_universe_summary.iloc[0].to_dict() if not current_universe_summary.empty else {}
+current_as_of = summary_row.get("as_of_date") or (pd.to_datetime(current["date"], errors="coerce").max().date().isoformat() if "date" in current and not current.empty else "Unavailable")
 
 metric_cols = st.columns(4)
-metric_cols[0].metric("Current Listed Assets", f"{len(current):,}")
-metric_cols[1].metric("Research Universe Rows", f"{len(market):,}")
-metric_cols[2].metric("Current Market Cap", format_money(current["current_market_cap_usd"].sum() if not current.empty else None))
-metric_cols[3].metric("Assets With Experimental FV", f"{int(current['experimental_estimated_fair_value_usd'].notna().sum()):,}")
+metric_cols[0].metric("Current Tradable Assets", f"{int(summary_row.get('tradable_asset_count', len(current))):,}", help=f"Canonical production Rally assets with active-tradable status and a non-stale current valuation as of {current_as_of}.")
+metric_cols[1].metric("Research Universe Rows", f"{len(market):,}", help="Rows in the broader research table, including historical/SEC-context rows; this is not a unique current-asset count.")
+metric_cols[2].metric("Tradable Exchange Market Cap", format_money(summary_row.get("tradable_market_cap", current.get("canonical_market_cap", current.get("current_market_cap_usd", pd.Series(dtype=float))).sum() if not current.empty else None)), help=f"Canonical current price × shares for current tradable assets as of {current_as_of}; stale carried-forward and offering-only values are excluded.")
+metric_cols[3].metric("Assets With Experimental FV", f"{int(current.get('experimental_estimated_fair_value_usd', pd.Series(dtype=float)).notna().sum()):,}")
 
 st.subheader("Market Size and Exit-Aware Total Return")
 if not exchange_market_cap.empty:
     exchange_market_cap["date"] = pd.to_datetime(exchange_market_cap["date"], errors="coerce")
     latest_exchange = exchange_market_cap.sort_values("date").iloc[-1]
     size_cols = st.columns(6)
-    size_cols[0].metric("Tradable Exchange Market Cap", format_money(latest_exchange.get("total_market_cap")), help="Active tradable represented value only; exits leave this series.")
-    size_cols[1].metric("Active Tradable Assets", f"{int(latest_exchange.get('active_asset_count', 0)):,}")
+    size_cols[0].metric("Represented Exchange Value", format_money(latest_exchange.get("total_market_cap")), help="Broader reconstructed exchange-history value, including stale carried-forward observations; not the canonical tradable market cap.")
+    size_cols[1].metric("Represented Assets", f"{int(latest_exchange.get('active_asset_count', 0)):,}")
     size_cols[2].metric("Active Categories", f"{int(exchange_market_cap.get('active_category_count', pd.Series([0])).iloc[-1] if 'active_category_count' in exchange_market_cap else current['category'].nunique()):,}")
     size_cols[3].metric("Pending Settlement Value", format_money(index_portfolio['pending_settlement_value'].max() if not index_portfolio.empty and 'pending_settlement_value' in index_portfolio else 0))
     size_cols[4].metric("New Issuance YTD", format_money(exchange_market_cap.loc[exchange_market_cap['date'].dt.year.eq(latest_exchange['date'].year), 'new_issuance'].sum() if 'new_issuance' in exchange_market_cap else 0))
