@@ -100,3 +100,54 @@ streamlit run app/Home.py
 ```
 
 Run Streamlit from the repository root so local and Community Cloud path behavior match. Deployment uses Python 3.11, `requirements.txt`, branch `main`, and entrypoint `app/Home.py`.
+
+## Current-Universe And Index Reconciliation Update (2026-07-18)
+
+The current-tradable universe is now defined centrally in `alt_asset_explorer.current_universe` and is the shared source for same-name homepage and Exchange Market Cap KPI cards. A current tradable asset is a production Rally asset with canonical `active_tradable` status, positive shares, a valid current price, no offering-only valuation, and an observation age no greater than the canonical 120-day staleness threshold. Stale carried-forward observations remain in exchange-history diagnostics and represented-value analysis, but they are not labeled tradable market capitalization.
+
+Canonical asset-state normalization maps legacy labels such as `trading`, `active`, and `accepting_orders` to `active_tradable`; terminal labels such as `sold`, `redeemed`, `liquidated`, `exited`, `delisted`, and `buyout` to `exited`; and other offering, paused, pending-settlement, cancelled, withdrawn, or unknown states to explicit canonical states. Production-facing Rally assets should use `platform = Rally` and `record_environment = production` when those fields exist. Fixture, demo, sample, mock, placeholder, synthetic, and test rows are excluded from production current-universe calculations.
+
+Current-price methodology is intentionally conservative for tradable market cap:
+
+1. Use the latest valid Rally/current secondary quote when available.
+2. Use latest valid historical secondary-market observation on or before the as-of date when it is within the staleness threshold.
+3. Carry forward a prior observation only while it remains within the staleness threshold and flag it as carried forward.
+4. Treat offering price as production context, not current tradable value, unless a methodology explicitly opts in.
+5. Prefer missing current valuation over silently substituting stale, future-dated, or offering-only values.
+
+The latest reconciliation artifact explains the previous homepage-vs-exchange discrepancy row by row. The legacy homepage counted 37 imported/manual listed rows with a summed decision-universe market cap near $1.57M. The Exchange Market Cap page displayed the latest reconstructed represented exchange-history value for 43 rows, approximately $28.8M, because it included stale carried-forward values and terminal/stale large fossil and handbag records. In the committed snapshot, the canonical current-tradable universe contains 28 assets and approximately $1.571M of tradable market cap as of 2026-07-01. The largest excluded represented-value rows are `rally-steg` and `rally-baro`, whose stale carried-forward fossil values account for most of the historical represented-value gap.
+
+Reconciliation artifacts:
+
+- `data/processed/current_universe_reconciliation.csv` — row-level inclusion, status, price, share, and reason-code audit for each asset in either legacy current source.
+- `data/processed/current_market_cap_difference_contributors.csv` — ranked market-cap gap contributors.
+- `data/processed/current_universe_summary.csv` — canonical current-tradable summary consumed by Streamlit.
+- `data/processed/index_engine_reconciliation.csv` — side-by-side legacy quarterly Index Explorer prototype versus monthly exit-aware total-return engine on common dates.
+
+Index methodology remains split between a legacy quarterly observed-row prototype and the newer exit-aware total-return portfolio engine. The reconciliation artifact documents that the legacy Index Explorer prototype is based on quarterly observation rows without imputation and dynamically changing observed constituents, whereas the total-return engine uses point-in-time eligibility, monthly rebalancing, carry-forward portfolio prices, explicit cash/pending-settlement handling, and exit awareness. Production pages should avoid presenting legacy quarterly prototypes as the same economic quantity as the exit-aware “What $100 Became” total-return indexes unless the chart is explicitly labeled as a diagnostic/prototype comparison.
+
+Data flow:
+
+```text
+Raw Rally Sources
+    +
+Manual Verified Records
+    +
+Historical Prices
+    +
+Exit Events
+        ↓
+Canonical Asset Identity
+        ↓
+Production / Fixture Classification
+        ↓
+Canonical Status as of Date
+        ↓
+Canonical Current Price
+        ↓
+Current Tradable Universe
+        ↓
+Shared Summary Metrics
+        ↓
+Homepage + Exchange Market Cap Page
+```

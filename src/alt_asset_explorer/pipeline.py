@@ -22,6 +22,7 @@ from alt_asset_explorer.investable import (
 )
 from alt_asset_explorer.indices import build_quarterly_rally_indices, build_rally_indices
 from alt_asset_explorer.exchange_history import rebuild_exchange_history
+from alt_asset_explorer.current_universe import build_current_asset_universe, calculate_current_universe_summary
 from alt_asset_explorer.liquidity import compute_liquidity_metrics
 from alt_asset_explorer.normalization import normalize_comps
 from alt_asset_explorer.paths import DATA_PROCESSED, ensure_dirs
@@ -68,6 +69,8 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
     ai_context = build_ai_context(assets, navs, liquidity, scores, exits, as_of=as_of)
     ai_report_context = build_ai_report_context(rally_asset_decision_universe, asset_comp_matches, data_diagnostics, as_of=as_of)
     exchange_history = rebuild_exchange_history(canonical_asset_master, price_history, exits, frequency="native")
+    current_universe = build_current_asset_universe(canonical_asset_master, exchange_history.asset_history, as_of_date=as_of)
+    current_universe_summary = pd.DataFrame([calculate_current_universe_summary(current_universe)])
 
     outputs = {
         "assets": assets,
@@ -95,6 +98,8 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
         "exchange_data_quality_report": exchange_history.data_quality_report,
         "exchange_reconciliation_report": exchange_history.reconciliation_report,
         "exchange_validation_warnings": exchange_history.validation_warnings,
+        "current_asset_universe": current_universe,
+        "current_universe_summary": current_universe_summary,
         "universe_export": universe_export,
         "mme_universe_export": mme_universe_export,
         **newsletter_exports,

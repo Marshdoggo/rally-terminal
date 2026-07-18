@@ -31,9 +31,12 @@ def load_exchange_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.D
         load_processed_csv("index_portfolio_history"),
         load_processed_csv("index_constituent_history"),
         load_processed_csv("exit_analytics"),
+        load_processed_csv("current_universe_summary"),
+        load_processed_csv("current_universe_reconciliation"),
+        load_processed_csv("current_market_cap_difference_contributors"),
     )
 
-market, category, asset, quality, recon, portfolio, constituents, exit_analytics = load_exchange_data()
+market, category, asset, quality, recon, portfolio, constituents, exit_analytics, current_summary, current_recon, current_contrib = load_exchange_data()
 if market.empty:
     st.warning("Exchange history has not been generated yet. Run `python3 scripts/rebuild_exchange_history.py --frequency native` or rebuild the full dataset.")
     if st.button("Build exchange history now from committed processed inputs"):
@@ -74,14 +77,16 @@ if not asset_f.empty:
 latest = market_f.iloc[-1]
 summary = performance_summary(market_f, frequency=frequency_label)
 cols = st.columns(6)
-cols[0].metric("Tradable Exchange Market Cap", f"${latest['total_market_cap']:,.0f}", help="Active tradable represented value only; terminal exits leave this series.")
+canonical_cap = float(current_summary.iloc[0].get("tradable_market_cap", latest["total_market_cap"])) if not current_summary.empty else float(latest["total_market_cap"])
+canonical_count = int(current_summary.iloc[0].get("tradable_asset_count", latest["active_asset_count"])) if not current_summary.empty else int(latest["active_asset_count"])
+cols[0].metric("Tradable Exchange Market Cap", f"${canonical_cap:,.0f}", help="Canonical current tradable value excludes stale carried-forward and offering-only valuations.")
 cols[1].metric("Issued capital", f"${latest['cumulative_invested_capital']:,.0f}")
 cols[2].metric("Flow-adjusted P/L", f"${latest['cumulative_flow_adjusted_pl']:,.0f}")
 cols[3].metric("Since inception", f"{summary.get('since_inception_return', 0):.1%}")
 cols[4].metric("Max drawdown", f"{summary.get('max_drawdown', 0):.1%}")
 cols[5].metric("Direct coverage", f"{latest['direct_coverage_pct']:.1%}")
 cols2 = st.columns(5)
-cols2[0].metric("Active assets", f"{int(latest['active_asset_count']):,}")
+cols2[0].metric("Current tradable assets", f"{canonical_count:,}")
 cols2[1].metric("Categories", f"{len(selected_categories):,}")
 cols2[2].metric("Latest observation", latest["date"].date().isoformat())
 cols2[3].metric("Annualized return", "n/a" if summary.get("annualized_return") is None else f"{summary['annualized_return']:.1%}")
@@ -156,8 +161,13 @@ if not portfolio.empty:
         st.download_button("Download constituent history", constituents.to_csv(index=False), "index_constituent_history.csv")
         st.download_button("Download exit analytics", exit_analytics.to_csv(index=False), "exit_analytics.csv")
 
-with st.expander("Data quality and coverage", expanded=False):
+with st.expander("Data quality and current-universe reconciliation", expanded=False):
     st.dataframe(quality[(quality["date"] >= start) & (quality["date"] <= end)], use_container_width=True)
+    if not current_contrib.empty:
+        st.write("Top current market-cap differences between legacy homepage and exchange-history universes")
+        st.dataframe(current_contrib.head(20), use_container_width=True)
+        st.download_button("Download full current-universe reconciliation", current_recon.to_csv(index=False), "current_universe_reconciliation.csv")
+        st.download_button("Download market-cap difference contributors", current_contrib.to_csv(index=False), "current_market_cap_difference_contributors.csv")
     st.plotly_chart(px.bar(market_f, x="date", y=["direct_observation_market_cap", "carried_forward_market_cap"], title="Direct vs carried-forward market cap"), use_container_width=True)
 
 with st.expander("Methodology", expanded=False):
