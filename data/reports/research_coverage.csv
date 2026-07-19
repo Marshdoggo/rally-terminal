@@ -10,32 +10,73 @@ rally-13beaux,13BEAUX,2013 Domaine Leroy Vosne-Romanée Les Beaux Monts,wine and
 rally-14drc,14DRC,2014 Domaine de la Romanée-Conti Assortment,wine and whiskey,True,True,True,2020-12-22,2026-06-24,23,22,0,1,0,,,,139.0,True,True,,23,,23,,2020-12-31,2026-06-30,,,23,22
 rally-16petrus,16PETRUS,2016 Château Pétrus,wine and whiskey,True,True,True,2021-04-01,2026-06-26,23,20,0,3,0,,,,137.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
 rally-16screag,16SCREAG,2016 Screaming Eagle,wine and whiskey,True,True,True,2020-12-15,2026-06-26,23,20,0,3,0,,,,164.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
+rally-59bond,59BOND,Ian Fleming - Goldfinger (Dedication Copy),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-59jfk,59JFK,John F. Kennedy - Profiles in Courage (Inscribed to Frank Sinatra),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-62bond,62BOND,Ian Fleming - The Spy Who Loved Me (Inscribed to RFK),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-79stella,79STELLA,1979 Rolex Coral Stella Dial Day-Date,watches,True,True,True,2021-04-15,2026-06-26,22,22,0,0,0,,,,97.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
 rally-93daytona,93DAYTONA,1993 Rolex Zenith Daytona Inverted 6,watches,True,True,True,2021-01-05,2026-06-30,23,23,0,0,0,,,,147.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
+rally-aghowl,AGHOWL,Allen Ginsberg - Howl and Other Poems (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-alice,ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-baro,BARO,Barosaurus Skeleton,fossils,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-birkinblu,BIRKINBLU,Hermès 25cm Blue Lizard Birkin,handbags,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-birkinbor,BIRKINBOR,Hermès 35cm Bordeaux Crocodile Birkin,handbags,True,True,True,2020-12-01,2026-06-26,22,22,0,0,0,,,,197.0,True,True,,23,,22,,2020-12-31,2026-06-30,,,22,22
 rally-birkintan,BIRKINTAN,Hermès 30cm Tangerine Ostrich Birkin,handbags,True,True,True,2022-09-30,2026-06-26,16,16,0,0,0,,,,96.0,True,True,,17,,16,,2022-09-30,2026-06-30,,,16,16
+rally-bond1,BOND1,Ian Fleming - Casino Royale (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-bondwatch,BONDWATCH,Pierce Brosnan Omega Seamaster James Bond Film-Worn Watch,watches,True,True,True,2022-10-10,2026-06-29,16,16,0,0,0,,,,95.0,True,True,,17,,16,,2022-09-30,2026-06-30,,,16,16
+rally-bradbury,BRADBURY,Ray Bradbury - Fahrenheit 451 (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-brosgrimm,BROSGRIMM,Grimms' Fairy Tales (Inscribed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-catcher,CATCHER,J.D. Salinger - The Catcher in the Rye (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-churchill,CHURCHILL,Winston Churchill - The Second World War (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-congress,CONGRESS,Journals of the Continental Congress (1774–1775),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-deaton,DEATON,Deaton Triceratops Skull,fossils,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-dimaggio2,DIMAGGIO2,DiMaggio 2 Watch,watches,True,True,True,2021-02-18,2026-06-30,22,22,0,0,0,,,,188.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
 rally-dominos,DOMINOS,Domino's Pizza Special Edition Rolex Air-King,watches,True,True,True,2021-05-04,2026-06-25,21,21,0,0,0,,,,158.0,True,True,,22,,21,,2021-06-30,2026-06-30,,,21,21
+rally-dune,DUNE,Frank Herbert - Dune (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-faubourg2,FAUBOURG2,Hermès Faubourg 2,handbags,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-frost,FROST,Robert Frost - A Boy's Will (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-gatsby,GATSBY,The Great Gatsby (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-gmtblack1,GMTBLACK1,1983 Rolex GMT-Master Nipple Dial,watches,True,True,True,2020-10-13,2026-06-30,24,24,0,0,0,,,,144.0,True,True,,25,,24,,2020-09-30,2026-06-30,,,24,24
+rally-grapes,GRAPES,John Steinbeck - The Grapes of Wrath (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-gwtw,GWTW,Gone with the Wind (Inscribed First Printing),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-hgwells,HGWELLS,H.G. Wells - The Time Machine (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-himalaya,HIMALAYA,Hermès 30cm Himalaya Birkin,handbags,True,True,True,2020-09-15,2026-06-26,24,24,0,0,0,,,,146.0,True,True,,25,,24,,2020-09-30,2026-06-30,,,24,24
+rally-holmes,HOLMES,Arthur Conan Doyle - Adventures & Memoirs of Sherlock Holmes,books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-huckfinn,HUCKFINN,Mark Twain - Adventures of Huckleberry Finn (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-irobot,IROBOT,"Isaac Asimov - I, Robot (First Edition)",books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-jekyll,JEKYLL,Dr. Jekyll and Mr. Hyde (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-karuizawa,KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whiskey,True,True,True,2022-03-31,2026-06-29,18,18,0,0,0,,,,94.0,True,True,,19,,18,,2022-03-31,2026-06-30,,,18,18
+rally-keller,KELLER,Helen Keller 1892 Book (Inscribed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-kerouac,KEROUAC,Jack Kerouac - On the Road (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-lotf,LOTF,William Golding - Lord of the Flies (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-lotr,LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-macallan1,MACALLAN1,Macallan 30-Year-Old Blue Label Scotch Whisky,wine and whiskey,True,True,True,2022-03-30,2026-06-29,18,18,0,0,0,,,,95.0,True,True,,19,,18,,2022-03-31,2026-06-30,,,18,18
 rally-macallan2,MACALLAN2,Macallan 40-Year-Old Whisky,wine and whiskey,True,True,True,2022-06-27,2026-06-29,17,17,0,0,0,,,,94.0,True,True,,18,,17,,2022-06-30,2026-06-30,,,17,17
 rally-macallan3,MACALLAN3,1938 Macallan Red Ribbon Whisky,wine and whiskey,True,True,True,2022-12-30,2026-06-26,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
+rally-marx,MARX,Karl Marx - Das Kapital (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-megalodon,MEGALODON,Megalodon Fossil,fossils,True,True,True,2022-12-30,2026-06-30,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
+rally-mobydick,MOBYDICK,Herman Melville - Moby-Dick (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-mosasaur,MOSASAUR,Mosasaur,fossils,True,True,True,2021-06-21,2026-06-29,21,21,0,0,0,,,,112.0,True,True,,22,,21,,2021-06-30,2026-06-30,,,21,21
+rally-newton,NEWTON,Isaac Newton - Principia (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-newworld,NEWWORLD,Aldous Huxley - Brave New World (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-pappy1,PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,True,True,True,2022-12-28,2026-06-26,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
 rally-picnic,PICNIC,Hermès 35cm Picnic Kelly,handbags,True,True,True,2021-04-29,2026-06-29,21,21,0,0,0,,,,208.0,True,True,,22,,21,,2021-03-31,2026-06-30,,,21,21
+rally-rabbit,RABBIT,The Tale of Peter Rabbit (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-riviera,RIVIERA,1965 Rolex 1601 Datejust Joyera Riviera,watches,True,True,True,2021-09-30,2026-06-26,20,20,0,0,0,,,,95.0,True,True,,21,,20,,2021-09-30,2026-06-30,,,20,20
 rally-rlexpepsi,RLEXPEPSI,Rolex GMT-Master II Pepsi Jubilee,watches,True,True,True,2020-03-17,2026-06-29,26,26,0,0,0,,,,152.0,True,True,,27,,26,,2020-03-31,2026-06-30,,,26,26
+rally-roosevelt,ROOSEVELT,Theodore Roosevelt - African Game Trails (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-shkspr4,SHKSPR4,"Shakespeare - Comedies, Histories & Tragedies",books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-smurf,SMURF,Rolex Submariner Smurf,watches,True,True,True,2020-05-05,2026-06-29,23,23,0,0,0,,,,221.0,True,True,,24,,23,,2020-03-31,2026-06-30,,,23,23
 rally-snoopy,SNOOPY,Omega Speedmaster Silver Snoopy,watches,True,True,True,2020-08-18,2026-06-29,24,24,0,0,0,,,,155.0,True,True,,25,,24,,2020-09-30,2026-06-30,,,24,24
 rally-soblack,SOBLACK,Hermès 30cm So Black Birkin,handbags,True,True,True,2021-01-05,2026-06-26,23,23,0,0,0,,,,164.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
 rally-steg,STEG,BCQ-24 Stegosaurus Skeleton,fossils,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-tkam,TKAM,Harper Lee - To Kill a Mockingbird (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-tornek,TORNEK,Tornek-Rayville TR-900,watches,True,True,True,2021-11-01,2026-06-24,20,20,0,0,0,,,,94.0,True,True,,21,,20,,2021-09-30,2026-06-30,,,20,20
+rally-treasure,TREASURE,Treasure Island (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-twocities,TWOCITIES,Charles Dickens - A Tale of Two Cities (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-ulysses,ULYSSES,James Joyce - Ulysses (Matisse Signed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-walden,WALDEN,Henry David Thoreau - Walden (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-wildthing,WILDTHING,Where the Wild Things Are (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-wzrdofoz,WZRDOFOZ,The Wonderful Wizard of Oz (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-yoko,YOKO,Yoko Ono - Grapefruit (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0

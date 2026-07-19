@@ -4,7 +4,7 @@
   "diagnostics": [
     {
       "metric": "rally_assets",
-      "value": 40,
+      "value": 81,
       "notes": "Unified Rally investable asset rows"
     },
     {
@@ -14,7 +14,7 @@
     },
     {
       "metric": "assets_with_no_comps",
-      "value": 40,
+      "value": 81,
       "notes": "Rally assets without matched realized sale comps"
     },
     {
