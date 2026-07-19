@@ -429,7 +429,14 @@ def _sec_asset_rows(sec_series: pd.DataFrame, exits: pd.DataFrame, existing_tick
     return rows
 
 
-def build_rally_asset_universe(assets: pd.DataFrame, price_history: pd.DataFrame, sec_series: pd.DataFrame, exits: pd.DataFrame) -> pd.DataFrame:
+def build_rally_asset_universe(
+    assets: pd.DataFrame,
+    price_history: pd.DataFrame,
+    sec_series: pd.DataFrame,
+    exits: pd.DataFrame,
+    *,
+    include_sec_context: bool = False,
+) -> pd.DataFrame:
     latest = _latest_prices(price_history)
     merged = assets.merge(latest, on="asset_id", how="left") if not assets.empty else pd.DataFrame()
     rows: list[dict] = []
@@ -476,7 +483,8 @@ def build_rally_asset_universe(assets: pd.DataFrame, price_history: pd.DataFrame
                 "source_notes": asset.get("notes") or asset.get("source_url"),
             }
         )
-    rows.extend(_sec_asset_rows(sec_series, exits, existing_tickers))
+    if include_sec_context:
+        rows.extend(_sec_asset_rows(sec_series, exits, existing_tickers))
     return pd.DataFrame(rows, columns=RALLY_ASSET_COLUMNS)
 
 

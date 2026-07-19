@@ -20,20 +20,28 @@ def _validated_frame(path: Path, model: type) -> pd.DataFrame:
     return pd.DataFrame(records)
 
 
-def load_assets(path: Path | None = None) -> pd.DataFrame:
-    seed = _validated_frame(path or DATA_RAW / "rally_assets_seed.csv", Asset)
+def load_assets(path: Path | None = None, *, include_legacy_seed: bool = False) -> pd.DataFrame:
+    """Load Rally asset inputs for production-facing datasets.
+
+    By default this excludes the legacy seed CSV because those rows were
+    illustrative bootstrap/demo records, not verified Rally Rd listings. Pass an
+    explicit path, or ``include_legacy_seed=True``, only for fixtures or legacy
+    diagnostics that intentionally exercise the seed schema.
+    """
+    if path is not None:
+        return _validated_frame(path, Asset).drop_duplicates(subset=["asset_id"], keep="last")
+
+    frames: list[pd.DataFrame] = []
+    if include_legacy_seed:
+        frames.append(_validated_frame(DATA_RAW / "rally_assets_seed.csv", Asset))
     imports = load_rally_asset_imports()
     manual = load_normalized_manual_assets()
-    frames = [seed]
     if not imports.empty:
         frames.append(imports)
     if not manual.empty:
         frames.append(manual)
-    if len(frames) == 1:
-        return seed
-    if path is None:
-        combined = pd.concat(frames, ignore_index=True)
-        return combined.drop_duplicates(subset=["asset_id"], keep="last")
+    if not frames:
+        return pd.DataFrame(columns=Asset.model_fields.keys())
     combined = pd.concat(frames, ignore_index=True)
     return combined.drop_duplicates(subset=["asset_id"], keep="last")
 
@@ -87,15 +95,26 @@ def load_comps(path: Path | None = None) -> pd.DataFrame:
     return _validated_frame(path or DATA_RAW / "comps_seed.csv", ComparableSale)
 
 
-def load_price_history(path: Path | None = None) -> pd.DataFrame:
-    seed = _validated_frame(path or DATA_RAW / "price_history_seed.csv", PriceObservation)
+def load_price_history(path: Path | None = None, *, include_legacy_seed: bool = False) -> pd.DataFrame:
+    """Load Rally price observations for production-facing datasets.
+
+    Legacy seed observations are excluded by default because they were demo data
+    used before verified Rally App observations were imported.
+    """
+    if path is not None:
+        return _validated_frame(path, PriceObservation).drop_duplicates(subset=["date", "asset_id", "source"], keep="last")
+
+    frames: list[pd.DataFrame] = []
+    if include_legacy_seed:
+        frames.append(_validated_frame(DATA_RAW / "price_history_seed.csv", PriceObservation))
     snapshots = load_rally_snapshot_imports()
     manual = load_normalized_price_observations()
-    frames = [seed]
     if not snapshots.empty:
         frames.append(snapshots)
     if not manual.empty:
         frames.append(manual)
+    if not frames:
+        return pd.DataFrame(columns=PriceObservation.model_fields.keys())
     combined = pd.concat(frames, ignore_index=True)
     return combined.drop_duplicates(subset=["date", "asset_id", "source"], keep="last")
 

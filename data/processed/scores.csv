@@ -1,7 +1,4 @@
 asset_id,ticker,investment_score,valuation_score,liquidity_score,category_momentum_score,rarity_score,data_quality_score,exit_probability_score
-rally-hermes-birkin-35,HERMES35,69.18,54.97,94.66,55.0,86.0,54.4,71.67
-rally-chanel-flap,CHANELCF,64.41,52.19,90.13,55.0,72.0,48.31,68.41
-rally-rolex-daytona,DAYTONA,69.1,57.81,94.09,55.0,80.0,56.47,70.41
 rally-00mouton,00MOUTON,55.7,50.0,45.0,55.0,50.0,100.0,59.5
 rally-03tache,03TACHE,55.7,50.0,45.0,55.0,50.0,100.0,59.5
 rally-05latour,05LATOUR,55.7,50.0,45.0,55.0,50.0,100.0,59.5

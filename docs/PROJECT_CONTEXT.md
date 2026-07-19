@@ -1,7 +1,7 @@
 # Rally Terminal Project Context
 
-Last audited: 2026-07-14  
-Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1, 91 tests passing
+Last audited: 2026-07-19  
+Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1
 
 ## Purpose And Product State
 
@@ -25,27 +25,27 @@ The application has no API server or database. Runtime storage is CSV/JSON on th
 ## Data Flow And Provenance
 
 1. Manual Rally research is validated into normalized asset and price-observation tables. Invalid rows are quarantined and import runs are recorded.
-2. Manual seeds and permitted source imports provide Rally assets, observations, and comparable sales.
+2. Verified normalized/manual imports provide production Rally assets and observations; legacy seed CSVs are fixture/demo bootstrap files and are excluded from production-facing dataset builds by default.
 3. Cached SEC filings are parsed into offering-series and exit-event context. SEC-synthesized identifiers are research identifiers, not official Rally IDs.
 4. The pipeline builds a canonical asset master and broader decision universe with provenance and quality warnings.
 5. Comparable matching, experimental NAV/fair-value estimates, liquidity metrics, scoring, indices, diagnostics, and exports are derived from those normalized inputs.
 6. The deployed app reads committed derived snapshots. It does not fetch SEC data or rebuild datasets during startup.
 
-Current generated snapshot:
+Current generated snapshot after removing legacy demo/SEC-synthesized rows from production-facing app artifacts:
 
 | Artifact | Rows |
 | --- | ---: |
-| Canonical asset master | 550 |
-| Rally asset decision universe | 550 |
+| Canonical asset master | 40 |
+| Rally asset decision universe | 40 |
 | Normalized manual assets | 40 |
 | Normalized manual price observations | 536 |
-| Processed price history | 527 |
-| General Rally index rows | 322 |
+| Processed price history | 510 |
+| General Rally index rows | 316 |
 | Quarterly Rally index rows | 248 |
-| SEC series context | 1,565 |
-| Rally exits | 190 |
-| Comparable sales universe | 67 |
-| Asset-to-comp matches | 194 |
+| SEC series context | 0 |
+| Rally exits | 0 |
+| Comparable sales universe | 6 |
+| Asset-to-comp matches | 0 |
 | Research coverage rows | 40 |
 
 Counts describe the committed research snapshot and are not live market coverage.
@@ -89,6 +89,10 @@ Counts describe the committed research snapshot and are not live market coverage
 4. Introduce provider boundaries and append-only quote storage before claiming live-market behavior.
 5. Formalize valuation-result and factor-contribution interfaces before expanding category models.
 6. Add durable custom-index persistence only when multi-user sharing becomes a product requirement.
+
+## Production Asset Cleanup (2026-07-19)
+
+Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain only the 40 verified normalized Rally App asset rows and their corresponding Rally App price observations; SEC-derived series remain filing research context rather than app-listed assets.
 
 ## Development And Verification
 

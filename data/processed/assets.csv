@@ -1,7 +1,4 @@
 asset_id,ticker,name,category,subcategory,issuer_cik,series_name,offering_date,offering_price,shares,market_cap_usd,last_price_usd,source_url,source_confidence,rarity_score,status,notes,exit_date,exit_price_per_share,exit_value_total,exit_type
-rally-hermes-birkin-35,HERMES35,2012 Hermes Birkin 35 Handbag,handbags,hermes_birkin,,Series #HermesBirkin35,2021-05-14,10.0,14000,168000.0,12.0,manual_seed,0.7,0.86,active,Seed asset for MVP dashboard.,,,,
-rally-chanel-flap,CHANELCF,Classic Chanel Double Flap Bag,handbags,chanel_flap,,Series #ChanelClassicFlap,2021-09-10,5.0,18000,99000.0,5.5,manual_seed,0.65,0.72,active,Manual values are illustrative and require verification.,,,,
-rally-rolex-daytona,DAYTONA,Rolex Daytona Reference 116500LN,watches,rolex_daytona,,Series #RolexDaytona116500,2020-11-20,20.0,8000,188000.0,23.5,manual_seed,0.68,0.8,active,Watch seed for cross-category testing.,,,,
 rally-00mouton,00MOUTON,2000 Château Mouton Rothschild,wine and whiskey,wine,,,2021-04-01,13.5,2000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2021-04.,,,,
 rally-03tache,03TACHE,2003 Domaine de la Romanée-Conti La Tâche,wine and whiskey,wine,,,2020-11-01,5.0,15600,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2020-11.,,,,
 rally-05latour,05LATOUR,2005 Château Latour,wine and whiskey,wine,,,2020-09-01,9.8,1000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2020-09.,,,,
