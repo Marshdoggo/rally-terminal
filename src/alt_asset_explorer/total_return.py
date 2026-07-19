@@ -44,7 +44,7 @@ CALCULATION_VERSION = "total_return_index_v1"
 @dataclass(frozen=True)
 class TotalReturnConfig:
     base_index_level: float = 100.0
-    rebalance_frequency: Literal["weekly", "monthly", "quarterly"] = "monthly"
+    rebalance_frequency: Literal["weekly", "monthly", "quarterly"] = "quarterly"
     reinvestment_policy: str = "scheduled_rebalance"
     reconciliation_tolerance: float = 1e-6
 
@@ -256,7 +256,7 @@ def build_total_return_indexes(assets: pd.DataFrame, prices: pd.DataFrame, exits
     return portfolio, pd.DataFrame(const_rows), e, pd.DataFrame(analytics).drop_duplicates() if analytics else pd.DataFrame(columns=analytics_columns)
 
 
-def rebuild_total_return_indexes(assets=None, prices=None, exits=None, *, frequency: Frequency="native", rebalance: str="monthly", weighting: str="all", output_dir: Path|None=None, **_: object):
+def rebuild_total_return_indexes(assets=None, prices=None, exits=None, *, frequency: Frequency="native", rebalance: str="quarterly", weighting: str="all", output_dir: Path|None=None, **_: object):
     output_dir = output_dir or DATA_PROCESSED
     if assets is None: assets = pd.read_csv(DATA_PROCESSED / "canonical_asset_master.csv") if (DATA_PROCESSED / "canonical_asset_master.csv").exists() else pd.DataFrame()
     if prices is None: prices = pd.read_csv(DATA_PROCESSED / "price_history.csv") if (DATA_PROCESSED / "price_history.csv").exists() else pd.DataFrame()

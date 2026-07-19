@@ -34,3 +34,13 @@ def test_repository_current_summary_reconciles_canonical_market_calculation():
     assert summary["tradable_asset_count"] == universe["asset_id"].nunique()
     assert round(summary["tradable_market_cap"], 2) == round(universe["canonical_market_cap"].sum(), 2)
     assert summary["tradable_market_cap"] <= market.exchange_history.market_cap_history.iloc[-1]["total_market_cap"]
+
+
+def test_canonical_market_generates_ordered_rebalance_variants():
+    from alt_asset_explorer.canonical_market import build_canonical_market_data
+
+    market = build_canonical_market_data()
+    rebalances = market.total_return_portfolio["rebalance_frequency"].dropna().astype(str).unique().tolist()
+
+    assert rebalances[:3] == ["quarterly", "monthly", "weekly"]
+    assert {"quarterly", "monthly", "weekly"}.issubset(set(rebalances))

@@ -117,7 +117,7 @@ st.subheader("Exchange Size vs Total-Return Investment Indexes")
 fig2 = go.Figure()
 fig2.add_trace(go.Scatter(x=market_f["date"], y=market_f["total_market_cap"], name="Market cap", yaxis="y1"))
 if not portfolio.empty:
-    fullp = portfolio[(portfolio["category"].astype(str).eq("all")) & (portfolio["rebalance_frequency"].astype(str).eq("monthly"))]
+    fullp = portfolio[(portfolio["category"].astype(str).eq("all")) & (portfolio["rebalance_frequency"].astype(str).eq("quarterly"))]
     for method, label in [("equal_weight", "Equal-weighted total return"), ("market_cap_weight", "Cap-weighted total return")]:
         mp = fullp[fullp["weighting_method"].eq(method)]
         fig2.add_trace(go.Scatter(x=mp["date"], y=mp["index_level"], name=label, yaxis="y2"))
@@ -157,7 +157,8 @@ if not portfolio.empty:
         st.subheader("Exit-Aware Total-Return Indexes")
         tr_categories = ["all"] + sorted([c for c in portfolio["category"].dropna().astype(str).unique() if c != "all"])
         sel_cat = st.selectbox("Category", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="exchange_tr_category")
-        sel_rebal = st.selectbox("Rebalance", sorted(portfolio["rebalance_frequency"].dropna().unique()), key="exchange_tr_rebal")
+        available_rebalances = [item for item in ["quarterly", "monthly", "weekly"] if item in set(portfolio["rebalance_frequency"].dropna().astype(str))]
+        sel_rebal = st.selectbox("Rebalance", available_rebalances or sorted(portfolio["rebalance_frequency"].dropna().unique()), key="exchange_tr_rebal")
         tr = portfolio[portfolio["category"].astype(str).eq(sel_cat) & portfolio["rebalance_frequency"].astype(str).eq(sel_rebal)].copy()
         wide = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-weighted total return", "market_cap_weight":"Market-cap-weighted total return"})
         st.plotly_chart(px.line(wide, x="date", y=[c for c in wide.columns if c != "date"], markers=True), use_container_width=True)
