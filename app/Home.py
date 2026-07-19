@@ -60,7 +60,7 @@ canonical_market = get_canonical_market()
 canonical = canonical_market.asset_master
 decision = load_processed_csv("rally_asset_decision_universe", required=True)
 prices = canonical_market.quarterly_prices
-manual_price_observations = canonical_market.quarterly_prices
+manual_price_observations = canonical_market.authored_price_observations
 liquidity = load_processed_csv("liquidity_metrics")
 coverage = load_report_csv("research_coverage")
 index_portfolio = canonical_market.total_return_portfolio

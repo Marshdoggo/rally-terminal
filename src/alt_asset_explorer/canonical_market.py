@@ -30,6 +30,7 @@ class CanonicalMarketData:
     asset_master: pd.DataFrame
     quarterly_prices: pd.DataFrame
     secondary_prices: pd.DataFrame
+    authored_price_observations: pd.DataFrame
     exchange_history: ExchangeHistoryResult
     current_universe: pd.DataFrame
     current_summary: pd.DataFrame
@@ -93,11 +94,26 @@ def load_secondary_prices() -> pd.DataFrame:
     return load_normalized_price_observations()
 
 
+def load_authored_price_observations() -> pd.DataFrame:
+    """Load authored price observations in the manual-import schema.
+
+    This preserves event-specific fields such as ``price_per_share``,
+    ``market_cap``, ``observed_at``, ``precision_status``, and ``period_end``
+    for UI sections that need manual observation details instead of transformed
+    index-ready price rows.
+    """
+    path = DATA_NORMALIZED / "price_observations.csv"
+    if not path.exists():
+        return pd.DataFrame()
+    return pd.read_csv(path)
+
+
 def build_canonical_market_data(*, as_of: date | None = None) -> CanonicalMarketData:
     as_of = as_of or date.today()
     authored_assets = load_asset_master()
     quarterly_prices = load_quarterly_prices()
     secondary_prices = load_secondary_prices()
+    authored_price_observations = load_authored_price_observations()
     master = build_canonical_asset_master(authored_assets, secondary_prices, as_of=as_of)
     manual_exits = _manual_exits_from_assets(pd.read_csv(DATA_NORMALIZED / "assets.csv") if (DATA_NORMALIZED / "assets.csv").exists() else pd.DataFrame())
     exchange = rebuild_exchange_history(master, quarterly_prices, manual_exits, frequency="native", persist=False)
@@ -110,6 +126,7 @@ def build_canonical_market_data(*, as_of: date | None = None) -> CanonicalMarket
         asset_master=master,
         quarterly_prices=quarterly_prices,
         secondary_prices=secondary_prices,
+        authored_price_observations=authored_price_observations,
         exchange_history=exchange,
         current_universe=current,
         current_summary=summary,

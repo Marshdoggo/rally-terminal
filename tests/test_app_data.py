@@ -31,3 +31,23 @@ def test_rebuilding_canonical_market_twice_is_deterministic():
     cols = ["date", "total_market_cap", "active_asset_count"]
     assert first.exchange_history.market_cap_history[cols].equals(second.exchange_history.market_cap_history[cols])
     assert first.current_summary.equals(second.current_summary)
+
+
+def test_home_price_history_uses_authored_observation_schema():
+    from app_data import get_canonical_market
+
+    market = get_canonical_market()
+    required = {
+        "event_type",
+        "price_per_share",
+        "market_cap",
+        "observed_at",
+        "precision_status",
+        "period_end",
+    }
+    assert required.issubset(market.authored_price_observations.columns)
+    offering_rows = market.authored_price_observations[
+        market.authored_price_observations["event_type"].astype(str).eq("offering_price")
+        & market.authored_price_observations["price_per_share"].notna()
+    ]
+    assert not offering_rows.empty
