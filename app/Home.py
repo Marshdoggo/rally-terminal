@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "app"))
 sys.path.insert(0, str(ROOT / "src"))
 
-from app_data import empty_state, load_normalized_csv, load_processed_csv, load_report_csv, render_data_diagnostics
+from app_data import empty_state, get_canonical_market, load_processed_csv, load_report_csv, render_data_diagnostics
 from alt_asset_explorer.custom_index_storage import (
     CombinedCustomIndexRegistry,
     CustomIndexStorageError,
@@ -56,17 +56,18 @@ def format_pct(value: object) -> str:
     return "Unavailable" if pd.isna(number) else f"{number:.1%}"
 
 
-canonical = load_processed_csv("canonical_asset_master", required=True)
+canonical_market = get_canonical_market()
+canonical = canonical_market.asset_master
 decision = load_processed_csv("rally_asset_decision_universe", required=True)
-prices = load_processed_csv("price_history", required=True)
-manual_price_observations = load_normalized_csv("price_observations")
+prices = canonical_market.quarterly_prices
+manual_price_observations = canonical_market.authored_price_observations
 liquidity = load_processed_csv("liquidity_metrics")
 coverage = load_report_csv("research_coverage")
-index_portfolio = load_processed_csv("index_portfolio_history")
-exit_analytics = load_processed_csv("exit_analytics")
-exchange_market_cap = load_processed_csv("exchange_market_cap_history")
-current_universe_artifact = load_processed_csv("current_asset_universe")
-current_universe_summary = load_processed_csv("current_universe_summary")
+index_portfolio = canonical_market.total_return_portfolio
+exit_analytics = canonical_market.exit_analytics
+exchange_market_cap = canonical_market.exchange_history.market_cap_history
+current_universe_artifact = canonical_market.current_universe
+current_universe_summary = canonical_market.current_summary
 
 st.title("Rally Terminal")
 st.caption("Market intelligence for Rally collectibles. Research only, not financial advice.")

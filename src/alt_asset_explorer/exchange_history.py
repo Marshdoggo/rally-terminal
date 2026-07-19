@@ -253,7 +253,7 @@ def aggregate_exchange_history(asset_history: pd.DataFrame, *, frequency: Freque
     return ExchangeHistoryResult(h, cat, total, quality, recon, pd.DataFrame())
 
 
-def rebuild_exchange_history(assets: pd.DataFrame | None = None, prices: pd.DataFrame | None = None, exits: pd.DataFrame | None = None, *, start_date: object | None = None, end_date: object | None = None, frequency: Frequency = "native", asset_ids: list[str] | None = None, force: bool = False, output_dir: Path | None = None, config: ExchangeHistoryConfig | None = None) -> ExchangeHistoryResult:
+def rebuild_exchange_history(assets: pd.DataFrame | None = None, prices: pd.DataFrame | None = None, exits: pd.DataFrame | None = None, *, start_date: object | None = None, end_date: object | None = None, frequency: Frequency = "native", asset_ids: list[str] | None = None, force: bool = False, output_dir: Path | None = None, config: ExchangeHistoryConfig | None = None, persist: bool = True) -> ExchangeHistoryResult:
     """Build and optionally persist exchange market-cap analytics.
 
     `start_date`, `end_date`, and `asset_ids` bound the rebuild inputs; aggregate
@@ -277,11 +277,12 @@ def rebuild_exchange_history(assets: pd.DataFrame | None = None, prices: pd.Data
             asset_history = asset_history[asset_history["date"] <= pd.to_datetime(end_date)]
     result = aggregate_exchange_history(asset_history, frequency=frequency, config=config)
     result = ExchangeHistoryResult(result.asset_history, result.category_history, result.market_cap_history, result.data_quality_report, result.reconciliation_report, warnings)
-    ensure_dirs(); output_dir.mkdir(parents=True, exist_ok=True)
-    for name, frame in [("exchange_asset_history", result.asset_history), ("exchange_category_history", result.category_history), ("exchange_market_cap_history", result.market_cap_history), ("exchange_data_quality_report", result.data_quality_report), ("exchange_reconciliation_report", result.reconciliation_report), ("exchange_validation_warnings", result.validation_warnings)]:
-        frame.to_csv(output_dir / f"{name}.csv", index=False)
-    # Keep survivorship-bias-free investment indexes in the same rebuild pipeline.
-    rebuild_total_return_indexes(assets, prices, exits, frequency="monthly", rebalance="monthly", output_dir=output_dir)
+    if persist:
+        ensure_dirs(); output_dir.mkdir(parents=True, exist_ok=True)
+        for name, frame in [("exchange_asset_history", result.asset_history), ("exchange_category_history", result.category_history), ("exchange_market_cap_history", result.market_cap_history), ("exchange_data_quality_report", result.data_quality_report), ("exchange_reconciliation_report", result.reconciliation_report), ("exchange_validation_warnings", result.validation_warnings)]:
+            frame.to_csv(output_dir / f"{name}.csv", index=False)
+        # Keep survivorship-bias-free investment indexes in the same rebuild pipeline.
+        rebuild_total_return_indexes(assets, prices, exits, frequency="monthly", rebalance="monthly", output_dir=output_dir)
     return result
 
 

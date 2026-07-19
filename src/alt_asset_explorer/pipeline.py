@@ -68,7 +68,7 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
     newsletter_exports = build_newsletter_exports(rally_asset_decision_universe, as_of=as_of)
     ai_context = build_ai_context(assets, navs, liquidity, scores, exits, as_of=as_of)
     ai_report_context = build_ai_report_context(rally_asset_decision_universe, asset_comp_matches, data_diagnostics, as_of=as_of)
-    exchange_history = rebuild_exchange_history(canonical_asset_master, price_history, exits, frequency="native")
+    exchange_history = rebuild_exchange_history(canonical_asset_master, price_history, exits, frequency="native", persist=False)
     current_universe = build_current_asset_universe(canonical_asset_master, exchange_history.asset_history, as_of_date=as_of)
     current_universe_summary = pd.DataFrame([calculate_current_universe_summary(current_universe)])
 
@@ -92,14 +92,9 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
         "asset_comp_matches": asset_comp_matches,
         "rally_asset_decision_universe": rally_asset_decision_universe,
         "data_diagnostics": data_diagnostics,
-        "exchange_asset_history": exchange_history.asset_history,
-        "exchange_category_history": exchange_history.category_history,
-        "exchange_market_cap_history": exchange_history.market_cap_history,
         "exchange_data_quality_report": exchange_history.data_quality_report,
         "exchange_reconciliation_report": exchange_history.reconciliation_report,
         "exchange_validation_warnings": exchange_history.validation_warnings,
-        "current_asset_universe": current_universe,
-        "current_universe_summary": current_universe_summary,
         "universe_export": universe_export,
         "mme_universe_export": mme_universe_export,
         **newsletter_exports,
