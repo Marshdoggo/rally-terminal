@@ -110,14 +110,19 @@ if not index_portfolio.empty:
     tr_categories = ["all"] + sorted([c for c in index_portfolio["category"].dropna().astype(str).unique() if c != "all"])
     tr_cols = st.columns([1.8, 1.2, 1.2])
     tr_category = tr_cols[0].selectbox("Total-return universe", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="home_tr_category")
-    tr_rebal = tr_cols[1].selectbox("Rebalance frequency", sorted(index_portfolio["rebalance_frequency"].dropna().unique()), key="home_tr_rebalance")
+    available_rebalances = [item for item in ["quarterly", "monthly", "weekly"] if item in set(index_portfolio["rebalance_frequency"].dropna().astype(str))]
+    tr_rebal = tr_cols[1].selectbox("Rebalance frequency", available_rebalances or sorted(index_portfolio["rebalance_frequency"].dropna().unique()), key="home_tr_rebalance")
     tr_range = tr_cols[2].selectbox("Total-return date range", ["Entire history", "Last 3 years", "Last year"], key="home_tr_range")
     tr = index_portfolio[index_portfolio["category"].astype(str).eq(tr_category) & index_portfolio["rebalance_frequency"].astype(str).eq(tr_rebal)].copy()
     if tr_range != "Entire history" and not tr.empty:
         years = 3 if tr_range == "Last 3 years" else 1
         tr = tr[tr["date"] >= tr["date"].max() - pd.DateOffset(years=years)]
     tr_plot = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-Weighted Total Return Index", "market_cap_weight":"Market-Cap-Weighted Total Return Index"})
-    st.plotly_chart(px.line(tr_plot, x="date", y=[c for c in tr_plot.columns if c != "date"], title="What $100 Became (realized exits reinvested on schedule)"), use_container_width=True)
+    st.plotly_chart(px.line(tr_plot, x="date", y=[c for c in tr_plot.columns if c != "date"], title="What $100 Became (offering entries; exits reinvested on schedule)"), use_container_width=True)
+    st.caption(
+        f"Exit-aware portfolio simulation · {tr_rebal} scheduled rebalance · offering prices are treated as investable entry prices · "
+        "prices are carried forward between observations · cash from exits is reinvested at the next scheduled rebalance."
+    )
     latest_tr = tr.sort_values("date").groupby("weighting_method").tail(1)
     ret_cols = st.columns(6)
     for idx, method in enumerate(["equal_weight", "market_cap_weight"]):
@@ -270,7 +275,7 @@ else:
     )
     universe_label = control_cols[2].radio(
         "Universe",
-        ["Currently Trading Only", "Include Exited Assets"],
+        ["Current Survivors Only", "Include Exited Assets"],
         horizontal=False,
         key="index_universe",
     )
@@ -302,7 +307,7 @@ else:
     weighting_map = {"Equal Weight": "equal", "Market-Cap Weight": "market_cap"}
     selected_weightings = [weighting_map[label] for label in weighting_labels]
     universe_assets = canonical.copy()
-    if universe_label == "Currently Trading Only":
+    if universe_label == "Current Survivors Only":
         universe_assets = universe_assets[universe_assets["status"].astype(str).str.lower().eq("trading")]
     universe_assets = universe_assets[universe_assets["category"].astype(str).isin(selected_index_categories)]
     selected_asset_ids = universe_assets["asset_id"].astype(str).unique().tolist()
@@ -443,6 +448,11 @@ else:
             config={"scrollZoom": True, "displaylogo": False, "modeBarButtonsToAdd": ["drawline", "eraseshape"]},
         )
         st.caption("Click legend entries to isolate series. Drag to zoom, scroll to zoom, double-click to reset, and use the range slider to pan.")
+        st.caption(
+            "Index Explorer is a descriptive quarterly observed-price prototype. Equal-weight returns use only assets with both prior and current "
+            "quarter-end observations; missing prices are not forward-filled and exits/cash proceeds are not modeled. "
+            "Current Survivors Only filters to assets trading today and applies that list retroactively."
+        )
 
         if selected_saved_result is not None and not selected_saved_result.contributions.empty:
             st.markdown("#### Saved Custom Index Contribution Analysis")

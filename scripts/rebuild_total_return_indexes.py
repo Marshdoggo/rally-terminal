@@ -13,7 +13,7 @@ from alt_asset_explorer.total_return import rebuild_total_return_indexes
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rebuild exit-aware Rally total-return indexes.")
     parser.add_argument("--frequency", choices=["native", "weekly", "monthly", "quarterly"], default="native")
-    parser.add_argument("--rebalance", choices=["weekly", "monthly", "quarterly"], default="monthly")
+    parser.add_argument("--rebalance", choices=["weekly", "monthly", "quarterly"], default="quarterly")
     parser.add_argument("--weighting", choices=["all", "equal", "market_cap"], default="all")
     parser.add_argument("--start-date")
     parser.add_argument("--end-date")

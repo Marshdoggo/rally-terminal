@@ -14,7 +14,7 @@ from alt_asset_explorer.connectors.rally_manual import (
 from alt_asset_explorer.current_universe import build_current_asset_universe, calculate_current_universe_summary
 from alt_asset_explorer.exchange_history import ExchangeHistoryResult, rebuild_exchange_history
 from alt_asset_explorer.paths import DATA_NORMALIZED
-from alt_asset_explorer.total_return import build_total_return_indexes, normalize_exit_events
+from alt_asset_explorer.total_return import TotalReturnConfig, build_total_return_indexes, normalize_exit_events
 
 
 @dataclass(frozen=True)
@@ -119,7 +119,28 @@ def build_canonical_market_data(*, as_of: date | None = None) -> CanonicalMarket
     exchange = rebuild_exchange_history(master, quarterly_prices, manual_exits, frequency="native", persist=False)
     current = build_current_asset_universe(master, exchange.asset_history, as_of_date=as_of)
     summary = pd.DataFrame([calculate_current_universe_summary(current)])
-    portfolio, constituents, exit_events, exit_analytics = build_total_return_indexes(master, quarterly_prices, manual_exits, frequency="native")
+    portfolio_frames = []
+    constituent_frames = []
+    exit_events = pd.DataFrame()
+    exit_analytics = pd.DataFrame()
+    for rebalance_frequency in ("quarterly", "monthly", "weekly"):
+        portfolio_part, constituents_part, exit_events_part, exit_analytics_part = build_total_return_indexes(
+            master,
+            quarterly_prices,
+            manual_exits,
+            frequency="native",
+            config=TotalReturnConfig(rebalance_frequency=rebalance_frequency),
+        )
+        if not portfolio_part.empty:
+            portfolio_frames.append(portfolio_part)
+        if not constituents_part.empty:
+            constituent_frames.append(constituents_part)
+        if exit_events.empty and not exit_events_part.empty:
+            exit_events = exit_events_part
+        if exit_analytics.empty and not exit_analytics_part.empty:
+            exit_analytics = exit_analytics_part
+    portfolio = pd.concat(portfolio_frames, ignore_index=True) if portfolio_frames else pd.DataFrame()
+    constituents = pd.concat(constituent_frames, ignore_index=True) if constituent_frames else pd.DataFrame()
     if exit_events.empty:
         exit_events = normalize_exit_events(master, manual_exits, quarterly_prices)
     return CanonicalMarketData(

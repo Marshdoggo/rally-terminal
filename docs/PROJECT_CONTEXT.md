@@ -56,7 +56,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - Validated manual research imports with dry runs, archives, quarantine outputs, conflict handling, and run records.
 - SEC filing cache/parser for offering-series and exit context.
 - Secondary comparable normalization, similarity matching, and experimental NAV estimates.
-- Equal-weighted, market-cap-weighted, quarterly, exit-aware total-return, and user-defined index calculations with contribution analysis, cash/pending-settlement accounting, and risk metrics.
+- Equal-weighted, market-cap-weighted, quarterly descriptive price-index prototypes, exit-aware total-return portfolios, and user-defined index calculations with contribution analysis, cash/pending-settlement accounting, and risk metrics.
 - Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, assets-added hover diagnostics for issuance-driven jumps, tradable market-cap exit removals, category decomposition, exit-aware total-return indexes, reconciliation reports, and CSV exports.
 - Local and curated custom-index registries. Local JSON persistence is development-only; cloud saving is disabled through `RALLY_CUSTOM_INDEX_READ_ONLY=true`.
 - Market-table filters, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
@@ -128,7 +128,7 @@ Reconciliation artifacts:
 - `data/processed/current_universe_summary.csv` — canonical current-tradable summary consumed by Streamlit.
 - `data/processed/index_engine_reconciliation.csv` — side-by-side legacy quarterly Index Explorer prototype versus monthly exit-aware total-return engine on common dates.
 
-Index methodology remains split between a legacy quarterly observed-row prototype and the newer exit-aware total-return portfolio engine. The reconciliation artifact documents that the legacy Index Explorer prototype is based on quarterly observation rows without imputation and dynamically changing observed constituents, whereas the total-return engine uses point-in-time eligibility, monthly rebalancing, carry-forward portfolio prices, explicit cash/pending-settlement handling, and exit awareness. Production pages should avoid presenting legacy quarterly prototypes as the same economic quantity as the exit-aware “What $100 Became” total-return indexes unless the chart is explicitly labeled as a diagnostic/prototype comparison.
+Index methodology remains intentionally split between descriptive quarterly observed-row price-index prototypes and the newer exit-aware total-return portfolio engine. The reconciliation artifact documents that the legacy Index Explorer prototype is based on quarterly observation rows without imputation and dynamically changing observed constituents, whereas the total-return engine uses point-in-time eligibility, offering-price entry, scheduled rebalancing, carry-forward portfolio prices, explicit cash/pending-settlement handling, and exit awareness. The canonical app build now generates quarterly, monthly, and weekly total-return variants, with quarterly presented first as the default benchmark because authored Rally observations are quarterly-oriented. Production pages should avoid presenting legacy quarterly prototypes as the same economic quantity as the exit-aware “What $100 Became” total-return indexes unless the chart is explicitly labeled as a diagnostic/prototype comparison.
 
 Data flow:
 
@@ -163,3 +163,10 @@ Rally market analytics now have an explicit canonical path for the migrated Home
 Large redundant generated CSVs including current-universe snapshots, exchange history snapshots, total-return portfolio/constituent histories, exit analytics, and index-engine reconciliation are no longer tracked as source-of-truth artifacts. They are ignored if generated locally. Legacy processed snapshots remain for pages that have not been migrated, but they are classified as derived/report artifacts rather than authoritative Rally market inputs.
 
 The architecture inventory and directory policy are documented in `docs/DATA_ARCHITECTURE_INVENTORY.md`.
+
+
+## Methodology Transparency Update (2026-07-19)
+
+The app now labels the survivor-biased Index Explorer universe as **Current Survivors Only** rather than **Currently Trading Only**. This label is meant to communicate that current trading status is applied retroactively and should be read as a descriptive survivor diagnostic, not a point-in-time investable benchmark.
+
+Total-return portfolio variants are generated for quarterly, monthly, and weekly scheduled rebalancing. Quarterly is the preferred default benchmark for the current dataset because normalized Rally price observations are quarterly-oriented. Offering prices remain investable entry prices for total-return methodology; exits still convert held units into cash or pending settlement and reinvest on the next scheduled rebalance.

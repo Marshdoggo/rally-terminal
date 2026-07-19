@@ -107,7 +107,7 @@ def test_two_asset_hand_calculated_exit_total_return_vs_tradable_market_cap(tmp_
         {"asset_id": "b", "date": "2020-02-01", "last": 50, "event_type": "chart_observation"},
     ])
     e = pd.DataFrame([{"asset_id": "a", "sale_date": "2020-02-01", "exit_price_per_share": 100, "exit_status": "settled", "exit_type": "buyout"}])
-    port, const, exits, analytics = build_total_return_indexes(a, p, e, frequency="native")
+    port, const, exits, analytics = build_total_return_indexes(a, p, e, frequency="native", config=TotalReturnConfig(rebalance_frequency="monthly"))
     full_eq = port[(port["category"].eq("all")) & (port["weighting_method"].eq("equal_weight"))].sort_values("date")
     assert full_eq.iloc[0]["index_level"] == 100
     assert round(float(full_eq.iloc[-1]["index_level"]), 6) == 150
@@ -137,7 +137,7 @@ def test_pending_settlement_cash_reinvests_at_next_monthly_rebalance():
     a = assets()
     p = pd.concat([prices(), pd.DataFrame([{"asset_id": "a", "date": "2020-02-28", "last": 12, "event_type": "chart_observation"}, {"asset_id": "b", "date": "2020-02-28", "last": 22, "event_type": "chart_observation"}])], ignore_index=True)
     e = pd.DataFrame([{"asset_id": "a", "sale_date": "2020-01-22", "settlement_date": "2020-02-15", "exit_price_per_share": 12, "exit_status": "pending_settlement"}])
-    port, _, _, _ = build_total_return_indexes(a, p, e, frequency="native")
+    port, _, _, _ = build_total_return_indexes(a, p, e, frequency="native", config=TotalReturnConfig(rebalance_frequency="monthly"))
     full = port[(port["category"].eq("all")) & (port["weighting_method"].eq("equal_weight"))].sort_values("date")
     assert full["pending_settlement_value"].max() >= 100
     assert full.iloc[-1]["cash_value"] == 0
@@ -152,3 +152,35 @@ def test_cap_weight_and_equal_weight_differ_with_unequal_market_caps():
     port, _, _, _ = build_total_return_indexes(a, p, pd.DataFrame(), frequency="weekly", config=TotalReturnConfig(rebalance_frequency="weekly"))
     latest = port[port["category"].eq("all")].sort_values("date").groupby("weighting_method").tail(1).set_index("weighting_method")
     assert latest.loc["equal_weight", "index_level"] != latest.loc["market_cap_weight", "index_level"]
+
+
+def test_default_total_return_rebalance_is_quarterly():
+    config = TotalReturnConfig()
+    assert config.rebalance_frequency == "quarterly"
+
+
+def test_equal_weight_rebalancing_harvests_rise_then_fall_path():
+    a = pd.DataFrame([
+        {"asset_id": "a", "ticker": "A", "name": "Alpha", "category": "synthetic", "share_count": 1, "offering_date": "2020-01-01", "offering_price_usd": 100, "status": "trading"},
+        {"asset_id": "b", "ticker": "B", "name": "Beta", "category": "synthetic", "share_count": 1, "offering_date": "2020-01-01", "offering_price_usd": 100, "status": "trading"},
+    ])
+    p = pd.DataFrame([
+        {"asset_id": "a", "date": "2020-01-01", "last": 100, "event_type": "offering_price"},
+        {"asset_id": "b", "date": "2020-01-01", "last": 100, "event_type": "offering_price"},
+        {"asset_id": "a", "date": "2020-02-01", "last": 200, "event_type": "chart_observation"},
+        {"asset_id": "b", "date": "2020-02-01", "last": 100, "event_type": "chart_observation"},
+        {"asset_id": "a", "date": "2020-03-01", "last": 100, "event_type": "chart_observation"},
+        {"asset_id": "b", "date": "2020-03-01", "last": 100, "event_type": "chart_observation"},
+    ])
+    port, _, _, _ = build_total_return_indexes(
+        a,
+        p,
+        pd.DataFrame(),
+        frequency="native",
+        config=TotalReturnConfig(rebalance_frequency="monthly"),
+    )
+    full = port[(port["category"].eq("all")) & (port["weighting_method"].eq("equal_weight"))].sort_values("date")
+    assert full.iloc[-1]["index_level"] == 112.5
+
+    buy_and_hold_final = 100 * (0.5 * (100 / 100) + 0.5 * (100 / 100))
+    assert buy_and_hold_final == 100

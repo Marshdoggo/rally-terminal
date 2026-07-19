@@ -299,7 +299,7 @@ def rebuild_exchange_history(assets: pd.DataFrame | None = None, prices: pd.Data
         for name, frame in [("exchange_asset_history", result.asset_history), ("exchange_category_history", result.category_history), ("exchange_market_cap_history", result.market_cap_history), ("exchange_data_quality_report", result.data_quality_report), ("exchange_reconciliation_report", result.reconciliation_report), ("exchange_validation_warnings", result.validation_warnings)]:
             frame.to_csv(output_dir / f"{name}.csv", index=False)
         # Keep survivorship-bias-free investment indexes in the same rebuild pipeline.
-        rebuild_total_return_indexes(assets, prices, exits, frequency="monthly", rebalance="monthly", output_dir=output_dir)
+        rebuild_total_return_indexes(assets, prices, exits, frequency="quarterly", rebalance="quarterly", output_dir=output_dir)
     return result
 
 
