@@ -35,9 +35,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 
 | Artifact | Rows |
 | --- | ---: |
-| Canonical asset master | 40 |
-| Rally asset decision universe | 40 |
-| Normalized manual assets | 40 |
+| Canonical asset master | 81 |
+| Rally asset decision universe | 81 |
+| Normalized manual assets | 81 |
 | Normalized manual price observations | 739 |
 | Processed price history | 701 |
 | General Rally index rows | 352 |
@@ -46,7 +46,7 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
 | Asset-to-comp matches | 0 |
-| Research coverage rows | 40 |
+| Research coverage rows | 81 |
 
 Counts describe the committed research snapshot and are not live market coverage.
 
@@ -90,9 +90,13 @@ Counts describe the committed research snapshot and are not live market coverage
 5. Formalize valuation-result and factor-contribution interfaces before expanding category models.
 6. Add durable custom-index persistence only when multi-user sharing becomes a product requirement.
 
+## Books Category Expansion (2026-07-19)
+
+The normalized Rally asset master now includes 41 user-provided Books category records for rare and signed first-edition books. These rows are committed as Rally App manual asset records with offering dates, share counts, offering prices, and offering market caps. They do not currently add secondary-market price observations, so current-tradable universe calculations continue to require valid current or recent secondary quotes before treating these assets as current tradable market capitalization.
+
 ## Production Asset Cleanup (2026-07-19)
 
-Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain only the 40 verified normalized Rally App asset rows and their corresponding Rally App price observations; SEC-derived series remain filing research context rather than app-listed assets.
+Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain the 81 verified normalized Rally App asset rows, including the 41 Books category offering records, and their corresponding Rally App price observations; SEC-derived series remain filing research context rather than app-listed assets.
 
 ## Development And Verification
 
