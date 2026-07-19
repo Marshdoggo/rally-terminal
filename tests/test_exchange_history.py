@@ -28,6 +28,9 @@ def test_constant_and_appreciating_assets_with_issuance_and_reconciliation(tmp_p
     assert total.loc[pd.Timestamp("2020-01-01"), "total_market_cap"] == 100
     assert total.loc[pd.Timestamp("2020-01-08"), "price_effect"] == 20
     assert total.loc[pd.Timestamp("2020-01-15"), "new_issuance"] == 100
+    assert total.loc[pd.Timestamp("2020-01-15"), "assets_added_count"] == 1
+    assert "B — Beta ($100)" in total.loc[pd.Timestamp("2020-01-15"), "assets_added_since_last_plot"]
+    assert total.loc[pd.Timestamp("2020-01-08"), "assets_added_since_last_plot"] == "None"
     assert total["reconciles"].all()
     assert total.loc[pd.Timestamp("2020-01-15"), "period_return"] == 0
 

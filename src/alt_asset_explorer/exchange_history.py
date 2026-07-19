@@ -241,6 +241,23 @@ def aggregate_exchange_history(asset_history: pd.DataFrame, *, frequency: Freque
     total["reconciliation_difference"] = total["total_market_cap"] - (total["prior_market_cap"] + total["price_effect"] + total["new_issuance"] - total["removed_capital"] + total["other_adjustments"])
     total["reconciles"] = total["reconciliation_difference"].abs() <= config.reconciliation_tolerance
 
+    additions = h[h["new_issuance"] > 0].copy()
+    if additions.empty:
+        total["assets_added_count"] = 0
+        total["assets_added_since_last_plot"] = "None"
+    else:
+        additions["added_asset_label"] = additions.apply(
+            lambda row: f"{row.get('ticker') or row['asset_id']} — {row.get('name') or row['asset_id']} (${row['new_issuance']:,.0f})",
+            axis=1,
+        )
+        added = additions.groupby("date").agg(
+            assets_added_count=("asset_id", "nunique"),
+            assets_added_since_last_plot=("added_asset_label", lambda labels: "; ".join(labels)),
+        )
+        total = total.merge(added, left_on="date", right_index=True, how="left")
+        total["assets_added_count"] = total["assets_added_count"].fillna(0).astype(int)
+        total["assets_added_since_last_plot"] = total["assets_added_since_last_plot"].fillna("None")
+
     cat = h.groupby(["date", "category"], as_index=False).agg(category_market_cap=("market_cap", "sum"), active_asset_count=("asset_id", "nunique"), direct_observation_market_cap=("market_cap", lambda s: float(s[h.loc[s.index, "is_direct_observation"]].sum())), carried_forward_market_cap=("market_cap", lambda s: float(s[h.loc[s.index, "price_source"].eq("carried_forward")].sum())), price_effect=("price_effect", "sum"), new_issuance=("new_issuance", "sum"), removed_capital=("removed_capital", "sum"), pl_contribution=("price_effect", "sum"))
     cat = cat.merge(total[["date", "total_market_cap"]], on="date", how="left")
     cat["category_weight"] = cat["category_market_cap"] / cat["total_market_cap"].replace(0, np.nan)

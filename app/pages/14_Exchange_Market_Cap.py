@@ -92,7 +92,24 @@ cols2[3].metric("Annualized return", "n/a" if summary.get("annualized_return") i
 cols2[4].metric("Carried coverage", f"{latest['carried_forward_coverage_pct']:.1%}")
 
 st.subheader("Tradable Exchange Market Cap")
-fig = px.line(market_f, x="date", y="total_market_cap", hover_data=["active_asset_count", "direct_observation_asset_count", "carried_forward_asset_count", "direct_coverage_pct", "carried_forward_coverage_pct"], markers=True)
+fig = px.line(
+    market_f,
+    x="date",
+    y="total_market_cap",
+    hover_data={
+        "total_market_cap": ":$,.0f",
+        "new_issuance": ":$,.0f",
+        "assets_added_count": True,
+        "assets_added_since_last_plot": True,
+        "active_asset_count": True,
+        "direct_observation_asset_count": True,
+        "carried_forward_asset_count": True,
+        "direct_coverage_pct": ":.1%",
+        "carried_forward_coverage_pct": ":.1%",
+    },
+    markers=True,
+)
+fig.update_traces(hoverlabel_align="left")
 fig.update_yaxes(tickprefix="$", title="Tradable market cap")
 st.plotly_chart(fig, use_container_width=True)
 

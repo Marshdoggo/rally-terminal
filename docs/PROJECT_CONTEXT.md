@@ -57,7 +57,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - SEC filing cache/parser for offering-series and exit context.
 - Secondary comparable normalization, similarity matching, and experimental NAV estimates.
 - Equal-weighted, market-cap-weighted, quarterly, exit-aware total-return, and user-defined index calculations with contribution analysis, cash/pending-settlement accounting, and risk metrics.
-- Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, tradable market-cap exit removals, category decomposition, exit-aware total-return indexes, reconciliation reports, and CSV exports.
+- Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, assets-added hover diagnostics for issuance-driven jumps, tradable market-cap exit removals, category decomposition, exit-aware total-return indexes, reconciliation reports, and CSV exports.
 - Local and curated custom-index registries. Local JSON persistence is development-only; cloud saving is disabled through `RALLY_CUSTOM_INDEX_READ_ONLY=true`.
 - Market-table filters, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
 
