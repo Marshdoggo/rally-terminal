@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 40 |
 | Rally asset decision universe | 40 |
 | Normalized manual assets | 40 |
-| Normalized manual price observations | 536 |
-| Processed price history | 510 |
-| General Rally index rows | 316 |
+| Normalized manual price observations | 739 |
+| Processed price history | 701 |
+| General Rally index rows | 352 |
 | Quarterly Rally index rows | 248 |
 | SEC series context | 0 |
 | Rally exits | 0 |
