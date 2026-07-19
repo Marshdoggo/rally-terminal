@@ -12,36 +12,35 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "app"))
 sys.path.insert(0, str(ROOT / "src"))
 
-from app_data import load_processed_csv, render_data_diagnostics
-from alt_asset_explorer.exchange_history import performance_summary, rebuild_exchange_history
+from app_data import get_canonical_market, render_data_diagnostics
+from alt_asset_explorer.exchange_history import performance_summary
 
 st.set_page_config(page_title="Exchange Market Cap & Performance", layout="wide")
 render_data_diagnostics()
 st.title("Exchange Market Cap & Performance")
-st.caption("Tradable Rally exchange capitalization is separated from exit-aware investor total-return indexes. All data comes from committed processed artifacts, not live Rally listings.")
+st.caption("Tradable Rally exchange capitalization is separated from exit-aware investor total-return indexes. Analytics are calculated from canonical authored Rally inputs, not live Rally listings or committed derived snapshots.")
 
 @st.cache_data(show_spinner=False)
-def load_exchange_data() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def load_exchange_data():
+    canonical_market = get_canonical_market()
+    exchange = canonical_market.exchange_history
     return (
-        load_processed_csv("exchange_market_cap_history"),
-        load_processed_csv("exchange_category_history"),
-        load_processed_csv("exchange_asset_history"),
-        load_processed_csv("exchange_data_quality_report"),
-        load_processed_csv("exchange_reconciliation_report"),
-        load_processed_csv("index_portfolio_history"),
-        load_processed_csv("index_constituent_history"),
-        load_processed_csv("exit_analytics"),
-        load_processed_csv("current_universe_summary"),
-        load_processed_csv("current_universe_reconciliation"),
-        load_processed_csv("current_market_cap_difference_contributors"),
+        exchange.market_cap_history,
+        exchange.category_history,
+        exchange.asset_history,
+        exchange.data_quality_report,
+        exchange.reconciliation_report,
+        canonical_market.total_return_portfolio,
+        canonical_market.total_return_constituents,
+        canonical_market.exit_analytics,
+        canonical_market.current_summary,
+        pd.DataFrame(),
+        pd.DataFrame(),
     )
 
 market, category, asset, quality, recon, portfolio, constituents, exit_analytics, current_summary, current_recon, current_contrib = load_exchange_data()
 if market.empty:
-    st.warning("Exchange history has not been generated yet. Run `python3 scripts/rebuild_exchange_history.py --frequency native` or rebuild the full dataset.")
-    if st.button("Build exchange history now from committed processed inputs"):
-        result = rebuild_exchange_history(frequency="native", force=True)
-        st.success(f"Built {len(result.market_cap_history):,} market-cap rows. Refresh the page to load the cached artifact.")
+    st.warning("Exchange history could not be calculated from canonical authored inputs. Check `data/normalized/assets.csv` and `data/normalized/price_observations.csv`.")
     st.stop()
 
 for frame in [market, category, asset, quality, recon, portfolio, constituents, exit_analytics]:

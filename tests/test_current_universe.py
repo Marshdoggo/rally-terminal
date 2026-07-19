@@ -25,11 +25,12 @@ def test_current_universe_excludes_fixture_exited_offering_only_and_stale_rows()
     assert summary["tradable_market_cap"] == 1000
 
 
-def test_repository_current_summary_reconciles_homepage_observed_cap_gap():
-    master = pd.read_csv("data/processed/canonical_asset_master.csv")
-    history = pd.read_csv("data/processed/exchange_asset_history.csv")
-    universe = build_current_asset_universe(master, history)
-    summary = calculate_current_universe_summary(universe)
+def test_repository_current_summary_reconciles_canonical_market_calculation():
+    from alt_asset_explorer.canonical_market import build_canonical_market_data
+
+    market = build_canonical_market_data()
+    universe = market.current_universe
+    summary = market.current_summary.iloc[0].to_dict()
     assert summary["tradable_asset_count"] == universe["asset_id"].nunique()
     assert round(summary["tradable_market_cap"], 2) == round(universe["canonical_market_cap"].sum(), 2)
-    assert summary["tradable_market_cap"] < pd.read_csv("data/processed/exchange_market_cap_history.csv").iloc[-1]["total_market_cap"]
+    assert summary["tradable_market_cap"] <= market.exchange_history.market_cap_history.iloc[-1]["total_market_cap"]

@@ -5,6 +5,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from alt_asset_explorer.canonical_market import build_canonical_market_data
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 DATA_REPORTS = PROJECT_ROOT / "data" / "reports"
@@ -66,3 +68,28 @@ def render_data_diagnostics() -> None:
 
 def empty_state() -> None:
     st.info(f"Run `python3 scripts/build_dataset.py` from `{PROJECT_ROOT}` to generate processed data.")
+
+
+@st.cache_data(show_spinner=False)
+def get_canonical_market(as_of: str | None = None):
+    as_of_date = pd.to_datetime(as_of).date() if as_of else None
+    return build_canonical_market_data(as_of=as_of_date)
+
+
+def get_current_market(as_of: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+    market = get_canonical_market(as_of)
+    return market.current_universe.copy(), market.current_summary.copy()
+
+
+def get_exchange_history(as_of: str | None = None):
+    market = get_canonical_market(as_of)
+    return market.exchange_history
+
+
+def get_total_return_index(as_of: str | None = None) -> tuple[pd.DataFrame, pd.DataFrame]:
+    market = get_canonical_market(as_of)
+    return market.total_return_portfolio.copy(), market.total_return_constituents.copy()
+
+
+def get_exit_analytics(as_of: str | None = None) -> pd.DataFrame:
+    return get_canonical_market(as_of).exit_analytics.copy()

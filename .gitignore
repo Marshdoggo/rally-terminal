@@ -24,3 +24,18 @@ data/manual_imports/quarantine/
 # Local custom indexes are not durable or shared.
 data/custom_indices/local/*.json
 
+
+# Deterministic rebuildable analytics; Streamlit computes these from canonical inputs.
+data/cache/
+data/processed/current_asset_universe.csv
+data/processed/current_universe_summary.csv
+data/processed/current_universe_reconciliation.csv
+data/processed/current_market_cap_difference_contributors.csv
+data/processed/exchange_asset_history.csv
+data/processed/exchange_category_history.csv
+data/processed/exchange_market_cap_history.csv
+data/processed/index_constituent_history.csv
+data/processed/index_portfolio_history.csv
+data/processed/index_engine_reconciliation.csv
+data/processed/exit_analytics.csv
+data/processed/rally_exit_events.csv

@@ -151,3 +151,11 @@ Shared Summary Metrics
         ↓
 Homepage + Exchange Market Cap Page
 ```
+
+## Canonical Market Data Cleanup (2026-07-19)
+
+Rally market analytics now have an explicit canonical path for the migrated Home and Exchange Market Cap surfaces: `data/normalized/assets.csv` and `data/normalized/price_observations.csv` are the two principal authored CSV inputs, loaded through `alt_asset_explorer.canonical_market`. Current tradable universe, exchange market-cap history, category decomposition, exit-aware total-return indexes, and exit analytics are calculated deterministically in memory and cached by Streamlit through semantic loaders in `app/app_data.py`.
+
+Large redundant generated CSVs including current-universe snapshots, exchange history snapshots, total-return portfolio/constituent histories, exit analytics, and index-engine reconciliation are no longer tracked as source-of-truth artifacts. They are ignored if generated locally. Legacy processed snapshots remain for pages that have not been migrated, but they are classified as derived/report artifacts rather than authoritative Rally market inputs.
+
+The architecture inventory and directory policy are documented in `docs/DATA_ARCHITECTURE_INVENTORY.md`.
