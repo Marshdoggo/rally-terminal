@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 81 |
 | Rally asset decision universe | 81 |
 | Normalized manual assets | 81 |
-| Normalized manual price observations | 739 |
-| Processed price history | 701 |
-| General Rally index rows | 352 |
+| Normalized manual price observations | 750 |
+| Processed price history | 710 |
+| General Rally index rows | 360 |
 | Quarterly Rally index rows | 248 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -97,6 +97,11 @@ The normalized Rally asset master now includes 41 user-provided Books category r
 ## Production Asset Cleanup (2026-07-19)
 
 Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain the 81 verified normalized Rally App asset rows, including the 41 Books category offering records, and their corresponding Rally App price observations; SEC-derived series remain filing research context rather than app-listed assets.
+
+
+## Manual Exit Coverage Update (2026-07-20)
+
+The normalized Rally inputs now include the exited `rally-faubourg` Hermès Faubourg handbag record with a confirmed May 30, 2023 buyout at $87.50 per share / $175,000 total value. Its authored quarterly observations run from the September 2020 offering through the May 2023 terminal buyout observation so exchange-history reconstruction and exit-aware total-return simulations can account for the asset instead of treating the dataset as survivor-only for this handbag. The buyout is an exit event and terminal payout observation, not a current Rally listing or definitive appraisal.
 
 ## Development And Verification
 

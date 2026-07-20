@@ -700,3 +700,12 @@ date,asset_id,bid,ask,last,volume,market_cap_usd,source,event_type,precision_sta
 2025-12-31,rally-tornek,,,2.55,0,84150.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2025-12-31T00:00:00Z,2025-12-31,quarterly
 2026-03-30,rally-tornek,,,2.5,0,82500.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-03-30T00:00:00Z,2026-03-31,quarterly
 2026-06-24,rally-tornek,,,2.35,0,77550.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-06-24T00:00:00Z,2026-06-30,quarterly
+2020-12-30,rally-faubourg,,,74.95,0,149900.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2020-12-30,2020-12-31,quarterly
+2021-03-09,rally-faubourg,,,74.0,0,148000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2021-03-09,2021-03-31,quarterly
+2021-05-13,rally-faubourg,,,45.5,0,91000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2021-05-13,2021-06-30,quarterly
+2021-09-28,rally-faubourg,,,62.05,0,124100.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2021-09-28,2021-09-30,quarterly
+2022-03-31,rally-faubourg,,,45.0,0,90000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2022-03-31,2022-03-31,quarterly
+2022-06-30,rally-faubourg,,,40.0,0,80000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2022-06-30,2022-06-30,quarterly
+2022-09-30,rally-faubourg,,,45.0,0,90000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2022-09-30,2022-09-30,quarterly
+2022-12-30,rally-faubourg,,,57.5,0,115000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2022-12-30,2022-12-31,quarterly
+2023-03-31,rally-faubourg,,,58.7,0,117400.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2023-03-31,2023-03-31,quarterly

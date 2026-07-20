@@ -20,7 +20,6 @@ rally-bondwatch,BONDWATCH,Pierce Brosnan Omega Seamaster James Bond Film-Worn Wa
 rally-deaton,DEATON,Deaton Triceratops Skull,fossils,triceratops,,,2021-01-01,25.0,11400,,,,1.0,0.5,buyout,"Last secondary close: $23.75/share ($270,800 market cap). Buyout offer: $600,000 ($52.63/share). Submitted offering_date was 2021-01.",,,600000.0,buyout_offer
 rally-dimaggio2,DIMAGGIO2,DiMaggio 2 Watch,watches,,,,2020-11-01,10.5,2000,,,,1.0,0.5,trading,Exact watch model not yet recorded. Submitted offering_date was 2020-11.,,,,
 rally-dominos,DOMINOS,Domino's Pizza Special Edition Rolex Air-King,watches,rolex,,,2021-01-01,5.5,2000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2021-01.,,,,
-rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,faubourg,,,2020-09-01,75.0,2000,,,,1.0,0.5,sold,Exited. Submitted offering_date was 2020-09.,,,,
 rally-faubourg2,FAUBOURG2,Hermès Faubourg 2,handbags,faubourg,,,2021-01-01,15.0,11000,,,,1.0,0.5,sold,Exited via buyout. Submitted offering_date was 2021-01.,2025-01-06,16.5,181500.0,buyout
 rally-gmtblack1,GMTBLACK1,1983 Rolex GMT-Master Nipple Dial,watches,rolex,,,2020-06-01,28.0,1000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2020-06.,,,,
 rally-himalaya,HIMALAYA,Hermès 30cm Himalaya Birkin,handbags,birkin_himalaya,,,2020-05-01,70.0,2000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2020-05.,,,,
@@ -80,3 +79,4 @@ rally-ulysses,ULYSSES,James Joyce - Ulysses (Matisse Signed),books,rare books,,,
 rally-twocities,TWOCITIES,Charles Dickens - A Tale of Two Cities (First Edition),books,rare books,,,2019-11-01,72.5,200,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2019-11.,,,,
 rally-congress,CONGRESS,Journals of the Continental Congress (1774–1775),books,rare books,,,2021-07-01,24.0,5000,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2021-07.,,,,
 rally-yoko,YOKO,Yoko Ono - Grapefruit (Signed First Edition),books,rare books,,,2020-05-01,80.0,200,,,,1.0,0.5,trading,Currently trading. Submitted offering_date was 2020-05.,,,,
+rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,faubourg,,,2020-09-01,75.0,2000,,,,1.0,0.5,sold,"Exited via buyout for $175,000 / $87.50 per share.",2023-05-30,87.5,175000.0,buyout
