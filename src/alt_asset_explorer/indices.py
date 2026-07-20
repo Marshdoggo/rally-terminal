@@ -255,7 +255,8 @@ def _quarterly_source(price_history: pd.DataFrame, assets: pd.DataFrame | None =
         return pd.DataFrame(columns=["asset_id", "date", "last", "market_cap_usd", "category"])
     source = price_history.copy()
     if "frequency" in source:
-        source = source[source["frequency"].astype(str).eq("quarterly")]
+        frequency = source["frequency"].astype("string").str.strip().str.lower()
+        source = source[frequency.isna() | frequency.eq("") | frequency.eq("quarterly")]
     if "period_end" not in source or source.empty:
         return pd.DataFrame(columns=["asset_id", "date", "last", "market_cap_usd", "category"])
     if "event_type" in source:

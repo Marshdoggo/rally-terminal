@@ -5,6 +5,7 @@ from collections.abc import Iterable
 import pandas as pd
 
 from alt_asset_explorer.indices import build_index_from_selection
+from alt_asset_explorer.universe import build_asset_universe, eligible_asset_ids
 
 
 SECTOR_PERFORMANCE_COLUMNS = [
@@ -57,17 +58,33 @@ def calculate_sector_performance(
         return pd.DataFrame(columns=SECTOR_PERFORMANCE_COLUMNS)
     rows: list[dict[str, object]] = []
     for category in categories:
-        category_assets = assets[assets["category"].astype(str).eq(str(category))].copy()
-        if current_trading_only and "status" in category_assets:
-            category_assets = category_assets[category_assets["status"].astype(str).str.lower().eq("trading")]
-        ids = category_assets["asset_id"].astype(str).tolist()
-        target_ids = set(ids)
+        if "status" in assets:
+            category_universe = build_asset_universe(
+                assets,
+                observations,
+                categories=[str(category)],
+                include_exited=not current_trading_only,
+                require_price_history=True,
+                weighting_method=weighting_method,
+            )
+            category_assets = category_universe[category_universe["is_universe_eligible"]].copy()
+            ids = eligible_asset_ids(category_universe)
+            target_universe = build_asset_universe(
+                assets,
+                observations,
+                categories=[str(category)],
+                include_exited=not current_trading_only,
+                require_price_history=False,
+            )
+            target_ids = set(eligible_asset_ids(target_universe))
+        else:
+            category_assets = assets[assets["category"].astype(str).eq(str(category))].copy()
+            ids = category_assets["asset_id"].astype(str).tolist()
+            target_ids = set(ids)
         if coverage is not None and not coverage.empty and {"asset_id", "category"}.issubset(coverage.columns):
             coverage_targets = coverage[coverage["category"].astype(str).eq(str(category))].copy()
             if current_trading_only and "status" in assets:
-                statuses = assets[["asset_id", "status"]].drop_duplicates("asset_id")
-                coverage_targets = coverage_targets.merge(statuses, on="asset_id", how="left")
-                coverage_targets = coverage_targets[coverage_targets["status"].astype(str).str.lower().eq("trading")]
+                coverage_targets = coverage_targets[coverage_targets["asset_id"].astype(str).isin(target_ids)]
             target_ids = set(coverage_targets["asset_id"].astype(str))
         category_observations = observations[observations["asset_id"].astype(str).isin(target_ids)]
         researched_asset_count = int(category_observations["asset_id"].astype(str).nunique())
