@@ -1,6 +1,6 @@
 # Rally Terminal Project Context
 
-Last audited: 2026-07-19  
+Last audited: 2026-07-20
 Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1
 
 ## Purpose And Product State
@@ -38,10 +38,10 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 81 |
 | Rally asset decision universe | 81 |
 | Normalized manual assets | 81 |
-| Normalized manual price observations | 739 |
-| Processed price history | 701 |
-| General Rally index rows | 352 |
-| Quarterly Rally index rows | 248 |
+| Normalized manual price observations | 777 |
+| Processed price history | 735 |
+| General Rally index rows | 372 |
+| Quarterly Rally index rows | 250 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
@@ -49,6 +49,10 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Research coverage rows | 81 |
 
 Counts describe the committed research snapshot and are not live market coverage.
+
+## Exited Handbag Price-History Expansion (2026-07-20)
+
+The normalized Rally price observations now include user-provided Rally App chart histories and final buyout observations for `rally-faubourg2` (`#FAUBOURG2`) and `rally-birkinblu` (`#BIRKINBLU`). These are committed as authored Rally App observations, including offering-price context, secondary chart observations, and terminal buyout rows; they remain historical/exited asset records and are not presented as current live Rally listings.
 
 ## Implemented Capabilities
 
