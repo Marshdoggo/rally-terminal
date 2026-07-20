@@ -37,6 +37,7 @@ EVENT_TYPES = {
     "offering_price",
     "distribution",
     "asset_sale",
+    "buyout",
     "unknown",
 }
 

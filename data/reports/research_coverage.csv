@@ -33,7 +33,7 @@ rally-deaton,DEATON,Deaton Triceratops Skull,fossils,True,True,True,,,0,0,0,0,0,
 rally-dimaggio2,DIMAGGIO2,DiMaggio 2 Watch,watches,True,True,True,2021-02-18,2026-06-30,22,22,0,0,0,,,,188.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
 rally-dominos,DOMINOS,Domino's Pizza Special Edition Rolex Air-King,watches,True,True,True,2021-05-04,2026-06-25,21,21,0,0,0,,,,158.0,True,True,,22,,21,,2021-06-30,2026-06-30,,,21,21
 rally-dune,DUNE,Frank Herbert - Dune (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,True,True,True,2020-12-30,2023-03-31,9,9,0,0,0,,,,184.0,True,True,,10,,9,,2020-12-31,2023-03-31,,,9,9
 rally-faubourg2,FAUBOURG2,Hermès Faubourg 2,handbags,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-frost,FROST,Robert Frost - A Boy's Will (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-gatsby,GATSBY,The Great Gatsby (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0

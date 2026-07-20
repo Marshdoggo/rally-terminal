@@ -21,7 +21,7 @@ RALLY_INDEX_COLUMNS = [
     "max_staleness_days",
 ]
 
-QUARTERLY_INDEX_EVENT_TYPES = PRICE_EVENT_TYPES | {"offering_price"}
+QUARTERLY_INDEX_EVENT_TYPES = PRICE_EVENT_TYPES | {"offering_price", "buyout", "asset_sale", "distribution"}
 
 WeightingMethod = Literal["equal", "market_cap"]
 

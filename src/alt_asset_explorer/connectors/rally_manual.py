@@ -192,7 +192,7 @@ def load_quarterly_index_observations(path: Path | None = None) -> pd.DataFrame:
     raw = pd.read_csv(path)
     if raw.empty:
         return pd.DataFrame(columns=PriceObservation.model_fields.keys())
-    allowed_events = PRICE_EVENT_TYPES | {"offering_price"}
+    allowed_events = PRICE_EVENT_TYPES | {"offering_price", "buyout", "asset_sale", "distribution"}
     raw = raw[raw["event_type"].astype(str).isin(allowed_events)].copy()
     raw = raw[raw["price_per_share"].notna()]
     rows: list[dict] = []
