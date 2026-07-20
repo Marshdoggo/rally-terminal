@@ -63,7 +63,7 @@ def _price_date_frame(prices: pd.DataFrame) -> pd.DataFrame:
     source = source[source["last"] > 0]
     source["price_source"] = np.where(source["event_type"].eq("offering_price"), "offering_price", "observed_price")
     source["is_direct_observation"] = ~source["event_type"].eq("offering_price")
-    source["_priority"] = np.where(source["event_type"].eq("offering_price"), 0, 1)
+    source["_priority"] = source["event_type"].astype(str).map({"offering_price": 0, **{event: 1 for event in PRICE_EVENT_TYPES}, "buyout": 2, "asset_sale": 2, "distribution": 2}).fillna(1)
     return source.sort_values(["date", "asset_id", "_priority"]).drop_duplicates(["date", "asset_id"], keep="last")
 
 

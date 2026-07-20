@@ -5,6 +5,7 @@ from alt_asset_explorer.indices import (
     RALLY_INDEX_COLUMNS,
     build_index_from_selection,
     build_quarterly_rally_indices,
+    prepare_quarterly_observations,
     build_rally_indices,
     summarize_contributions,
 )
@@ -169,6 +170,47 @@ def test_quarterly_indices_use_offering_price_as_inception_baseline():
     assert watches.iloc[0]["index_level"] == pytest.approx(100.0)
     assert watches.iloc[1]["return_1d"] == pytest.approx(-0.45)
     assert watches.iloc[1]["index_level"] == pytest.approx(55.0)
+
+
+def test_quarterly_indices_prefer_terminal_buyout_over_intra_quarter_observation():
+    prices = pd.DataFrame(
+        [
+            {
+                "asset_id": "watch",
+                "period_end": "2021-03-31",
+                "observed_at": "2021-03-02",
+                "last": 40.50,
+                "market_cap_usd": 40500,
+                "event_type": "chart_observation",
+                "frequency": "quarterly",
+            },
+            {
+                "asset_id": "watch",
+                "period_end": "2021-06-30",
+                "observed_at": "2021-05-10",
+                "last": 40.65,
+                "market_cap_usd": 40650,
+                "event_type": "chart_observation",
+                "frequency": "quarterly",
+            },
+            {
+                "asset_id": "watch",
+                "period_end": "2021-06-30",
+                "observed_at": "2021-06-30",
+                "last": 110.00,
+                "market_cap_usd": 110000,
+                "event_type": "buyout",
+                "frequency": "quarterly",
+            },
+        ]
+    )
+    assets = pd.DataFrame([{"asset_id": "watch", "category": "watches"}])
+
+    observations = prepare_quarterly_observations(prices, assets)
+    q2 = observations[observations["date"].astype(str).eq("2021-06-30")].iloc[0]
+
+    assert q2["last"] == pytest.approx(110.00)
+    assert q2["event_type"] == "buyout"
 
 
 def test_custom_index_accepts_arbitrary_asset_selection_and_date_range():
