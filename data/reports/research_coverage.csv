@@ -29,7 +29,7 @@ rally-brosgrimm,BROSGRIMM,Grimms' Fairy Tales (Inscribed),books,True,True,True,,
 rally-catcher,CATCHER,J.D. Salinger - The Catcher in the Rye (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-churchill,CHURCHILL,Winston Churchill - The Second World War (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-congress,CONGRESS,Journals of the Continental Congress (1774–1775),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-deaton,DEATON,Deaton Triceratops Skull,fossils,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-deaton,DEATON,Deaton Triceratops Skull,fossils,True,True,True,2021-05-24,2026-06-22,21,21,0,0,0,,,,147.0,True,True,,1,,21,,2021-06-30,2026-06-30,,,0,0
 rally-dimaggio2,DIMAGGIO2,DiMaggio 2 Watch,watches,True,True,True,2021-02-18,2026-06-30,22,22,0,0,0,,,,188.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
 rally-dominos,DOMINOS,Domino's Pizza Special Edition Rolex Air-King,watches,True,True,True,2021-05-04,2026-06-25,21,21,0,0,0,,,,158.0,True,True,,22,,21,,2021-06-30,2026-06-30,,,21,21
 rally-dune,DUNE,Frank Herbert - Dune (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0

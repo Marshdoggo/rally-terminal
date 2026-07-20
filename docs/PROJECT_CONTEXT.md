@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 81 |
 | Rally asset decision universe | 81 |
 | Normalized manual assets | 81 |
-| Normalized manual price observations | 788 |
-| Processed price history | 744 |
-| General Rally index rows | 380 |
+| Normalized manual price observations | 810 |
+| Processed price history | 765 |
+| General Rally index rows | 390 |
 | Quarterly Rally index rows | 250 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -106,6 +106,10 @@ The normalized Rally inputs now include the exited `rally-faubourg` Hermès Faub
 ## Manual Exit Price Coverage Update (2026-07-20)
 
 The normalized Rally price observations now include authored quarterly chart observations and terminal buyout observations for exited handbag assets `rally-faubourg2` and `rally-birkinblu`. `rally-faubourg2` runs from its January 2021 offering context through the January 6, 2025 buyout at $16.50 per share / $181,500 total value. `rally-birkinblu` runs from its November 2019 offering context through the April 10, 2025 buyout at $68.00 per share / $68,000 total value. These terminal rows are exit payout observations for reconstruction and total-return research, not current Rally listings or definitive appraisals.
+
+## Pending Buyout Offer Coverage Update (2026-07-20)
+
+The normalized Rally inputs now include authored quarterly price observations for `rally-deaton`, the Deaton Triceratops Skull fossil asset, from its January 2021 offering context through the June 22, 2026 last close before a pending buyout vote. The asset is marked `exit_announced`, with pending offer metadata for a proposed $600,000 / $52.631579 per-share buyout and 54% yes vote snapshot. Because the offer has not been approved and completed, Deaton is not modeled as a realized exit, settled buyout, or terminal payout observation.
 
 ## Development And Verification
 
