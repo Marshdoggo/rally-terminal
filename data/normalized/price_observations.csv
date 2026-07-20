@@ -297,6 +297,28 @@ rally-93daytona,2025-09-30,2025-09-26T00:00:00Z,14.95,29900.0,chart_observation,
 rally-93daytona,2025-12-31,2025-12-31T00:00:00Z,16.0,32000.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,32000.0,chart_observation_marked_exact
 rally-93daytona,2026-03-31,2026-03-26T00:00:00Z,18.1,36200.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,36200.0,chart_observation_marked_exact
 rally-93daytona,2026-06-30,2026-06-30T00:00:00Z,18.1,36200.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,36200.0,chart_observation_marked_exact
+rally-birkinblu,2019-12-31,2019-11-01T00:00:00Z,58.0,58000.0,offering_price,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Initial offering,,quarterly,58000.0,observed_at_exceeds_quarter_lookback:60d; offering_price_excluded_from_secondary_returns
+rally-birkinblu,2020-06-30,2020-04-28T00:00:00Z,61.5,61500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,61500.0,observed_at_exceeds_quarter_lookback:63d; chart_observation_marked_exact
+rally-birkinblu,2020-09-30,2020-08-04T00:00:00Z,61.55,61550.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,61550.0,observed_at_exceeds_quarter_lookback:57d; chart_observation_marked_exact
+rally-birkinblu,2020-12-31,2020-11-05T00:00:00Z,62.1,62100.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,62100.0,observed_at_exceeds_quarter_lookback:56d; chart_observation_marked_exact
+rally-birkinblu,2021-03-31,2021-03-30T00:00:00Z,55.1,55100.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,55100.0,chart_observation_marked_exact
+rally-birkinblu,2021-06-30,2021-06-16T00:00:00Z,58.0,58000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,58000.0,chart_observation_marked_exact
+rally-birkinblu,2021-09-30,2021-08-30T00:00:00Z,58.25,58250.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,58250.0,observed_at_exceeds_quarter_lookback:31d; chart_observation_marked_exact
+rally-birkinblu,2021-12-31,2021-11-17T00:00:00Z,66.7,66700.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,66700.0,observed_at_exceeds_quarter_lookback:44d; chart_observation_marked_exact
+rally-birkinblu,2022-03-31,2022-03-07T00:00:00Z,60.0,60000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,60000.0,observed_at_exceeds_quarter_lookback:24d; chart_observation_marked_exact
+rally-birkinblu,2022-06-30,2022-06-29T00:00:00Z,49.0,49000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,49000.0,chart_observation_marked_exact
+rally-birkinblu,2022-09-30,2022-09-27T00:00:00Z,45.0,45000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,45000.0,chart_observation_marked_exact
+rally-birkinblu,2022-12-31,2022-12-27T00:00:00Z,39.0,39000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,39000.0,chart_observation_marked_exact
+rally-birkinblu,2023-03-31,2023-03-31T00:00:00Z,44.7,44700.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,44700.0,chart_observation_marked_exact
+rally-birkinblu,2023-06-30,2023-06-29T00:00:00Z,44.75,44750.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,44750.0,chart_observation_marked_exact
+rally-birkinblu,2023-09-30,2023-09-26T00:00:00Z,31.0,31000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,31000.0,chart_observation_marked_exact
+rally-birkinblu,2023-12-31,2023-12-29T00:00:00Z,32.0,32000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,32000.0,chart_observation_marked_exact
+rally-birkinblu,2024-03-31,2024-03-28T00:00:00Z,32.05,32050.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,32049.999999999996,chart_observation_marked_exact
+rally-birkinblu,2024-06-30,2024-06-27T00:00:00Z,31.75,31750.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,31750.0,chart_observation_marked_exact
+rally-birkinblu,2024-09-30,2024-09-25T00:00:00Z,29.95,29950.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,29950.0,chart_observation_marked_exact
+rally-birkinblu,2024-12-31,2024-12-30T00:00:00Z,34.0,34000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,34000.0,chart_observation_marked_exact
+rally-birkinblu,2025-03-31,2025-03-24T00:00:00Z,30.9,30900.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,30900.0,chart_observation_marked_exact
+rally-birkinblu,2025-06-30,2025-04-10T00:00:00Z,68.0,68000.0,buyout,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Final buyout / exit value,,quarterly,68000.0,observed_at_exceeds_quarter_lookback:81d
 rally-birkinbor,2020-06-30,2020-05-26T00:00:00Z,26.25,52500.0,offering_price,rally_app,Rally App,2026-07-12T00:00:00Z,Marshall,exact,Initial offering,,quarterly,52500.0,observed_at_exceeds_quarter_lookback:35d; offering_price_excluded_from_secondary_returns
 rally-birkinbor,2020-12-31,2020-12-01T00:00:00Z,30.0,60000.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,60000.0,observed_at_exceeds_quarter_lookback:30d; chart_observation_marked_exact
 rally-birkinbor,2021-03-31,2021-04-15T00:00:00Z,20.0,40000.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,Nearest available observation occurred after quarter-end,,quarterly,40000.0,observed_at_after_period_end; chart_observation_marked_exact
@@ -399,6 +421,33 @@ rally-dominos,2025-09-30,2025-09-30T00:00:00Z,5.45,10900.0,chart_observation,ral
 rally-dominos,2025-12-31,2025-12-30T00:00:00Z,5.15,10300.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,10300.0,chart_observation_marked_exact
 rally-dominos,2026-03-31,2026-03-26T00:00:00Z,5.9,11800.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,11800.0,chart_observation_marked_exact
 rally-dominos,2026-06-30,2026-06-25T00:00:00Z,5.1,10200.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,10200.0,chart_observation_marked_exact
+rally-faubourg,2020-09-30,2020-09-11,75.0,150000.0,offering_price,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Initial offering,,quarterly,150000.0,
+rally-faubourg,2020-12-31,2020-12-30,74.95,149900.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,149900.0,chart_observation_marked_exact
+rally-faubourg,2021-03-31,2021-03-09,74.0,148000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,148000.0,chart_observation_marked_exact
+rally-faubourg,2021-06-30,2021-05-13,45.5,91000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,91000.0,chart_observation_marked_exact
+rally-faubourg,2021-09-30,2021-09-28,62.05,124100.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,124100.0,chart_observation_marked_exact
+rally-faubourg,2022-03-31,2022-03-31,45.0,90000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,90000.0,chart_observation_marked_exact
+rally-faubourg,2022-06-30,2022-06-30,40.0,80000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,80000.0,chart_observation_marked_exact
+rally-faubourg,2022-09-30,2022-09-30,45.0,90000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,90000.0,chart_observation_marked_exact
+rally-faubourg,2022-12-31,2022-12-30,57.5,115000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,115000.0,chart_observation_marked_exact
+rally-faubourg,2023-03-31,2023-03-31,58.7,117400.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,117400.0,chart_observation_marked_exact
+rally-faubourg,2023-06-30,2023-05-30,87.5,175000.0,buyout,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Final buyout / exit value.,,quarterly,175000.0,
+rally-faubourg2,2021-03-31,2021-01-01T00:00:00Z,15.0,165000.0,offering_price,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Initial offering; submitted period_end 2021-01-31 normalized to 2021-Q1 quarter end,,quarterly,165000.0,observed_at_exceeds_quarter_lookback:89d; offering_price_excluded_from_secondary_returns
+rally-faubourg2,2021-06-30,2021-06-18T00:00:00Z,14.75,162250.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,162250.0,chart_observation_marked_exact
+rally-faubourg2,2021-09-30,2021-09-03T00:00:00Z,14.0,154000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,154000.0,observed_at_exceeds_quarter_lookback:27d; chart_observation_marked_exact
+rally-faubourg2,2021-12-31,2022-01-10T00:00:00Z,13.8,151800.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,151800.0,observed_at_after_period_end; chart_observation_marked_exact
+rally-faubourg2,2022-03-31,2022-03-31T00:00:00Z,10.2,112200.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,112199.99999999999,chart_observation_marked_exact
+rally-faubourg2,2022-06-30,2022-06-29T00:00:00Z,10.5,115500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,115500.0,chart_observation_marked_exact
+rally-faubourg2,2022-09-30,2022-09-30T00:00:00Z,9.0,99000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,99000.0,chart_observation_marked_exact
+rally-faubourg2,2022-12-31,2022-12-28T00:00:00Z,11.0,121000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,121000.0,chart_observation_marked_exact
+rally-faubourg2,2023-03-31,2023-03-31T00:00:00Z,11.25,123750.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,123750.0,chart_observation_marked_exact
+rally-faubourg2,2023-06-30,2023-06-29T00:00:00Z,13.75,151250.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,151250.0,chart_observation_marked_exact
+rally-faubourg2,2023-09-30,2023-09-26T00:00:00Z,13.5,148500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,148500.0,chart_observation_marked_exact
+rally-faubourg2,2023-12-31,2023-12-29T00:00:00Z,12.5,137500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,137500.0,chart_observation_marked_exact
+rally-faubourg2,2024-03-31,2024-03-27T00:00:00Z,14.5,159500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,159500.0,chart_observation_marked_exact
+rally-faubourg2,2024-06-30,2024-06-28T00:00:00Z,15.0,165000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,165000.0,chart_observation_marked_exact
+rally-faubourg2,2024-09-30,2024-09-26T00:00:00Z,15.0,165000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,165000.0,chart_observation_marked_exact
+rally-faubourg2,2025-03-31,2025-01-06T00:00:00Z,16.5,181500.0,buyout,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Final buyout / exit value,,quarterly,181500.0,observed_at_exceeds_quarter_lookback:84d
 rally-gmtblack1,2020-06-30,2020-06-19T00:00:00Z,28.0,28000.0,offering_price,rally_app,Rally App,2026-07-12T00:00:00Z,Marshall,exact,Initial offering,,quarterly,28000.0,offering_price_excluded_from_secondary_returns
 rally-gmtblack1,2020-09-30,2020-10-13T00:00:00Z,28.0,28000.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,Nearest available observation occurred after quarter-end,,quarterly,28000.0,observed_at_after_period_end; chart_observation_marked_exact
 rally-gmtblack1,2020-12-31,2021-01-14T00:00:00Z,28.0,28000.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,Nearest available observation occurred after quarter-end,,quarterly,28000.0,observed_at_after_period_end; chart_observation_marked_exact
@@ -738,14 +787,3 @@ rally-tornek,2025-09-30,2025-09-29T00:00:00Z,2.4,79200.0,chart_observation,rally
 rally-tornek,2025-12-31,2025-12-31T00:00:00Z,2.55,84150.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,84150.0,chart_observation_marked_exact
 rally-tornek,2026-03-31,2026-03-30T00:00:00Z,2.5,82500.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,82500.0,chart_observation_marked_exact
 rally-tornek,2026-06-30,2026-06-24T00:00:00Z,2.35,77550.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,77550.0,chart_observation_marked_exact
-rally-faubourg,2020-09-30,2020-09-11,75.0,150000.0,offering_price,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Initial offering,,quarterly,150000.0,
-rally-faubourg,2020-12-31,2020-12-30,74.95,149900.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,149900.0,chart_observation_marked_exact
-rally-faubourg,2021-03-31,2021-03-09,74.0,148000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,148000.0,chart_observation_marked_exact
-rally-faubourg,2021-06-30,2021-05-13,45.5,91000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,91000.0,chart_observation_marked_exact
-rally-faubourg,2021-09-30,2021-09-28,62.05,124100.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,124100.0,chart_observation_marked_exact
-rally-faubourg,2022-03-31,2022-03-31,45.0,90000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,90000.0,chart_observation_marked_exact
-rally-faubourg,2022-06-30,2022-06-30,40.0,80000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,80000.0,chart_observation_marked_exact
-rally-faubourg,2022-09-30,2022-09-30,45.0,90000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,90000.0,chart_observation_marked_exact
-rally-faubourg,2022-12-31,2022-12-30,57.5,115000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,115000.0,chart_observation_marked_exact
-rally-faubourg,2023-03-31,2023-03-31,58.7,117400.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,117400.0,chart_observation_marked_exact
-rally-faubourg,2023-06-30,2023-05-30,87.5,175000.0,buyout,rally_app,Rally App,2026-07-19T00:00:00Z,Marshall,exact,Final buyout / exit value.,,quarterly,175000.0,

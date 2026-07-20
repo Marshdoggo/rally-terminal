@@ -38,10 +38,10 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 81 |
 | Rally asset decision universe | 81 |
 | Normalized manual assets | 81 |
-| Normalized manual price observations | 750 |
-| Processed price history | 710 |
-| General Rally index rows | 360 |
-| Quarterly Rally index rows | 248 |
+| Normalized manual price observations | 788 |
+| Processed price history | 744 |
+| General Rally index rows | 380 |
+| Quarterly Rally index rows | 250 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
@@ -102,6 +102,10 @@ Production-facing dataset builds now exclude the legacy raw Rally asset and pric
 ## Manual Exit Coverage Update (2026-07-20)
 
 The normalized Rally inputs now include the exited `rally-faubourg` Hermès Faubourg handbag record with a confirmed May 30, 2023 buyout at $87.50 per share / $175,000 total value. Its authored quarterly observations run from the September 2020 offering through the May 2023 terminal buyout observation so exchange-history reconstruction and exit-aware total-return simulations can account for the asset instead of treating the dataset as survivor-only for this handbag. The buyout is an exit event and terminal payout observation, not a current Rally listing or definitive appraisal.
+
+## Manual Exit Price Coverage Update (2026-07-20)
+
+The normalized Rally price observations now include authored quarterly chart observations and terminal buyout observations for exited handbag assets `rally-faubourg2` and `rally-birkinblu`. `rally-faubourg2` runs from its January 2021 offering context through the January 6, 2025 buyout at $16.50 per share / $181,500 total value. `rally-birkinblu` runs from its November 2019 offering context through the April 10, 2025 buyout at $68.00 per share / $68,000 total value. These terminal rows are exit payout observations for reconstruction and total-return research, not current Rally listings or definitive appraisals.
 
 ## Development And Verification
 
