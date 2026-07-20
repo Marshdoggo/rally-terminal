@@ -35,18 +35,18 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 
 | Artifact | Rows |
 | --- | ---: |
-| Canonical asset master | 81 |
-| Rally asset decision universe | 81 |
-| Normalized manual assets | 81 |
-| Normalized manual price observations | 810 |
-| Processed price history | 765 |
-| General Rally index rows | 390 |
+| Canonical asset master | 83 |
+| Rally asset decision universe | 83 |
+| Normalized manual assets | 83 |
+| Normalized manual price observations | 829 |
+| Processed price history | 780 |
+| General Rally index rows | 400 |
 | Quarterly Rally index rows | 250 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
 | Asset-to-comp matches | 0 |
-| Research coverage rows | 81 |
+| Research coverage rows | 83 |
 
 Counts describe the committed research snapshot and are not live market coverage.
 
@@ -106,6 +106,10 @@ The normalized Rally inputs now include the exited `rally-faubourg` Hermès Faub
 ## Manual Exit Price Coverage Update (2026-07-20)
 
 The normalized Rally price observations now include authored quarterly chart observations and terminal buyout observations for exited handbag assets `rally-faubourg2` and `rally-birkinblu`. `rally-faubourg2` runs from its January 2021 offering context through the January 6, 2025 buyout at $16.50 per share / $181,500 total value. `rally-birkinblu` runs from its November 2019 offering context through the April 10, 2025 buyout at $68.00 per share / $68,000 total value. These terminal rows are exit payout observations for reconstruction and total-return research, not current Rally listings or definitive appraisals.
+
+## Manual Watch Exit Coverage Update (2026-07-20)
+
+The normalized Rally inputs now include authored watch exit coverage for `rally-7orlex` (`#70RLEX`) and `rally-aproak` (`#APROAK`). `rally-7orlex` runs from its November 2019 offering context through the December 12, 2023 buyout at $30.00 per share / $30,000 total value. `rally-aproak` runs from its December 2019 offering context through the June 30, 2021 buyout at $110.00 per share / $110,000 total value. APROAK intentionally retains both the May 10, 2021 intra-quarter secondary chart observation and the June 30, 2021 terminal buyout in Q2 2021; canonical quarter-end research should use the realized buyout while preserving the May observation as historical evidence. These terminal rows are exit payout observations for reconstruction and total-return research, not current Rally listings or definitive appraisals.
 
 ## Pending Buyout Offer Coverage Update (2026-07-20)
 

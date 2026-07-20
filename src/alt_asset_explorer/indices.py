@@ -272,7 +272,7 @@ def _quarterly_source(price_history: pd.DataFrame, assets: pd.DataFrame | None =
     source = source.dropna(subset=["asset_id", "date", "last"])
     source = source[source["last"] > 0]
     if "event_type" in source:
-        source["_event_priority"] = source["event_type"].astype(str).isin(PRICE_EVENT_TYPES).astype(int)
+        source["_event_priority"] = source["event_type"].astype(str).map({"offering_price": 0, **{event: 1 for event in PRICE_EVENT_TYPES}, "buyout": 2, "asset_sale": 2, "distribution": 2}).fillna(1)
     else:
         source["_event_priority"] = 1
     return (
