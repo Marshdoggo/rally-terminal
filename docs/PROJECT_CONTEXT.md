@@ -35,18 +35,18 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 
 | Artifact | Rows |
 | --- | ---: |
-| Canonical asset master | 83 |
-| Rally asset decision universe | 83 |
-| Normalized manual assets | 83 |
-| Normalized manual price observations | 829 |
-| Processed price history | 780 |
-| General Rally index rows | 400 |
+| Canonical asset master | 84 |
+| Rally asset decision universe | 84 |
+| Normalized manual assets | 84 |
+| Normalized manual price observations | 846 |
+| Processed price history | 795 |
+| General Rally index rows | 402 |
 | Quarterly Rally index rows | 250 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
 | Asset-to-comp matches | 0 |
-| Research coverage rows | 83 |
+| Research coverage rows | 84 |
 
 Counts describe the committed research snapshot and are not live market coverage.
 
@@ -96,7 +96,7 @@ The normalized Rally asset master now includes 41 user-provided Books category r
 
 ## Production Asset Cleanup (2026-07-19)
 
-Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain the 81 verified normalized Rally App asset rows, including the 41 Books category offering records, and their corresponding Rally App price observations; SEC-derived series remain filing research context rather than app-listed assets.
+Production-facing dataset builds now exclude the legacy raw Rally asset and price seed CSVs by default. Those seed files remain available only as explicit fixtures/legacy diagnostics because their rows were illustrative bootstrap/demo records, not verified Rally Rd listings. The investable universe builder also no longer appends SEC-synthesized series rows unless a caller explicitly opts into SEC context. As a result, committed processed app artifacts now contain 84 verified normalized production asset rows, including the 41 Books category offering records and authored exit coverage rows, with corresponding Rally App/manual price observations; SEC-derived series remain filing research context rather than app-listed assets.
 
 
 ## Manual Exit Coverage Update (2026-07-20)
@@ -110,6 +110,11 @@ The normalized Rally price observations now include authored quarterly chart obs
 ## Manual Watch Exit Coverage Update (2026-07-20)
 
 The normalized Rally inputs now include authored watch exit coverage for `rally-7orlex` (`#70RLEX`) and `rally-aproak` (`#APROAK`). `rally-7orlex` runs from its November 2019 offering context through the December 12, 2023 buyout at $30.00 per share / $30,000 total value. `rally-aproak` runs from its December 2019 offering context through the June 30, 2021 buyout at $110.00 per share / $110,000 total value. APROAK intentionally retains both the May 10, 2021 intra-quarter secondary chart observation and the June 30, 2021 terminal buyout in Q2 2021; canonical quarter-end research should use the realized buyout while preserving the May observation as historical evidence. These terminal rows are exit payout observations for reconstruction and total-return research, not current Rally listings or definitive appraisals.
+
+
+## Manual Wine Exit Coverage Update (2026-07-20)
+
+The normalized Rally inputs now include authored wine-and-whiskey exit coverage for `rally-17dujac` (`#17DUJAC`), modeled as the 2017 Domaine Dujac Wine Collection. The observation history runs from the March 2021 offering context through the May 13, 2025 realized buyout at approximately $10.923077 per share / $35,500 total value. This terminal row is an exit payout observation for reconstruction and total-return research, not a current Rally listing or definitive appraisal.
 
 ## Pending Buyout Offer Coverage Update (2026-07-20)
 
