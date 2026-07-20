@@ -1,6 +1,6 @@
 # Rally Terminal Project Context
 
-Last audited: 2026-07-19  
+Last audited: 2026-07-20
 Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1
 
 ## Purpose And Product State
@@ -41,12 +41,13 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Normalized manual price observations | 846 |
 | Processed price history | 795 |
 | General Rally index rows | 402 |
-| Quarterly Rally index rows | 250 |
+| Quarterly Rally index rows | 254 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
 | Asset-to-comp matches | 0 |
 | Research coverage rows | 84 |
+| Asset universe diagnostics rows | 84 |
 
 Counts describe the committed research snapshot and are not live market coverage.
 
@@ -196,3 +197,9 @@ The architecture inventory and directory policy are documented in `docs/DATA_ARC
 The app now labels the survivor-biased Index Explorer universe as **Current Survivors Only** rather than **Currently Trading Only**. This label is meant to communicate that current trading status is applied retroactively and should be read as a descriptive survivor diagnostic, not a point-in-time investable benchmark.
 
 Total-return portfolio variants are generated for quarterly, monthly, and weekly scheduled rebalancing. Quarterly is the preferred default benchmark for the current dataset because normalized Rally price observations are quarterly-oriented. Offering prices remain investable entry prices for total-return methodology; exits still convert held units into cash or pending settlement and reinvest on the next scheduled rebalance.
+
+## Universe Eligibility Architecture Update (2026-07-20)
+
+Rally analytics now share `alt_asset_explorer.universe` for reusable source-data-driven eligibility and propagation diagnostics. The builder distinguishes canonical source presence, production eligibility, normalized status, active-tradable versus exit-aware scopes, price-history availability, market-cap-history availability, and dated entry eligibility. Index Explorer uses this layer for its Current Survivors Only and Include Exited Assets scopes, while its plotted `constituent_count` remains the actual number of assets with usable observations at each point in the calculation; the UI also surfaces the selected historical universe size so exited assets are visible without creating look-ahead-biased date counts.
+
+Exit-aware total-return portfolios are now generated for both `include_exited` and `active_only` universe scopes, allowing the Home and Exchange Market Cap pages to compare survivor-only portfolios against lifecycle-aware simulations where exits realize proceeds and reinvest according to the selected rebalance methodology. The dataset build also emits `data/processed/asset_universe_diagnostics.csv` as a lightweight developer audit table showing each asset's category, normalized status, history rows, equal-weight eligibility, market-cap-weight eligibility, exit recognition, and named exclusion reason. This diagnostic is derived from canonical normalized assets and observations and is intended to prevent silent orphaning when new Rally assets or exited assets are entered.

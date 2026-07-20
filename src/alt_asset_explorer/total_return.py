@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 
 from alt_asset_explorer.paths import DATA_PROCESSED, ensure_dirs
+from alt_asset_explorer.universe import build_asset_universe, eligible_asset_ids
 from typing import Literal as _Literal
 
 Frequency = _Literal["native", "weekly", "monthly", "quarterly"]
@@ -171,7 +172,7 @@ def scheduled_rebalance_dates(dates: pd.DatetimeIndex, frequency: str) -> set[pd
     return {pd.Timestamp(d).normalize() for d in out}
 
 
-def build_total_return_indexes(assets: pd.DataFrame, prices: pd.DataFrame, exits: pd.DataFrame | None = None, *, frequency: Frequency = "native", config: TotalReturnConfig | None = None) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def build_total_return_indexes(assets: pd.DataFrame, prices: pd.DataFrame, exits: pd.DataFrame | None = None, *, frequency: Frequency = "native", config: TotalReturnConfig | None = None, include_exited: bool = True) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     config = config or TotalReturnConfig()
     required = {"asset_id", "offering_date", "share_count", "offering_price_usd"}
     if assets is None or assets.empty or not required.issubset(assets.columns):
@@ -180,7 +181,14 @@ def build_total_return_indexes(assets: pd.DataFrame, prices: pd.DataFrame, exits
     a = assets.copy(); a["asset_id"] = a["asset_id"].astype(str); a["offering_date"] = pd.to_datetime(a["offering_date"], errors="coerce").dt.normalize(); a["share_count"] = pd.to_numeric(a["share_count"], errors="coerce"); a["offering_price_usd"] = pd.to_numeric(a["offering_price_usd"], errors="coerce")
     a = a.dropna(subset=["asset_id", "offering_date", "share_count", "offering_price_usd"])
     a = a[(a["share_count"] > 0) & (a["offering_price_usd"] > 0)]
-    p = _price_date_frame(prices)
+    source_prices = _price_date_frame(prices)
+    universe = build_asset_universe(a, source_prices, include_exited=include_exited, require_price_history=False)
+    allowed_ids = set(eligible_asset_ids(universe)) if not universe.empty else set()
+    if allowed_ids:
+        a = a[a["asset_id"].astype(str).isin(allowed_ids)].copy()
+    else:
+        a = a.iloc[0:0].copy()
+    p = source_prices[source_prices["asset_id"].astype(str).isin(set(a["asset_id"].astype(str)))] if not source_prices.empty else source_prices
     offer = a[["asset_id", "offering_date", "offering_price_usd"]].rename(columns={"offering_date":"date", "offering_price_usd":"last"}); offer["event_type"]="offering_price"; offer["price_source"]="offering_price"; offer["is_direct_observation"]=False; offer["_priority"]=0
     p = pd.concat([p, offer], ignore_index=True, sort=False).sort_values(["date","asset_id","_priority"]).drop_duplicates(["date","asset_id"], keep="last")
     e = normalize_exit_events(a, exits, prices)
@@ -246,12 +254,12 @@ def build_total_return_indexes(assets: pd.DataFrame, prices: pd.DataFrame, exits
             period_return=0.0; level=config.base_index_level
           else:
             period_return=(total_value/prev_value-1) if prev_value else 0.0; level*=1+period_return; prev_value=total_value
-          port_rows.append({"date":d,"universe":"full_market" if cat is None else "category","category":cat or "all","weighting_method":method,"rebalance_frequency":config.rebalance_frequency,"index_level":level,"portfolio_value":total_value,"invested_asset_value":invested,"cash_value":cash,"pending_settlement_value":sum(pending.values()),"eligible_constituent_count":len([aid for aid in ids if offer_map[aid]<=d]),"active_constituent_count":len(units),"exited_constituent_count":len([1 for ex in exit_by_asset.values() if pd.notna(ex["exit_effective_date"]) and d>=ex["exit_effective_date"] and ex["exit_status"]!="cancelled_exit"]),"realized_exit_proceeds":cash,"period_return":period_return,"cumulative_return":level/config.base_index_level-1,"rebalance_flag":is_rebal,"calculation_version":CALCULATION_VERSION})
+          port_rows.append({"date":d,"universe":"full_market" if cat is None else "category","category":cat or "all","universe_scope":"include_exited" if include_exited else "active_only","weighting_method":method,"rebalance_frequency":config.rebalance_frequency,"index_level":level,"portfolio_value":total_value,"invested_asset_value":invested,"cash_value":cash,"pending_settlement_value":sum(pending.values()),"eligible_constituent_count":len([aid for aid in ids if offer_map[aid]<=d]),"active_constituent_count":len(units),"exited_constituent_count":len([1 for ex in exit_by_asset.values() if pd.notna(ex["exit_effective_date"]) and d>=ex["exit_effective_date"] and ex["exit_status"]!="cancelled_exit"]),"realized_exit_proceeds":cash,"period_return":period_return,"cumulative_return":level/config.base_index_level-1,"rebalance_flag":is_rebal,"calculation_version":CALCULATION_VERSION})
           for aid,u in units.items():
-            val=u*price_map.get(aid,0); const_rows.append({"date":d,"universe":"full_market" if cat is None else "category","category":cat or "all","weighting_method":method,"asset_id":aid,"ticker":ticker_map.get(aid, aid),"constituent_status":"included_in_index","units_held":u,"price":price_map.get(aid),"price_source":"asof_observed_or_offering","position_value":val,"portfolio_weight":val/total_value if total_value else 0,"entry_date":offer_map[aid],"exit_date":pd.NaT,"terminal_proceeds":0.0,"realized_pl":0.0,"rebalance_trade_value":np.nan})
+            val=u*price_map.get(aid,0); const_rows.append({"date":d,"universe":"full_market" if cat is None else "category","category":cat or "all","universe_scope":"include_exited" if include_exited else "active_only","weighting_method":method,"asset_id":aid,"ticker":ticker_map.get(aid, aid),"constituent_status":"included_in_index","units_held":u,"price":price_map.get(aid),"price_source":"asof_observed_or_offering","position_value":val,"portfolio_weight":val/total_value if total_value else 0,"entry_date":offer_map[aid],"exit_date":pd.NaT,"terminal_proceeds":0.0,"realized_pl":0.0,"rebalance_trade_value":np.nan})
     portfolio=pd.DataFrame(port_rows)
     if not portfolio.empty:
-      portfolio["drawdown"] = portfolio.groupby(["universe","category","weighting_method","rebalance_frequency"])["index_level"].transform(lambda s: s/s.cummax()-1)
+      portfolio["drawdown"] = portfolio.groupby(["universe_scope","universe","category","weighting_method","rebalance_frequency"])["index_level"].transform(lambda s: s/s.cummax()-1)
       portfolio["calculated_at"] = datetime.now(timezone.utc).isoformat()
     analytics_columns = ["asset_id", "ticker", "category", "offering_date", "offering_price", "exit_date", "exit_price", "holding_period_days", "total_return", "annualized_return", "premium_vs_last_trade", "initial_market_cap", "exit_market_cap", "realized_pl", "data_quality_flag"]
     return portfolio, pd.DataFrame(const_rows), e, pd.DataFrame(analytics).drop_duplicates() if analytics else pd.DataFrame(columns=analytics_columns)

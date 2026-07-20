@@ -20,7 +20,8 @@ from alt_asset_explorer.investable import (
     match_assets_to_comps,
     write_ai_report_context,
 )
-from alt_asset_explorer.indices import build_quarterly_rally_indices, build_rally_indices
+from alt_asset_explorer.indices import build_quarterly_rally_indices, build_rally_indices, prepare_quarterly_observations
+from alt_asset_explorer.universe import build_asset_universe_diagnostics
 from alt_asset_explorer.exchange_history import rebuild_exchange_history
 from alt_asset_explorer.current_universe import build_current_asset_universe, calculate_current_universe_summary
 from alt_asset_explorer.liquidity import compute_liquidity_metrics
@@ -71,6 +72,7 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
     exchange_history = rebuild_exchange_history(canonical_asset_master, price_history, exits, frequency="native", persist=False)
     current_universe = build_current_asset_universe(canonical_asset_master, exchange_history.asset_history, as_of_date=as_of)
     current_universe_summary = pd.DataFrame([calculate_current_universe_summary(current_universe)])
+    asset_universe_diagnostics = build_asset_universe_diagnostics(canonical_asset_master, prepare_quarterly_observations(quarterly_index_observations, canonical_asset_master), exits, include_exited=True)
 
     outputs = {
         "assets": assets,
@@ -95,6 +97,7 @@ def build_dataset(*, as_of: date | None = None) -> dict[str, pd.DataFrame]:
         "exchange_data_quality_report": exchange_history.data_quality_report,
         "exchange_reconciliation_report": exchange_history.reconciliation_report,
         "exchange_validation_warnings": exchange_history.validation_warnings,
+        "asset_universe_diagnostics": asset_universe_diagnostics,
         "universe_export": universe_export,
         "mme_universe_export": mme_universe_export,
         **newsletter_exports,

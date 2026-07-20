@@ -157,9 +157,13 @@ if not portfolio.empty:
         st.subheader("Exit-Aware Total-Return Indexes")
         tr_categories = ["all"] + sorted([c for c in portfolio["category"].dropna().astype(str).unique() if c != "all"])
         sel_cat = st.selectbox("Category", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="exchange_tr_category")
+        if "universe_scope" not in portfolio:
+            portfolio["universe_scope"] = "include_exited"
+        scope_options = [scope for scope in ["include_exited", "active_only"] if scope in set(portfolio["universe_scope"].dropna().astype(str))]
+        sel_scope = st.selectbox("Universe scope", scope_options or ["include_exited"], format_func=lambda v: "Include exited" if v == "include_exited" else "Active only", key="exchange_tr_scope")
         available_rebalances = [item for item in ["quarterly", "monthly", "weekly"] if item in set(portfolio["rebalance_frequency"].dropna().astype(str))]
         sel_rebal = st.selectbox("Rebalance", available_rebalances or sorted(portfolio["rebalance_frequency"].dropna().unique()), key="exchange_tr_rebal")
-        tr = portfolio[portfolio["category"].astype(str).eq(sel_cat) & portfolio["rebalance_frequency"].astype(str).eq(sel_rebal)].copy()
+        tr = portfolio[portfolio["category"].astype(str).eq(sel_cat) & portfolio["rebalance_frequency"].astype(str).eq(sel_rebal) & portfolio["universe_scope"].astype(str).eq(sel_scope)].copy()
         wide = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-weighted total return", "market_cap_weight":"Market-cap-weighted total return"})
         st.plotly_chart(px.line(wide, x="date", y=[c for c in wide.columns if c != "date"], markers=True), use_container_width=True)
         st.plotly_chart(px.area(tr, x="date", y=["cash_value", "pending_settlement_value"], facet_row="weighting_method", title="Cash and pending settlement balances"), use_container_width=True)

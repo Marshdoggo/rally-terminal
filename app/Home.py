@@ -23,6 +23,7 @@ from alt_asset_explorer.custom_index_storage import (
 )
 from alt_asset_explorer.custom_indices import build_custom_index, calculate_index_metrics, new_custom_index_definition
 from alt_asset_explorer.indices import build_index_from_selection, prepare_quarterly_observations, summarize_contributions
+from alt_asset_explorer.universe import build_asset_universe, eligible_asset_ids
 from alt_asset_explorer.market_table import build_market_table, filter_market_table
 from alt_asset_explorer.research import calculate_sector_performance, completed_categories
 
@@ -108,19 +109,23 @@ if not exchange_market_cap.empty:
 if not index_portfolio.empty:
     index_portfolio["date"] = pd.to_datetime(index_portfolio["date"], errors="coerce")
     tr_categories = ["all"] + sorted([c for c in index_portfolio["category"].dropna().astype(str).unique() if c != "all"])
-    tr_cols = st.columns([1.8, 1.2, 1.2])
+    if "universe_scope" not in index_portfolio:
+        index_portfolio["universe_scope"] = "include_exited"
+    tr_cols = st.columns([1.8, 1.2, 1.2, 1.2])
     tr_category = tr_cols[0].selectbox("Total-return universe", tr_categories, format_func=lambda v: "Full market" if v == "all" else v.replace("_", " ").title(), key="home_tr_category")
+    scope_options = [scope for scope in ["include_exited", "active_only"] if scope in set(index_portfolio["universe_scope"].dropna().astype(str))]
+    tr_scope = tr_cols[1].selectbox("Universe scope", scope_options or ["include_exited"], format_func=lambda v: "Include exited" if v == "include_exited" else "Active only", key="home_tr_scope")
     available_rebalances = [item for item in ["quarterly", "monthly", "weekly"] if item in set(index_portfolio["rebalance_frequency"].dropna().astype(str))]
-    tr_rebal = tr_cols[1].selectbox("Rebalance frequency", available_rebalances or sorted(index_portfolio["rebalance_frequency"].dropna().unique()), key="home_tr_rebalance")
-    tr_range = tr_cols[2].selectbox("Total-return date range", ["Entire history", "Last 3 years", "Last year"], key="home_tr_range")
-    tr = index_portfolio[index_portfolio["category"].astype(str).eq(tr_category) & index_portfolio["rebalance_frequency"].astype(str).eq(tr_rebal)].copy()
+    tr_rebal = tr_cols[2].selectbox("Rebalance frequency", available_rebalances or sorted(index_portfolio["rebalance_frequency"].dropna().unique()), key="home_tr_rebalance")
+    tr_range = tr_cols[3].selectbox("Total-return date range", ["Entire history", "Last 3 years", "Last year"], key="home_tr_range")
+    tr = index_portfolio[index_portfolio["category"].astype(str).eq(tr_category) & index_portfolio["rebalance_frequency"].astype(str).eq(tr_rebal) & index_portfolio["universe_scope"].astype(str).eq(tr_scope)].copy()
     if tr_range != "Entire history" and not tr.empty:
         years = 3 if tr_range == "Last 3 years" else 1
         tr = tr[tr["date"] >= tr["date"].max() - pd.DateOffset(years=years)]
     tr_plot = tr.pivot_table(index="date", columns="weighting_method", values="index_level", aggfunc="last").reset_index().rename(columns={"equal_weight":"Equal-Weighted Total Return Index", "market_cap_weight":"Market-Cap-Weighted Total Return Index"})
     st.plotly_chart(px.line(tr_plot, x="date", y=[c for c in tr_plot.columns if c != "date"], title="What $100 Became (offering entries; exits reinvested on schedule)"), use_container_width=True)
     st.caption(
-        f"Exit-aware portfolio simulation · {tr_rebal} scheduled rebalance · offering prices are treated as investable entry prices · "
+        f"Exit-aware portfolio simulation · {'includes exited assets' if tr_scope == 'include_exited' else 'active-tradable survivor universe'} · {tr_rebal} scheduled rebalance · offering prices are treated as investable entry prices · "
         "prices are carried forward between observations · cash from exits is reinvested at the next scheduled rebalance."
     )
     latest_tr = tr.sort_values("date").groupby("weighting_method").tail(1)
@@ -306,11 +311,16 @@ else:
 
     weighting_map = {"Equal Weight": "equal", "Market-Cap Weight": "market_cap"}
     selected_weightings = [weighting_map[label] for label in weighting_labels]
-    universe_assets = canonical.copy()
-    if universe_label == "Current Survivors Only":
-        universe_assets = universe_assets[universe_assets["status"].astype(str).str.lower().eq("trading")]
-    universe_assets = universe_assets[universe_assets["category"].astype(str).isin(selected_index_categories)]
-    selected_asset_ids = universe_assets["asset_id"].astype(str).unique().tolist()
+    include_exited_assets = universe_label == "Include Exited Assets"
+    universe_diagnostics = build_asset_universe(
+        canonical,
+        quarterly_observations,
+        categories=selected_index_categories,
+        include_exited=include_exited_assets,
+        require_price_history=True,
+    )
+    universe_assets = universe_diagnostics[universe_diagnostics["is_universe_eligible"]].copy()
+    selected_asset_ids = eligible_asset_ids(universe_diagnostics)
 
     explorer_series: list[pd.DataFrame] = []
     primary_result = None
@@ -329,7 +339,10 @@ else:
         )
         if primary_result is None:
             primary_result = combined
-        explorer_series.append(combined.series)
+        combined_series = combined.series.copy()
+        if not combined_series.empty:
+            combined_series["universe_constituent_count"] = len(selected_asset_ids)
+        explorer_series.append(combined_series)
         for category in selected_index_categories:
             category_ids = universe_assets.loc[universe_assets["category"].astype(str).eq(category), "asset_id"].astype(str).tolist()
             category_result = build_index_from_selection(
@@ -342,7 +355,10 @@ else:
                 start_date=start_date,
                 end_date=end_date,
             )
-            explorer_series.append(category_result.series)
+            category_series = category_result.series.copy()
+            if not category_series.empty:
+                category_series["universe_constituent_count"] = len(category_ids)
+            explorer_series.append(category_series)
 
     if selected_saved_index is not None:
         saved_ids = [item.asset_id for item in selected_saved_index.constituents]
@@ -395,6 +411,7 @@ else:
             saved_chart["index_id"] = selected_saved_index.id
             saved_chart["index_name"] = f"{selected_saved_index.name} · Custom"
             saved_chart["category"] = "custom"
+            saved_chart["universe_constituent_count"] = len(saved_ids)
             explorer_series.insert(0, saved_chart)
             saved_metrics = calculate_index_metrics(selected_saved_result.series)
             custom_metric_cols = st.columns(5)
@@ -416,7 +433,8 @@ else:
         metric_columns = st.columns(max(1, len(latest_combined)))
         for metric_column, (_, row) in zip(metric_columns, latest_combined.iterrows()):
             metric_column.metric(row["index_name"], f"{float(row['index_level']):,.2f}", format_pct(row.get("return_1d")))
-            metric_column.caption(f"{int(row['constituent_count'])} constituents · through {row['date']}")
+            universe_count = row.get("universe_constituent_count", row["constituent_count"])
+            metric_column.caption(f"{int(row['constituent_count'])} observed constituents at date · {int(universe_count)} assets in selected history · through {row['date']}")
 
         explorer_figure = go.Figure()
         palette = ["#58a6ff", "#3fb950", "#d29922", "#f778ba", "#a371f7", "#ff7b72", "#79c0ff", "#56d4dd"]
@@ -429,8 +447,8 @@ else:
                     mode="lines+markers",
                     line={"width": 3 if str(series_name).startswith("Selected Market") else 1.8, "color": palette[color_index % len(palette)]},
                     marker={"size": 5},
-                    customdata=frame[["constituent_count", "return_1d"]],
-                    hovertemplate="%{x}<br><b>%{y:.2f}</b><br>%{customdata[0]} constituents<br>Period return %{customdata[1]:+.1%}<extra>%{fullData.name}</extra>",
+                    customdata=frame[["constituent_count", "universe_constituent_count", "return_1d"]],
+                    hovertemplate="%{x}<br><b>%{y:.2f}</b><br>%{customdata[0]} observed constituents at date<br>%{customdata[1]} assets in selected history<br>Period return %{customdata[2]:+.1%}<extra>%{fullData.name}</extra>",
                 )
             )
         explorer_figure.update_layout(
@@ -451,7 +469,8 @@ else:
         st.caption(
             "Index Explorer is a descriptive quarterly observed-price prototype. Equal-weight returns use only assets with both prior and current "
             "quarter-end observations; missing prices are not forward-filled and exits/cash proceeds are not modeled. "
-            "Current Survivors Only filters to assets trading today and applies that list retroactively."
+            "Hover counts show observed constituents at that date plus the selected historical universe size. "
+            "Current Survivors Only uses the canonical active-tradable status and applies that list retroactively."
         )
 
         if selected_saved_result is not None and not selected_saved_result.contributions.empty:
