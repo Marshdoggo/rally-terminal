@@ -45,7 +45,11 @@ def _manual_exits_from_assets(manual_assets: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
     rows = []
     for _, row in manual_assets.iterrows():
-        if pd.isna(row.get("exit_date")) and pd.isna(row.get("exit_price_per_share")) and pd.isna(row.get("exit_value_total")):
+        exit_type = str(row.get("exit_type") or "").strip().lower()
+        has_exit_date = pd.notna(row.get("exit_date"))
+        has_exit_price = pd.notna(row.get("exit_price_per_share"))
+        has_exit_value = pd.notna(row.get("exit_value_total"))
+        if exit_type in {"buyout_offer", "pending_buyout"} or not has_exit_date or not (has_exit_price or has_exit_value):
             continue
         rows.append(
             {

@@ -1,0 +1,2 @@
+asset_id,event_date,event_type,proposed_price_per_share,proposed_market_cap,vote_yes_pct,status,notes
+rally-deaton,2026-07,pending_buyout,52.631579,600000,54,pending,Buyout vote in progress; do not classify as realized exit until approved and completed.

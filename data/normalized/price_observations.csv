@@ -313,7 +313,7 @@ rally-birkinblu,2023-03-31,2023-03-31T00:00:00Z,44.7,44700.0,chart_observation,r
 rally-birkinblu,2023-06-30,2023-06-29T00:00:00Z,44.75,44750.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,44750.0,chart_observation_marked_exact
 rally-birkinblu,2023-09-30,2023-09-26T00:00:00Z,31.0,31000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,31000.0,chart_observation_marked_exact
 rally-birkinblu,2023-12-31,2023-12-29T00:00:00Z,32.0,32000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,32000.0,chart_observation_marked_exact
-rally-birkinblu,2024-03-31,2024-03-28T00:00:00Z,32.05,32050.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,32049.999999999996,chart_observation_marked_exact
+rally-birkinblu,2024-03-31,2024-03-28T00:00:00Z,32.05,32050.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,32050.0,chart_observation_marked_exact
 rally-birkinblu,2024-06-30,2024-06-27T00:00:00Z,31.75,31750.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,31750.0,chart_observation_marked_exact
 rally-birkinblu,2024-09-30,2024-09-25T00:00:00Z,29.95,29950.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,29950.0,chart_observation_marked_exact
 rally-birkinblu,2024-12-31,2024-12-30T00:00:00Z,34.0,34000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,34000.0,chart_observation_marked_exact
@@ -436,7 +436,7 @@ rally-faubourg2,2021-03-31,2021-01-01T00:00:00Z,15.0,165000.0,offering_price,ral
 rally-faubourg2,2021-06-30,2021-06-18T00:00:00Z,14.75,162250.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,162250.0,chart_observation_marked_exact
 rally-faubourg2,2021-09-30,2021-09-03T00:00:00Z,14.0,154000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,154000.0,observed_at_exceeds_quarter_lookback:27d; chart_observation_marked_exact
 rally-faubourg2,2021-12-31,2022-01-10T00:00:00Z,13.8,151800.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,151800.0,observed_at_after_period_end; chart_observation_marked_exact
-rally-faubourg2,2022-03-31,2022-03-31T00:00:00Z,10.2,112200.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,112199.99999999999,chart_observation_marked_exact
+rally-faubourg2,2022-03-31,2022-03-31T00:00:00Z,10.2,112200.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,112200.0,chart_observation_marked_exact
 rally-faubourg2,2022-06-30,2022-06-29T00:00:00Z,10.5,115500.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,115500.0,chart_observation_marked_exact
 rally-faubourg2,2022-09-30,2022-09-30T00:00:00Z,9.0,99000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,99000.0,chart_observation_marked_exact
 rally-faubourg2,2022-12-31,2022-12-28T00:00:00Z,11.0,121000.0,chart_observation,rally_app_chart,Rally App,2026-07-19T00:00:00Z,Marshall,exact,,,quarterly,121000.0,chart_observation_marked_exact
@@ -787,3 +787,25 @@ rally-tornek,2025-09-30,2025-09-29T00:00:00Z,2.4,79200.0,chart_observation,rally
 rally-tornek,2025-12-31,2025-12-31T00:00:00Z,2.55,84150.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,84150.0,chart_observation_marked_exact
 rally-tornek,2026-03-31,2026-03-30T00:00:00Z,2.5,82500.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,82500.0,chart_observation_marked_exact
 rally-tornek,2026-06-30,2026-06-24T00:00:00Z,2.35,77550.0,chart_observation,rally_app_chart,Rally App,2026-07-12T00:00:00Z,Marshall,exact,,,quarterly,77550.0,chart_observation_marked_exact
+rally-deaton,2021-01-31,2021-01,25.0,285000.0,offering_price,rally_app,Rally App,2026-07-19,Marshall,exact,Initial offering,,,,
+rally-deaton,2021-06-30,2021-05-24,17.5,199500.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2021-09-30,2021-08-05,24.0,273600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2021-12-31,2021-12-30,17.5,199500.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2022-03-31,2022-03-30,18.7,213180.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2022-06-30,2022-06-28,16.0,182400.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2022-09-30,2022-09-26,19.0,216600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2022-12-31,2022-12-30,16.0,182400.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2023-03-31,2023-03-30,20.5,233700.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2023-06-30,2023-06-28,24.0,273600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2023-09-30,2023-09-26,24.0,273600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2023-12-31,2023-12-26,23.5,267900.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2024-03-31,2024-03-25,24.75,282150.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2024-06-30,2024-06-27,23.0,262200.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2024-09-30,2024-09-25,25.85,294690.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2024-12-31,2024-12-30,27.5,313500.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2025-03-31,2025-03-31,27.75,316350.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2025-06-30,2025-06-27,27.0,307800.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2025-09-30,2025-09-26,24.0,273600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2025-12-31,2025-12-30,24.15,275310.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2026-03-31,2026-03-30,24.0,273600.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,,,,,
+rally-deaton,2026-06-30,2026-06-22,23.75,270750.0,chart_observation,rally_app_chart,Rally App,2026-07-19,Marshall,exact,Last close before pending buyout vote,,,,

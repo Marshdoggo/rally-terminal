@@ -41,7 +41,7 @@ WILDTHING,Where the Wild Things Are (Inscribed First Edition),books,rare books,t
 WZRDOFOZ,The Wonderful Wizard of Oz (First Edition),books,rare books,trading,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
 YOKO,Yoko Ono - Grapefruit (Signed First Edition),books,rare books,trading,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
 BARO,Barosaurus Skeleton,fossils,barosaurus,sold,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
-DEATON,Deaton Triceratops Skull,fossils,triceratops,buyout,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
+DEATON,Deaton Triceratops Skull,fossils,triceratops,exit_announced,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
 MEGALODON,Megalodon Fossil,fossils,shark,trading,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
 MOSASAUR,Mosasaur,fossils,mosasaur,trading,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02
 STEG,BCQ-24 Stegosaurus Skeleton,fossils,stegosaurus,sold,data_completeness,0.0,,"Missing live price, offering cap, comps, or robust NAV confidence.",2026-07-02

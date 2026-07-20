@@ -23,6 +23,8 @@ ASSET_STATUSES = {
     "accepting_orders",
     "suspended",
     "asset_sale_pending",
+    "exit_announced",
+    "pending_approval",
     "liquidated",
     "delisted",
     "sold",
@@ -38,6 +40,7 @@ EVENT_TYPES = {
     "distribution",
     "asset_sale",
     "buyout",
+    "pending_buyout",
     "unknown",
 }
 
