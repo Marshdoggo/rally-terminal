@@ -172,6 +172,38 @@ def test_quarterly_indices_use_offering_price_as_inception_baseline():
     assert watches.iloc[1]["index_level"] == pytest.approx(55.0)
 
 
+
+def test_quarterly_observations_keep_missing_frequency_with_period_end():
+    prices = pd.DataFrame(
+        [
+            {
+                "asset_id": "fossil",
+                "period_end": "2026-06-30",
+                "observed_at": "2026-06-22",
+                "price_per_share": 23.75,
+                "market_cap": 270750,
+                "event_type": "chart_observation",
+                "frequency": None,
+            },
+            {
+                "asset_id": "daily",
+                "period_end": "2026-06-30",
+                "observed_at": "2026-06-22",
+                "price_per_share": 10.00,
+                "market_cap": 10000,
+                "event_type": "chart_observation",
+                "frequency": "daily",
+            },
+        ]
+    )
+    assets = pd.DataFrame([{"asset_id": "fossil", "category": "fossils"}, {"asset_id": "daily", "category": "cards"}])
+
+    observations = prepare_quarterly_observations(prices, assets)
+
+    assert observations["asset_id"].tolist() == ["fossil"]
+    assert observations.iloc[0]["date"].isoformat() == "2026-06-30"
+    assert observations.iloc[0]["last"] == pytest.approx(23.75)
+
 def test_quarterly_indices_prefer_terminal_buyout_over_intra_quarter_observation():
     prices = pd.DataFrame(
         [
