@@ -22,6 +22,7 @@ from alt_asset_explorer.custom_index_storage import (
     custom_index_storage_is_read_only,
 )
 from alt_asset_explorer.custom_indices import build_custom_index, calculate_index_metrics, new_custom_index_definition
+from alt_asset_explorer.custom_portfolios import PortfolioDefinition, PortfolioMethodology, simulate_index_investment, simulate_portfolio
 from alt_asset_explorer.indices import build_index_from_selection, prepare_quarterly_observations, summarize_contributions
 from alt_asset_explorer.universe import build_asset_universe, eligible_asset_ids
 from alt_asset_explorer.market_table import build_market_table, filter_market_table
@@ -538,6 +539,229 @@ else:
                 commentary += f", while weakness in {' and '.join(laggard_names)} offset part of the move"
             st.info(commentary + ".")
 
+st.subheader("Rally Market Table")
+
+with st.sidebar:
+    st.subheader("Market filters")
+    current_only = st.toggle("Current listed assets only", value=True)
+    search = st.text_input("Search name or ticker", value="")
+    category_options = sorted(market["category"].dropna().astype(str).unique().tolist())
+    selected_categories = st.multiselect("Category", category_options, default=category_options)
+    subcategory_base = market[market["category"].astype(str).isin(selected_categories)] if selected_categories else market
+    subcategory_options = sorted(subcategory_base["subcategory"].dropna().astype(str).unique().tolist())
+    selected_subcategories = st.multiselect("Subcategory", subcategory_options, default=subcategory_options)
+    quality_options = sorted(market["data_quality_status"].dropna().astype(str).unique().tolist())
+    selected_quality = st.multiselect("Data quality", quality_options, default=quality_options)
+    valuation_filter = st.selectbox("Fair value position", ["All", "Below estimated fair value", "Above estimated fair value"])
+    min_confidence = st.slider("Minimum FV confidence", 0.0, 1.0, 0.0, 0.05)
+
+filtered = filter_market_table(
+    market,
+    search=search,
+    categories=selected_categories,
+    subcategories=selected_subcategories,
+    data_quality=selected_quality,
+    valuation_filter=valuation_filter,
+    min_confidence=min_confidence,
+    current_listed_only=current_only,
+)
+
+if filtered.empty:
+    st.info("No assets match the current filters.")
+else:
+    display = filtered.rename(
+        columns={
+            "name": "Asset name",
+            "ticker": "Ticker",
+            "asset_id": "Asset ID",
+            "category": "Category",
+            "subcategory": "Subcategory",
+            "last_price": "Last price",
+            "return_1q": "1Q Return",
+            "return_1y": "1Y Return",
+            "return_full_history": "Full Return",
+            "best_bid": "Best bid",
+            "best_ask": "Best ask",
+            "bid_ask_spread_pct": "Bid-ask spread",
+            "shares_outstanding": "Shares outstanding",
+            "current_market_cap_usd": "Market cap",
+            "offering_price_usd": "Offering price",
+            "offering_valuation_usd": "Offering valuation",
+            "experimental_estimated_fair_value_usd": "Experimental estimated fair value",
+            "premium_discount_to_fair_value": "Premium / discount to FV",
+            "nav_confidence": "FV confidence",
+            "last_quote_observed_at": "Last quote update",
+            "data_quality_status": "Data quality",
+            "data_quality_warnings": "Data warnings",
+        }
+    )
+    columns = [
+        "Ticker",
+        "Asset name",
+        "Last price",
+        "1Q Return",
+        "1Y Return",
+        "Full Return",
+        "Category",
+        "Subcategory",
+        "Asset ID",
+        "Best bid",
+        "Best ask",
+        "Bid-ask spread",
+        "Shares outstanding",
+        "Market cap",
+        "Offering price",
+        "Offering valuation",
+        "Experimental estimated fair value",
+        "Premium / discount to FV",
+        "FV confidence",
+        "Last quote update",
+        "Data quality",
+        "Data warnings",
+    ]
+    for percent_col in ("1Q Return", "1Y Return", "Full Return", "Bid-ask spread", "Premium / discount to FV", "FV confidence"):
+        if percent_col in display:
+            display[percent_col] = pd.to_numeric(display[percent_col], errors="coerce") * 100
+    market_display = display[[col for col in columns if col in display.columns]].sort_values("Ticker").reset_index(drop=True)
+    market_selection = st.dataframe(
+        market_display,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Last price": st.column_config.NumberColumn(format="$%.2f"),
+            "Best bid": st.column_config.NumberColumn(format="$%.2f"),
+            "Best ask": st.column_config.NumberColumn(format="$%.2f"),
+            "1Q Return": st.column_config.NumberColumn(format="%+.1f%%"),
+            "1Y Return": st.column_config.NumberColumn(format="%+.1f%%"),
+            "Full Return": st.column_config.NumberColumn(format="%+.1f%%"),
+            "Bid-ask spread": st.column_config.NumberColumn(format="%.1f%%"),
+            "Shares outstanding": st.column_config.NumberColumn(format="%.0f"),
+            "Market cap": st.column_config.NumberColumn(format="$%.0f"),
+            "Offering price": st.column_config.NumberColumn(format="$%.2f"),
+            "Offering valuation": st.column_config.NumberColumn(format="$%.0f"),
+            "Experimental estimated fair value": st.column_config.NumberColumn(format="$%.0f"),
+            "Premium / discount to FV": st.column_config.NumberColumn(format="%.1f%%"),
+            "FV confidence": st.column_config.NumberColumn(format="%.0f%%"),
+        },
+        on_select="rerun",
+        selection_mode="single-row",
+    )
+    selected_rows = market_selection.selection.rows if market_selection is not None else []
+    if selected_rows:
+        selected_asset = market_display.iloc[selected_rows[0]]
+        selected_asset_id_for_history = str(selected_asset["Asset ID"])
+        if st.session_state.get("asset_explorer_selected_asset_id") != selected_asset_id_for_history:
+            st.session_state["asset_explorer_selected_asset_id"] = selected_asset_id_for_history
+            st.rerun()
+
+    st.caption(
+        "Unavailable values are intentionally left blank. SEC-synthesized rows remain research context and are hidden by default unless current-listing filtering is turned off."
+    )
+
+
+
+st.subheader("Portfolio Simulator")
+st.caption("What would $100 have become? Compare Full Rally Market, category indexes, and custom portfolios using normalized growth series.")
+if index_portfolio.empty:
+    st.info("Total-return simulations are unavailable until canonical market data is available.")
+else:
+    sim_source = st.radio("Strategy source", ["Full Market", "Category Index", "Custom Portfolio"], horizontal=True, key="portfolio_sim_source")
+    sim_cols = st.columns([1.2, 1.2, 1.2, 1.2])
+    sim_starting_value = sim_cols[0].number_input("Starting investment", min_value=1.0, value=100.0, step=25.0, format="%.2f", key="portfolio_sim_start")
+    sim_rebalance_label = sim_cols[1].selectbox("Rebalance", ["None / Buy & Hold", "Monthly", "Quarterly", "Annual"], index=2, key="portfolio_sim_rebalance")
+    sim_universe_label = sim_cols[2].selectbox("Universe", ["Include Exited Assets", "Current Survivors Only"], key="portfolio_sim_universe")
+    sim_weighting_label = sim_cols[3].selectbox("Weighting", ["Equal Weight", "Custom Weight"], key="portfolio_sim_weighting")
+    rebalance_map = {"None / Buy & Hold": "none", "Monthly": "monthly", "Quarterly": "quarterly", "Annual": "annual"}
+    universe_map = {"Include Exited Assets": "include_exited", "Current Survivors Only": "active_only"}
+    methodology_universe_map = {"Include Exited Assets": "include_exited", "Current Survivors Only": "current_survivors_only"}
+    sim_series = pd.DataFrame()
+    comparison_frames: list[pd.DataFrame] = []
+    portfolio_result = None
+    if sim_source in {"Full Market", "Category Index"}:
+        sim_category_options = ["all"] + sorted([c for c in index_portfolio["category"].dropna().astype(str).unique() if c != "all"])
+        sim_category = "all"
+        if sim_source == "Category Index":
+            sim_category = st.selectbox("Category index", sim_category_options[1:] or ["all"], format_func=lambda v: v.replace("_", " ").title(), key="portfolio_sim_category")
+        tr_method = "equal_weight" if sim_weighting_label == "Equal Weight" else "market_cap_weight"
+        tr_rebalance = "quarterly" if rebalance_map[sim_rebalance_label] in {"none", "annual"} else rebalance_map[sim_rebalance_label]
+        sim_series = index_portfolio[
+            index_portfolio["category"].astype(str).eq(sim_category)
+            & index_portfolio["weighting_method"].astype(str).eq(tr_method)
+            & index_portfolio["rebalance_frequency"].astype(str).eq(tr_rebalance)
+            & index_portfolio["universe_scope"].astype(str).eq(universe_map[sim_universe_label])
+        ].copy()
+        if rebalance_map[sim_rebalance_label] in {"none", "annual"}:
+            st.caption("Built-in total-return artifacts currently expose weekly, monthly, and quarterly schedules; simulator uses quarterly for this built-in view. Custom portfolios support buy-and-hold and annual directly.")
+        growth = simulate_index_investment(sim_series, starting_value=sim_starting_value)
+        if not growth.empty:
+            growth["Series"] = "Full Rally Market" if sim_source == "Full Market" else f"{sim_category.replace('_', ' ').title()} Index"
+            comparison_frames.append(growth)
+    else:
+        sim_metadata = canonical[["asset_id", "ticker", "name", "category", "subcategory"]].drop_duplicates("asset_id").copy()
+        sim_metadata["label"] = sim_metadata["ticker"].fillna(sim_metadata["asset_id"]).astype(str) + " | " + sim_metadata["name"].fillna(sim_metadata["asset_id"]).astype(str) + " · " + sim_metadata["category"].fillna("other").astype(str).str.replace("_", " ").str.title()
+        label_to_asset = dict(zip(sim_metadata["label"], sim_metadata["asset_id"].astype(str)))
+        selected_portfolio_labels = st.multiselect("Select portfolio assets", sorted(label_to_asset), placeholder="Search by ticker, asset, or category", key="portfolio_sim_assets")
+        selected_portfolio_ids = [label_to_asset[label] for label in selected_portfolio_labels]
+        custom_weights = None
+        if selected_portfolio_ids and sim_weighting_label == "Custom Weight":
+            weight_cols = st.columns(min(4, len(selected_portfolio_ids)))
+            raw_weights = {}
+            for pos, aid in enumerate(selected_portfolio_ids):
+                meta = sim_metadata[sim_metadata["asset_id"].astype(str).eq(aid)].iloc[0]
+                raw_weights[aid] = weight_cols[pos % len(weight_cols)].number_input(str(meta["ticker"]), min_value=0.0, max_value=100.0, value=100.0 / len(selected_portfolio_ids), step=0.5, key=f"portfolio_weight_{aid}")
+            total_raw = sum(raw_weights.values())
+            if total_raw > 0:
+                custom_weights = {aid: value / total_raw for aid, value in raw_weights.items()}
+                st.caption(f"Custom weights normalized from {total_raw:.2f}% raw allocation.")
+            else:
+                st.warning("Custom weights must have a positive total.")
+        if selected_portfolio_ids:
+            definition = PortfolioDefinition(
+                name="Custom Portfolio",
+                asset_ids=tuple(selected_portfolio_ids),
+                methodology=PortfolioMethodology(
+                    weighting_method="custom_weight" if sim_weighting_label == "Custom Weight" and custom_weights else "equal_weight",
+                    rebalance_frequency=rebalance_map[sim_rebalance_label],
+                    universe_policy=methodology_universe_map[sim_universe_label],
+                ),
+                custom_weights=custom_weights,
+                base_value=sim_starting_value,
+            )
+            portfolio_result = simulate_portfolio(definition, canonical, prices, canonical_market.exit_events)
+            for warning in portfolio_result.warnings:
+                st.warning(warning)
+            if not portfolio_result.series.empty:
+                growth = portfolio_result.series[["date", "index_level", "period_return"]].rename(columns={"index_level": "growth_value"})
+                growth["Series"] = "Custom Portfolio"
+                comparison_frames.append(growth)
+                market_benchmark = index_portfolio[
+                    index_portfolio["category"].astype(str).eq("all")
+                    & index_portfolio["weighting_method"].astype(str).eq("equal_weight")
+                    & index_portfolio["rebalance_frequency"].astype(str).eq("quarterly")
+                    & index_portfolio["universe_scope"].astype(str).eq(universe_map[sim_universe_label])
+                ].copy()
+                benchmark_growth = simulate_index_investment(market_benchmark, starting_value=sim_starting_value)
+                if not benchmark_growth.empty:
+                    benchmark_growth["Series"] = "Full Rally Market"
+                    comparison_frames.append(benchmark_growth)
+        else:
+            st.info("Select at least one asset to simulate a custom portfolio.")
+    if comparison_frames:
+        chart = pd.concat(comparison_frames, ignore_index=True).dropna(subset=["date", "growth_value"])
+        primary = chart.groupby("Series", sort=False).head(1).iloc[0]["Series"]
+        primary_chart = chart[chart["Series"].eq(primary)].sort_values("date")
+        ending_value = float(primary_chart.iloc[-1]["growth_value"])
+        total_return = ending_value / sim_starting_value - 1 if sim_starting_value else 0
+        metric_row = st.columns(5)
+        metric_row[0].metric("Starting Value", f"${sim_starting_value:,.2f}")
+        metric_row[1].metric("Ending Value", f"${ending_value:,.2f}")
+        metric_row[2].metric("Total Return", format_pct(total_return))
+        if portfolio_result is not None:
+            metric_row[3].metric("CAGR", format_pct(portfolio_result.metrics.get("cagr")))
+            metric_row[4].metric("Max Drawdown", format_pct(portfolio_result.metrics.get("maximum_drawdown")))
+        st.plotly_chart(px.line(chart, x="date", y="growth_value", color="Series", markers=True, title=f"What ${sim_starting_value:,.0f} Became — Normalized Growth"), use_container_width=True)
+        st.caption("Chart shows normalized growth of the starting investment, not raw index levels. Custom portfolios use the reusable portfolio engine; built-in market/category comparisons use canonical total-return index artifacts.")
+
 st.subheader("Asset Price History")
 if prices.empty:
     st.info("No asset price observations are available yet.")
@@ -745,120 +969,3 @@ else:
                     export_definition = pending_definition.model_dump(mode="json")
                 if export_definition:
                     st.download_button("Export definition (JSON)", json.dumps(export_definition, indent=2), file_name=f"{export_definition['id']}.json", mime="application/json", key="workshop_export_json")
-
-st.subheader("Rally Market Table")
-
-with st.sidebar:
-    st.subheader("Market filters")
-    current_only = st.toggle("Current listed assets only", value=True)
-    search = st.text_input("Search name or ticker", value="")
-    category_options = sorted(market["category"].dropna().astype(str).unique().tolist())
-    selected_categories = st.multiselect("Category", category_options, default=category_options)
-    subcategory_base = market[market["category"].astype(str).isin(selected_categories)] if selected_categories else market
-    subcategory_options = sorted(subcategory_base["subcategory"].dropna().astype(str).unique().tolist())
-    selected_subcategories = st.multiselect("Subcategory", subcategory_options, default=subcategory_options)
-    quality_options = sorted(market["data_quality_status"].dropna().astype(str).unique().tolist())
-    selected_quality = st.multiselect("Data quality", quality_options, default=quality_options)
-    valuation_filter = st.selectbox("Fair value position", ["All", "Below estimated fair value", "Above estimated fair value"])
-    min_confidence = st.slider("Minimum FV confidence", 0.0, 1.0, 0.0, 0.05)
-
-filtered = filter_market_table(
-    market,
-    search=search,
-    categories=selected_categories,
-    subcategories=selected_subcategories,
-    data_quality=selected_quality,
-    valuation_filter=valuation_filter,
-    min_confidence=min_confidence,
-    current_listed_only=current_only,
-)
-
-if filtered.empty:
-    st.info("No assets match the current filters.")
-else:
-    display = filtered.rename(
-        columns={
-            "name": "Asset name",
-            "ticker": "Ticker",
-            "asset_id": "Asset ID",
-            "category": "Category",
-            "subcategory": "Subcategory",
-            "last_price": "Last price",
-            "return_1q": "1Q Return",
-            "return_1y": "1Y Return",
-            "return_full_history": "Full Return",
-            "best_bid": "Best bid",
-            "best_ask": "Best ask",
-            "bid_ask_spread_pct": "Bid-ask spread",
-            "shares_outstanding": "Shares outstanding",
-            "current_market_cap_usd": "Market cap",
-            "offering_price_usd": "Offering price",
-            "offering_valuation_usd": "Offering valuation",
-            "experimental_estimated_fair_value_usd": "Experimental estimated fair value",
-            "premium_discount_to_fair_value": "Premium / discount to FV",
-            "nav_confidence": "FV confidence",
-            "last_quote_observed_at": "Last quote update",
-            "data_quality_status": "Data quality",
-            "data_quality_warnings": "Data warnings",
-        }
-    )
-    columns = [
-        "Ticker",
-        "Asset name",
-        "Asset ID",
-        "Category",
-        "Subcategory",
-        "Last price",
-        "1Q Return",
-        "1Y Return",
-        "Full Return",
-        "Best bid",
-        "Best ask",
-        "Bid-ask spread",
-        "Shares outstanding",
-        "Market cap",
-        "Offering price",
-        "Offering valuation",
-        "Experimental estimated fair value",
-        "Premium / discount to FV",
-        "FV confidence",
-        "Last quote update",
-        "Data quality",
-        "Data warnings",
-    ]
-    for percent_col in ("1Q Return", "1Y Return", "Full Return", "Bid-ask spread", "Premium / discount to FV", "FV confidence"):
-        if percent_col in display:
-            display[percent_col] = pd.to_numeric(display[percent_col], errors="coerce") * 100
-    market_display = display[[col for col in columns if col in display.columns]].sort_values("Ticker").reset_index(drop=True)
-    market_selection = st.dataframe(
-        market_display,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "Last price": st.column_config.NumberColumn(format="$%.2f"),
-            "Best bid": st.column_config.NumberColumn(format="$%.2f"),
-            "Best ask": st.column_config.NumberColumn(format="$%.2f"),
-            "1Q Return": st.column_config.NumberColumn(format="%+.1f%%"),
-            "1Y Return": st.column_config.NumberColumn(format="%+.1f%%"),
-            "Full Return": st.column_config.NumberColumn(format="%+.1f%%"),
-            "Bid-ask spread": st.column_config.NumberColumn(format="%.1f%%"),
-            "Shares outstanding": st.column_config.NumberColumn(format="%.0f"),
-            "Market cap": st.column_config.NumberColumn(format="$%.0f"),
-            "Offering price": st.column_config.NumberColumn(format="$%.2f"),
-            "Offering valuation": st.column_config.NumberColumn(format="$%.0f"),
-            "Experimental estimated fair value": st.column_config.NumberColumn(format="$%.0f"),
-            "Premium / discount to FV": st.column_config.NumberColumn(format="%.1f%%"),
-            "FV confidence": st.column_config.NumberColumn(format="%.0f%%"),
-        },
-        on_select="rerun",
-        selection_mode="single-row",
-    )
-    selected_rows = market_selection.selection.rows if market_selection is not None else []
-    if selected_rows:
-        selected_asset = market_display.iloc[selected_rows[0]]
-        st.session_state["asset_explorer_selected_asset_id"] = str(selected_asset["Asset ID"])
-        st.info(f"Selected {selected_asset['Ticker']} for Asset Price History. The chart above will use this asset on rerun.")
-
-    st.caption(
-        "Unavailable values are intentionally left blank. SEC-synthesized rows remain research context and are hidden by default unless current-listing filtering is turned off."
-    )
