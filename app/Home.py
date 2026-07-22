@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pandas as pd
 import plotly.express as px
@@ -23,6 +24,7 @@ from alt_asset_explorer.custom_index_storage import (
 )
 from alt_asset_explorer.custom_indices import build_custom_index, calculate_index_metrics, new_custom_index_definition
 from alt_asset_explorer.custom_portfolios import PortfolioDefinition, PortfolioMethodology, simulate_index_investment, simulate_portfolio
+from alt_asset_explorer.contribution import attribution_from_index_result, attribution_from_portfolio_result, breadth_metrics, concentration_metrics
 from alt_asset_explorer.indices import build_index_from_selection, prepare_quarterly_observations, summarize_contributions
 from alt_asset_explorer.universe import build_asset_universe, eligible_asset_ids
 from alt_asset_explorer.market_table import build_market_table, filter_market_table
@@ -728,6 +730,7 @@ else:
                 base_value=sim_starting_value,
             )
             portfolio_result = simulate_portfolio(definition, canonical, prices, canonical_market.exit_events)
+            st.session_state["active_custom_portfolio_definition"] = definition
             for warning in portfolio_result.warnings:
                 st.warning(warning)
             if not portfolio_result.series.empty:
@@ -761,6 +764,161 @@ else:
             metric_row[4].metric("Max Drawdown", format_pct(portfolio_result.metrics.get("maximum_drawdown")))
         st.plotly_chart(px.line(chart, x="date", y="growth_value", color="Series", markers=True, title=f"What ${sim_starting_value:,.0f} Became — Normalized Growth"), use_container_width=True)
         st.caption("Chart shows normalized growth of the starting investment, not raw index levels. Custom portfolios use the reusable portfolio engine; built-in market/category comparisons use canonical total-return index artifacts.")
+
+
+st.subheader("Contribution Explorer")
+st.caption("Explain what moved a market, category, custom portfolio, or compatible custom basket using reconciling contribution math.")
+
+category_targets = sorted([c for c in canonical["category"].dropna().astype(str).unique()]) if "category" in canonical else []
+target_options = ["Full Rally Market"] + [f"Category: {c.replace('_', ' ').title()}" for c in category_targets]
+if st.session_state.get("active_custom_portfolio_definition") is not None:
+    target_options.append("Active Custom Portfolio")
+if st.session_state.get("workshop_constituent_ids"):
+    target_options.append("Active Custom Index Basket")
+
+ce_cols = st.columns([1.8, 1.1, 1.1, 1.1])
+ce_target = ce_cols[0].selectbox("Analyze", target_options, key="contrib_target")
+ce_weighting = ce_cols[1].selectbox("Weighting", ["Equal Weight", "Market Cap Weight"], key="contrib_weighting")
+ce_universe = ce_cols[2].selectbox("Universe", ["Include Exited Assets", "Current Survivors Only"], key="contrib_universe")
+ce_range = ce_cols[3].selectbox("Date Range", ["Entire History", "Last Quarter / 3M", "Last 1 Year", "Year to Date", "Custom Date Range"], key="contrib_range")
+
+all_dates = pd.to_datetime(quarterly_observations.get("date", pd.Series(dtype=object)), errors="coerce").dropna()
+def _window_dates(dates: pd.Series) -> tuple[pd.Timestamp | None, pd.Timestamp | None]:
+    if dates.empty:
+        return None, None
+    end = pd.Timestamp(dates.max()).normalize()
+    if ce_range == "Entire History":
+        start = None
+    elif ce_range == "Last Quarter / 3M":
+        start = end - pd.DateOffset(months=3)
+    elif ce_range == "Last 1 Year":
+        start = end - pd.DateOffset(years=1)
+    elif ce_range == "Year to Date":
+        start = pd.Timestamp(year=end.year, month=1, day=1)
+    else:
+        left, right = st.columns(2)
+        min_d = pd.Timestamp(dates.min()).date(); max_d = end.date()
+        start = pd.Timestamp(left.date_input("Custom start", value=min_d, min_value=min_d, max_value=max_d, key="contrib_start"))
+        end = pd.Timestamp(right.date_input("Custom end", value=max_d, min_value=min_d, max_value=max_d, key="contrib_end"))
+    return start, end
+ce_start, ce_end = _window_dates(all_dates)
+
+contribution_result = None
+try:
+    if ce_target == "Active Custom Portfolio":
+        definition = st.session_state.get("active_custom_portfolio_definition")
+        if definition is None:
+            st.info("Build a Custom Portfolio in Portfolio Simulator first, then return here.")
+        else:
+            if ce_start is not None or ce_end is not None:
+                definition = PortfolioDefinition(name=definition.name, asset_ids=definition.asset_ids, methodology=definition.methodology, custom_weights=definition.custom_weights, base_value=definition.base_value, start_date=ce_start, end_date=ce_end, benchmark_category=definition.benchmark_category)
+            pr = simulate_portfolio(definition, canonical, prices, canonical_market.exit_events)
+            contribution_result = attribution_from_portfolio_result(pr, canonical, target_name=definition.name, start_date=ce_start, end_date=ce_end)
+    elif ce_target == "Active Custom Index Basket":
+        ids = list(st.session_state.get("workshop_constituent_ids", []))
+        raw_weights = st.session_state.get("workshop_weights", {})
+        weights = {aid: float(raw_weights.get(aid, 0)) / 100 for aid in ids} if raw_weights else None
+        ci = build_custom_index(quarterly_observations, asset_ids=ids, weights=weights, start_date=ce_start, end_date=ce_end)
+        idx = SimpleNamespace(series=ci.series.rename(columns={"return_period": "return_1d"}), contributions=ci.contributions.assign(date=ci.effective_end_date, weight=ci.contributions.get("starting_weight", 0)))
+        contribution_result = attribution_from_index_result(idx, canonical, target_name="Active Custom Index Basket", target_type="Custom Index", unit_label="index points", methodology={"weighting": "custom basket", "rebalance": "constant-weight normalized composite", "missing_prices": "common observed dates only"})
+    else:
+        asset_ids = None
+        category_name = "all"
+        if ce_target.startswith("Category: "):
+            label = ce_target.removeprefix("Category: ").lower().replace(" ", "_")
+            matches = [c for c in category_targets if c.lower() == label or c.replace("_", " ").lower() == ce_target.removeprefix("Category: ").lower()]
+            category_name = matches[0] if matches else label
+            asset_ids = canonical.loc[canonical["category"].astype(str).eq(category_name), "asset_id"].astype(str).tolist()
+        if ce_universe == "Current Survivors Only":
+            survivor_ids = set(current.get("asset_id", pd.Series(dtype=str)).astype(str))
+            asset_ids = list(survivor_ids if asset_ids is None else survivor_ids.intersection(asset_ids))
+        weighting_method = "equal" if ce_weighting == "Equal Weight" else "market_cap"
+        idx_result = build_index_from_selection(quarterly_observations, asset_ids=asset_ids, weighting_method=weighting_method, index_id="contribution_explorer", index_name=ce_target, category=category_name, start_date=ce_start, end_date=ce_end)
+        contribution_result = attribution_from_index_result(idx_result, canonical, target_name=ce_target, target_type="Index", unit_label="index points", methodology={"weighting": weighting_method, "rebalance": "observed-period dynamic weights", "universe": ce_universe, "missing_prices": "no imputation; require paired observations"})
+except Exception as exc:
+    st.error(f"Contribution Explorer could not calculate this target: {exc}")
+
+if contribution_result is not None:
+    for warning in contribution_result.warnings:
+        st.warning(warning)
+    if contribution_result.starting_value is not None:
+        unit = contribution_result.unit_label
+        metrics = st.columns(6)
+        metrics[0].metric("Start", f"{contribution_result.starting_value:,.2f}")
+        metrics[1].metric("End", f"{contribution_result.ending_value:,.2f}")
+        metrics[2].metric("Total Change", f"{contribution_result.total_change:+,.2f} {unit}")
+        metrics[3].metric("Total Return", format_pct(contribution_result.total_return))
+        metrics[4].metric("Constituents", f"{len(contribution_result.constituent_contributions):,}")
+        metrics[5].metric("Residual", f"{contribution_result.residual:+.6f} {unit}")
+        st.caption(f"{contribution_result.target_name} · {contribution_result.start_date.date()} → {contribution_result.end_date.date()} · reconciliation tolerance {contribution_result.reconciliation_metadata.get('tolerance')}")
+        contrib_table = contribution_result.constituent_contributions.copy()
+        pos = contrib_table[contrib_table["contribution"] > 0].head(10)
+        neg = contrib_table[contrib_table["contribution"] < 0].sort_values("contribution").head(10)
+        top_n = st.slider("Top N contributors to highlight", 3, 15, 5, key="contrib_top_n")
+        left, right = st.columns(2)
+        for container, title, frame, share_col in [(left, "Largest Positive Contributors", pos.head(top_n), "gross_positive_share"), (right, "Largest Negative Contributors", neg.head(top_n), "gross_negative_share")]:
+            with container:
+                st.markdown(f"**{title}**")
+                if frame.empty:
+                    st.caption("No contributors in this direction.")
+                else:
+                    show = frame[["ticker", "name", "category", "contribution", share_col]].rename(columns={"ticker": "Ticker", "name": "Asset", "category": "Category", "contribution": f"Contribution ({unit})", share_col: "Share"})
+                    show["Share"] = pd.to_numeric(show["Share"], errors="coerce") * 100
+                    st.dataframe(show, use_container_width=True, hide_index=True, column_config={f"Contribution ({unit})": st.column_config.NumberColumn(format="%+.2f"), "Share": st.column_config.NumberColumn(format="%.1f%%")})
+        st.markdown("#### Reconciliation Waterfall")
+        ranked = contrib_table.reindex(contrib_table["contribution"].abs().sort_values(ascending=False).index)
+        shown = ranked.head(top_n)
+        other = float(ranked.iloc[top_n:]["contribution"].sum()) if len(ranked) > top_n else 0.0
+        labels = ["Start"] + [str(r.get("ticker") or r.get("asset_id")) for _, r in shown.iterrows()] + ["Other assets", "Cash", "Residual", "End"]
+        measures = ["absolute"] + ["relative"] * len(shown) + ["relative", "relative", "relative", "total"]
+        yvals = [contribution_result.starting_value] + shown["contribution"].astype(float).tolist() + [other, contribution_result.cash_contribution, contribution_result.residual, contribution_result.ending_value]
+        st.plotly_chart(go.Figure(go.Waterfall(name="Contribution", orientation="v", measure=measures, x=labels, y=yvals)).update_layout(height=390, yaxis_title=unit), use_container_width=True)
+        conc = concentration_metrics(contrib_table); breadth = breadth_metrics(contrib_table)
+        c1, c2 = st.columns(2)
+        c1.markdown("#### Contribution Concentration")
+        c1.write(f"Top 1 / Top 3 / Top 5 share of gross positive contribution: {format_pct(conc['positive_top_1'])} · {format_pct(conc['positive_top_3'])} · {format_pct(conc['positive_top_5'])}")
+        c1.write(f"Top 1 / Top 3 / Top 5 share of absolute contribution: {format_pct(conc['absolute_top_1'])} · {format_pct(conc['absolute_top_3'])} · {format_pct(conc['absolute_top_5'])}")
+        c2.markdown("#### Contribution Breadth")
+        c2.write(f"Positive: {breadth['positive_count']} · Negative: {breadth['negative_count']} · Flat: {breadth['flat_count']} · Percent positive: {format_pct(breadth['percent_positive'])}")
+        st.markdown("#### Contribution Over Time")
+        if contribution_result.contribution_series.empty:
+            st.caption("Cumulative contribution series is unavailable for this target/window.")
+        else:
+            keep_ids = set(shown["asset_id"].astype(str))
+            ts = contribution_result.contribution_series.copy()
+            ts["Contributor"] = ts["asset_id"].where(ts["asset_id"].astype(str).isin(keep_ids), "Other")
+            ts = ts.groupby(["date", "Contributor"], as_index=False)["contribution"].sum().sort_values("date")
+            ts["cumulative_contribution"] = ts.groupby("Contributor")["contribution"].cumsum()
+            st.plotly_chart(px.line(ts, x="date", y="cumulative_contribution", color="Contributor", markers=True, labels={"cumulative_contribution": unit}), use_container_width=True)
+        leader = contrib_table.iloc[0] if not contrib_table.empty else None
+        laggard = contrib_table.sort_values("contribution").iloc[0] if not contrib_table.empty else None
+        direction = "gained" if contribution_result.total_change >= 0 else "declined"
+        summary = f"{contribution_result.target_name} {direction} {abs(contribution_result.total_change):.1f} {unit} over the selected period."
+        if leader is not None:
+            summary += f" {leader.get('ticker') or leader.get('asset_id')} was the largest contributor at {leader['contribution']:+.1f} {unit}."
+        if laggard is not None and laggard['contribution'] < 0:
+            summary += f" {laggard.get('ticker') or laggard.get('asset_id')} was the largest detractor at {laggard['contribution']:+.1f} {unit}."
+        summary += f" {breadth['positive_count']} of {breadth['total_count']} constituents contributed positively."
+        st.info(summary)
+        st.markdown("#### Full Contribution Table")
+        search_term = st.text_input("Search contributors", key="contrib_search")
+        display_contrib = contrib_table.copy()
+        if search_term:
+            mask = display_contrib[["asset_id", "ticker", "name", "category"]].fillna("").astype(str).apply(lambda col: col.str.contains(search_term, case=False, regex=False)).any(axis=1)
+            display_contrib = display_contrib[mask]
+        export_cols = display_contrib.rename(columns={"ticker": "Ticker", "name": "Asset", "category": "Category", "start_weight": "Start Weight", "end_weight": "End Weight", "average_weight": "Average Weight", "asset_return": "Asset Return", "contribution": f"Contribution ({unit})", "contribution_share": "Contribution Share", "status": "Status", "exit_indicator": "Exit Indicator"})
+        for pct_col in ["Start Weight", "End Weight", "Average Weight", "Asset Return", "Contribution Share"]:
+            if pct_col in export_cols:
+                export_cols[pct_col] = pd.to_numeric(export_cols[pct_col], errors="coerce") * 100
+        st.dataframe(export_cols[[c for c in ["Ticker", "Asset", "Category", "Start Weight", "End Weight", "Asset Return", f"Contribution ({unit})", "Contribution Share", "Status", "Exit Indicator"] if c in export_cols]], use_container_width=True, hide_index=True)
+        drill_options = {f"{row.get('ticker') or row['asset_id']} | {row.get('name') or row['asset_id']}": row["asset_id"] for _, row in contrib_table.iterrows()}
+        drill_label = st.selectbox("Send contributor to Asset Price History", ["—"] + list(drill_options), key="contrib_drill")
+        if drill_label != "—" and st.button("Open in Asset Price History", key="contrib_open_asset"):
+            st.session_state["asset_explorer_selected_asset_id"] = str(drill_options[drill_label])
+            st.session_state["asset_history_mode"] = "Single Asset"
+            st.rerun()
+        with st.expander("Methodology Used"):
+            st.json(contribution_result.methodology | {"cash": "explicit cash delta shown separately", "reconciliation": "start + asset contributions + cash + rebalance/entry-exit + residual = end"})
 
 st.subheader("Asset Price History")
 if prices.empty:
