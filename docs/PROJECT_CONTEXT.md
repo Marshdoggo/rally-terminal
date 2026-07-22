@@ -38,8 +38,8 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1023 |
-| Processed price history | 964 |
+| Normalized manual price observations | 1041 |
+| Processed price history | 981 |
 | General Rally index rows | 436 |
 | Quarterly Rally index rows | 304 |
 | SEC series context | 0 |
@@ -160,6 +160,11 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (NEWTON, 2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-newton` (`#NEWTON`), Sir Isaac Newton's The Principia, First Edition. The history preserves the actual observed Rally dates from the May 2021 offering reference value through the June 29, 2026 Q2 observation at $6.85 per share / $205,500 total value. Market caps are validated against the existing 30,000-share master record. The October 22, 2021 and January 10, 2022 observations are normalized to the September 30, 2021 and December 31, 2021 periods, respectively, as nearest available after-quarter observations. NEWTON now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (NEWWORLD, 2026-07-22)
+
+The normalized Rally price observations now include manually transcribed chart coverage for existing Books asset `rally-newworld` (`#NEWWORLD`), Aldous Huxley - Brave New World (First Edition). The history preserves the actual observed Rally dates from the January 2022 offering reference value through the June 26, 2026 Q2 observation at $2.95 per share / $5,900 total value, with market caps validated against the existing 2,000-share master record. A known July 22, 2026 post-Q2 observation at $5.80 per share / $11,600 total value is retained as a weekly/current-price observation for future higher-frequency history; it is intentionally not used as the Q2 2026 quarterly observation because it falls 22 days after June 30 under the strict quarterly cutoff note. NEWWORLD now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Development And Verification
 
