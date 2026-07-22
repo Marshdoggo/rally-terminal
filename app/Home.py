@@ -579,8 +579,12 @@ else:
         st.info("No asset price observations are available yet.")
     elif history_mode == "Single Asset":
         default_idx = 0
+        explorer_asset_id = st.session_state.get("asset_explorer_selected_asset_id")
+        explorer_match = options.index[options["asset_id"].astype(str).eq(str(explorer_asset_id))].tolist() if explorer_asset_id else []
         mosasaur_match = options.index[options["asset_id"].eq("rally-mosasaur")].tolist()
-        if mosasaur_match:
+        if explorer_match:
+            default_idx = explorer_match[0]
+        elif mosasaur_match:
             default_idx = mosasaur_match[0]
         selected_label = st.selectbox("Asset", options["asset_label"].tolist(), index=default_idx, key="single_asset")
         selected_asset_id = options.loc[options["asset_label"].eq(selected_label), "asset_id"].iloc[0]
@@ -780,6 +784,9 @@ else:
             "category": "Category",
             "subcategory": "Subcategory",
             "last_price": "Last price",
+            "return_1q": "1Q Return",
+            "return_1y": "1Y Return",
+            "return_full_history": "Full Return",
             "best_bid": "Best bid",
             "best_ask": "Best ask",
             "bid_ask_spread_pct": "Bid-ask spread",
@@ -802,6 +809,9 @@ else:
         "Category",
         "Subcategory",
         "Last price",
+        "1Q Return",
+        "1Y Return",
+        "Full Return",
         "Best bid",
         "Best ask",
         "Bid-ask spread",
@@ -816,17 +826,21 @@ else:
         "Data quality",
         "Data warnings",
     ]
-    for percent_col in ("Bid-ask spread", "Premium / discount to FV", "FV confidence"):
+    for percent_col in ("1Q Return", "1Y Return", "Full Return", "Bid-ask spread", "Premium / discount to FV", "FV confidence"):
         if percent_col in display:
             display[percent_col] = pd.to_numeric(display[percent_col], errors="coerce") * 100
-    st.dataframe(
-        display[[col for col in columns if col in display.columns]].sort_values("Ticker"),
+    market_display = display[[col for col in columns if col in display.columns]].sort_values("Ticker").reset_index(drop=True)
+    market_selection = st.dataframe(
+        market_display,
         use_container_width=True,
         hide_index=True,
         column_config={
             "Last price": st.column_config.NumberColumn(format="$%.2f"),
             "Best bid": st.column_config.NumberColumn(format="$%.2f"),
             "Best ask": st.column_config.NumberColumn(format="$%.2f"),
+            "1Q Return": st.column_config.NumberColumn(format="%+.1f%%"),
+            "1Y Return": st.column_config.NumberColumn(format="%+.1f%%"),
+            "Full Return": st.column_config.NumberColumn(format="%+.1f%%"),
             "Bid-ask spread": st.column_config.NumberColumn(format="%.1f%%"),
             "Shares outstanding": st.column_config.NumberColumn(format="%.0f"),
             "Market cap": st.column_config.NumberColumn(format="$%.0f"),
@@ -836,7 +850,14 @@ else:
             "Premium / discount to FV": st.column_config.NumberColumn(format="%.1f%%"),
             "FV confidence": st.column_config.NumberColumn(format="%.0f%%"),
         },
+        on_select="rerun",
+        selection_mode="single-row",
     )
+    selected_rows = market_selection.selection.rows if market_selection is not None else []
+    if selected_rows:
+        selected_asset = market_display.iloc[selected_rows[0]]
+        st.session_state["asset_explorer_selected_asset_id"] = str(selected_asset["Asset ID"])
+        st.info(f"Selected {selected_asset['Ticker']} for Asset Price History. The chart above will use this asset on rerun.")
 
     st.caption(
         "Unavailable values are intentionally left blank. SEC-synthesized rows remain research context and are hidden by default unless current-listing filtering is turned off."
