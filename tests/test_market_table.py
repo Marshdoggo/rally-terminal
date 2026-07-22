@@ -162,3 +162,39 @@ def test_market_table_filters_below_estimated_fair_value_and_confidence():
     filtered = filter_market_table(table, valuation_filter="Below estimated fair value", min_confidence=0.5)
 
     assert filtered["ticker"].tolist() == ["A"]
+
+
+def test_market_table_adds_trailing_and_full_returns_from_valid_prices():
+    canonical = pd.DataFrame([
+        {"asset_id": "a", "ticker": "A", "name": "Asset A", "category": "art", "subcategory": "", "share_count": 100, "offering_price_usd": 10, "offering_valuation_usd": 1000, "source_type": "manual_seed", "status": "trading", "data_quality_status": "usable"}
+    ])
+    decision = pd.DataFrame([{"asset_id": "a"}])
+    prices = pd.DataFrame([
+        {"asset_id": "a", "date": "2025-01-01", "last": 10.0, "event_type": "chart_observation"},
+        {"asset_id": "a", "date": "2025-07-01", "last": 12.0, "event_type": "chart_observation"},
+        {"asset_id": "a", "date": "2026-04-01", "last": 15.0, "event_type": "chart_observation"},
+        {"asset_id": "a", "date": "2026-07-01", "last": 18.0, "event_type": "chart_observation"},
+    ])
+
+    table = build_market_table(canonical, decision, prices)
+
+    assert table.iloc[0]["return_1q"] == pytest.approx(0.2)
+    assert table.iloc[0]["return_1y"] == pytest.approx(0.5)
+    assert table.iloc[0]["return_full_history"] == pytest.approx(0.8)
+
+
+def test_market_table_leaves_insufficient_trailing_history_blank():
+    canonical = pd.DataFrame([
+        {"asset_id": "new", "ticker": "NEW", "name": "New Asset", "category": "books", "subcategory": "", "share_count": 100, "offering_price_usd": 10, "offering_valuation_usd": 1000, "source_type": "manual_seed", "status": "trading", "data_quality_status": "usable"}
+    ])
+    decision = pd.DataFrame([{"asset_id": "new"}])
+    prices = pd.DataFrame([
+        {"asset_id": "new", "date": "2026-06-01", "last": 10.0, "event_type": "chart_observation"},
+        {"asset_id": "new", "date": "2026-07-01", "last": 11.0, "event_type": "chart_observation"},
+    ])
+
+    table = build_market_table(canonical, decision, prices)
+
+    assert pd.isna(table.iloc[0]["return_1q"])
+    assert pd.isna(table.iloc[0]["return_1y"])
+    assert table.iloc[0]["return_full_history"] == pytest.approx(0.1)

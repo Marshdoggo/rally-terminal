@@ -60,7 +60,7 @@ Counts describe the committed research snapshot and are not live market coverage
 - Equal-weighted, market-cap-weighted, quarterly descriptive price-index prototypes, exit-aware total-return portfolios, and user-defined index calculations with contribution analysis, cash/pending-settlement accounting, and risk metrics.
 - Exchange Market Cap & Performance reconstruction with asset-level carry-forward audit fields, assets-added hover diagnostics for issuance-driven jumps, tradable market-cap exit removals, category decomposition, exit-aware total-return indexes, reconciliation reports, and CSV exports.
 - Local and curated custom-index registries. Local JSON persistence is development-only; cloud saving is disabled through `RALLY_CUSTOM_INDEX_READ_ONLY=true`.
-- Market-table filters, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
+- Market-table filters with asset-level trailing/full-history returns, native row-to-price-chart selection, a reusable custom portfolio simulation engine, coverage diagnostics, category performance, liquidity metrics, deterministic AI/report context, and MME/newsletter exports.
 
 ## Important Semantics And Constraints
 
@@ -170,6 +170,16 @@ The normalized Rally price observations now include manually transcribed chart c
 ## Manual Books Price Coverage Update (ROOSEVELT, 2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-roosevelt` (`#ROOSEVELT`), Theodore Roosevelt - African Game Trails (Signed First Edition). The history preserves the actual observed Rally dates from the March 2020 offering reference value through the June 30, 2026 Q2 observation at $19.80 per share / $19,800 total value. Market caps are validated against the existing 1,000-share master record. The April 13, 2021 and January 31, 2022 observations are normalized to the March 31, 2021 and December 31, 2021 periods, respectively, as nearest available after-quarter observations. ROOSEVELT now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+## Market Table Return Screening Update (2026-07-22)
+
+The homepage Rally Market Table now includes asset-level 1Q, 1Y, and full-history return columns calculated from the same canonical historical price-cleaning path used by the exit-aware total-return engine. Sparse trailing windows use the latest valid observable price on or before the lookback anchor date, avoiding interpolation and avoiding forward-looking prices. Full-history return uses each asset's first valid observable price and latest valid or terminal price. Insufficient trailing history remains blank rather than imputed. The market table also supports single-row selection to seed the Asset Price History selector, beginning the Asset Explorer workflow without introducing custom JavaScript.
+
+## Custom Portfolio Simulator Update (2026-07-22)
+
+Rally Terminal now includes a reusable `alt_asset_explorer.portfolio_engine` layer for first-class custom portfolio definitions and simulations. The engine is intentionally portfolio-oriented rather than a replacement for the existing Custom Index Workshop: custom indexes remain constant-weight normalized composites on common observed dates with no fill, while custom portfolios model investor capital, target weights, buy-and-hold or scheduled rebalancing, carried-forward observed prices, cash for assets not yet eligible, and exit proceeds held as cash until a later scheduled rebalance. The homepage Portfolio Simulator can compare custom portfolios against the existing full-market total-return benchmark as normalized growth of the selected starting investment.
+
+The engine exposes methodology metadata fields including weighting method, rebalance frequency, universe policy, exit treatment, missing-price policy, and asset-entry policy so future Methodology Transparency UI can describe the same configuration being executed.
 
 ## Development And Verification
 
