@@ -61,7 +61,7 @@ rally-marx,MARX,Karl Marx - Das Kapital (First Edition),books,True,True,True,,,0
 rally-megalodon,MEGALODON,Megalodon Fossil,fossils,True,True,True,2022-12-30,2026-06-30,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
 rally-mobydick,MOBYDICK,Herman Melville - Moby-Dick (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-mosasaur,MOSASAUR,Mosasaur,fossils,True,True,True,2021-06-21,2026-06-29,21,21,0,0,0,,,,112.0,True,True,,22,,21,,2021-06-30,2026-06-30,,,21,21
-rally-newton,NEWTON,Isaac Newton - Principia (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-newton,NEWTON,Isaac Newton - Principia (First Edition),books,True,True,True,2021-10-22,2026-06-29,20,20,0,0,0,,,,97.0,True,True,,21,,20,,2021-09-30,2026-06-30,,,20,20
 rally-newworld,NEWWORLD,Aldous Huxley - Brave New World (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-pappy1,PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,True,True,True,2022-12-28,2026-06-26,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
 rally-picnic,PICNIC,Hermès 35cm Picnic Kelly,handbags,True,True,True,2021-04-29,2026-06-29,21,21,0,0,0,,,,208.0,True,True,,22,,21,,2021-03-31,2026-06-30,,,21,21
