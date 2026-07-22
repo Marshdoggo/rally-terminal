@@ -68,7 +68,7 @@ rally-picnic,PICNIC,Hermès 35cm Picnic Kelly,handbags,True,True,True,2021-04-29
 rally-rabbit,RABBIT,The Tale of Peter Rabbit (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-riviera,RIVIERA,1965 Rolex 1601 Datejust Joyera Riviera,watches,True,True,True,2021-09-30,2026-06-26,20,20,0,0,0,,,,95.0,True,True,,21,,20,,2021-09-30,2026-06-30,,,20,20
 rally-rlexpepsi,RLEXPEPSI,Rolex GMT-Master II Pepsi Jubilee,watches,True,True,True,2020-03-17,2026-06-29,26,26,0,0,0,,,,152.0,True,True,,27,,26,,2020-03-31,2026-06-30,,,26,26
-rally-roosevelt,ROOSEVELT,Theodore Roosevelt - African Game Trails (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-roosevelt,ROOSEVELT,Theodore Roosevelt - African Game Trails (Signed First Edition),books,True,True,True,2020-06-09,2026-06-30,24,24,0,0,0,,,,157.0,True,True,,25,,24,,2020-06-30,2026-06-30,,,24,24
 rally-shkspr4,SHKSPR4,"Shakespeare - Comedies, Histories & Tragedies",books,True,True,True,2020-11-10,2026-06-24,23,23,0,0,0,,,,185.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
 rally-smurf,SMURF,Rolex Submariner Smurf,watches,True,True,True,2020-05-05,2026-06-29,23,23,0,0,0,,,,221.0,True,True,,24,,23,,2020-03-31,2026-06-30,,,23,23
 rally-snoopy,SNOOPY,Omega Speedmaster Silver Snoopy,watches,True,True,True,2020-08-18,2026-06-29,24,24,0,0,0,,,,155.0,True,True,,25,,24,,2020-09-30,2026-06-30,,,24,24
