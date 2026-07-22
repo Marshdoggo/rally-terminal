@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import pandas as pd
 
+from alt_asset_explorer.asset_returns import build_asset_return_summary
+from alt_asset_explorer.total_return import _price_date_frame
+
 
 MARKET_TABLE_COLUMNS = [
     "asset_id",
@@ -10,6 +13,9 @@ MARKET_TABLE_COLUMNS = [
     "category",
     "subcategory",
     "last_price",
+    "return_1q",
+    "return_1y",
+    "return_full_history",
     "best_bid",
     "best_ask",
     "bid_ask_spread_pct",
@@ -37,8 +43,7 @@ def _num(value: object) -> float | None:
 def _latest_quotes(price_history: pd.DataFrame) -> pd.DataFrame:
     if price_history.empty or not {"asset_id", "date"}.issubset(price_history.columns):
         return pd.DataFrame(columns=["asset_id", "last_quote_observed_at", "last_price", "best_bid", "best_ask"])
-    quotes = price_history.copy()
-    quotes["date"] = pd.to_datetime(quotes["date"], errors="coerce")
+    quotes = _price_date_frame(price_history)
     quotes = quotes.dropna(subset=["asset_id", "date"])
     if quotes.empty:
         return pd.DataFrame(columns=["asset_id", "last_quote_observed_at", "last_price", "best_bid", "best_ask"])
@@ -78,7 +83,8 @@ def build_market_table(
     ]
     decision = decision_universe[[col for col in decision_cols if col in decision_universe.columns]].copy() if not decision_universe.empty else pd.DataFrame(columns=decision_cols)
     latest_quotes = _latest_quotes(price_history)
-    table = master.merge(decision, on="asset_id", how="left").merge(latest_quotes, on="asset_id", how="left", suffixes=("", "_quote"))
+    return_summary = build_asset_return_summary(price_history)
+    table = master.merge(decision, on="asset_id", how="left").merge(latest_quotes, on="asset_id", how="left", suffixes=("", "_quote")).merge(return_summary, on="asset_id", how="left")
 
     if liquidity is not None and not liquidity.empty and "asset_id" in liquidity:
         table = table.merge(liquidity[["asset_id", "bid_ask_spread_pct"]], on="asset_id", how="left")
