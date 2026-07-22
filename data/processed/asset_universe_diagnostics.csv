@@ -62,7 +62,7 @@ rally-megalodon,MEGALODON,Megalodon Fossil,fossils,trading,active_tradable,True,
 rally-mobydick,MOBYDICK,Herman Melville - Moby-Dick (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-mosasaur,MOSASAUR,Mosasaur,fossils,trading,active_tradable,True,True,False,True,21,2021-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-newton,NEWTON,Isaac Newton - Principia (First Edition),books,trading,active_tradable,True,True,False,True,21,2021-06-30,2026-06-30,True,True,True,included,True,True,True,False
-rally-newworld,NEWWORLD,Aldous Huxley - Brave New World (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-newworld,NEWWORLD,Aldous Huxley - Brave New World (First Edition),books,trading,active_tradable,True,True,False,True,17,2022-03-31,2026-06-30,True,True,True,included,True,True,True,False
 rally-pappy1,PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,trading,active_tradable,True,True,False,True,16,2022-09-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-picnic,PICNIC,Hermès 35cm Picnic Kelly,handbags,trading,active_tradable,True,True,False,True,22,2020-12-31,2026-06-30,True,True,True,included,True,True,True,False
 rally-rabbit,RABBIT,The Tale of Peter Rabbit (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
