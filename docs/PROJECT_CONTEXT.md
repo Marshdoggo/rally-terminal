@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 893 |
-| Processed price history | 840 |
-| General Rally index rows | 416 |
+| Normalized manual price observations | 917 |
+| Processed price history | 863 |
+| General Rally index rows | 420 |
 | Quarterly Rally index rows | 302 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -129,6 +129,11 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (SHKSPR4, 2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-shkspr4` (`#SHKSPR4`), Shakespeare's Comedies, Histories, and Tragedies. The history preserves the actual observed Rally dates from the July 2020 offering context through the June 24, 2026 Q2 observation at $75.00 per share / $75,000 total value. Market caps are validated against the existing 1,000-share master record. The February 7, 2022 observation is normalized to the December 31, 2021 period as the nearest available after-quarter observation so the March 28, 2022 quote remains the Q1 2022 observation. SHKSPR4 now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (CHURCHILL, 2026-07-22)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-churchill` (`#CHURCHILL`), Winston Churchill - The Second World War (Signed First Edition). The history preserves the actual observed Rally dates from the July 2020 offering context through the June 24, 2026 Q2 observation at $3.15 per share / $23,625 total value. Market caps are validated against the existing 7,500-share master record. A more recent conversational $3.90 trade note after the Q2 2026 cutoff is intentionally excluded from this quarterly historical build and reserved for future weekly-history coverage. CHURCHILL now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Development And Verification
 
