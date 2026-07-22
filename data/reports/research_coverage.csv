@@ -53,7 +53,7 @@ rally-karuizawa,KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whi
 rally-keller,KELLER,Helen Keller 1892 Book (Inscribed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-kerouac,KEROUAC,Jack Kerouac - On the Road (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-lotf,LOTF,William Golding - Lord of the Flies (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-lotr,LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-lotr,LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,True,True,True,2020-09-29,2026-07-01,23,23,0,0,0,,,,172.0,True,True,,24,,23,,2020-09-30,2026-06-30,,,23,23
 rally-macallan1,MACALLAN1,Macallan 30-Year-Old Blue Label Scotch Whisky,wine and whiskey,True,True,True,2022-03-30,2026-06-29,18,18,0,0,0,,,,95.0,True,True,,19,,18,,2022-03-31,2026-06-30,,,18,18
 rally-macallan2,MACALLAN2,Macallan 40-Year-Old Whisky,wine and whiskey,True,True,True,2022-06-27,2026-06-29,17,17,0,0,0,,,,94.0,True,True,,18,,17,,2022-06-30,2026-06-30,,,17,17
 rally-macallan3,MACALLAN3,1938 Macallan Red Ribbon Whisky,wine and whiskey,True,True,True,2022-12-30,2026-06-26,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15

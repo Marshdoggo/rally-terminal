@@ -1,6 +1,7 @@
 ticker,name,category,subcategory,status,metric,value,source_url,notes,last_updated
 PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,bourbon,trading,premium_to_offering,3.6500000000000004,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 CHURCHILL,Winston Churchill - The Second World War (Signed First Edition),books,rare books,trading,premium_to_offering,2.15,,Live Rally market cap compared with SEC offering cap.,2026-07-02
+LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,rare books,trading,premium_to_offering,1.5862068965517242,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,rare books,trading,premium_to_offering,1.0,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 MEGALODON,Megalodon Fossil,fossils,shark,trading,premium_to_offering,-0.7025,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 HGWELLS,H.G. Wells - The Time Machine (Inscribed First Edition),books,rare books,trading,premium_to_offering,-0.6290322580645161,,Live Rally market cap compared with SEC offering cap.,2026-07-02
@@ -23,4 +24,3 @@ MACALLAN3,1938 Macallan Red Ribbon Whisky,wine and whiskey,scotch whisky,trading
 FAUBOURG,Hermès Faubourg,handbags,faubourg,sold,premium_to_offering,-0.21733333333333338,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 16SCREAG,2016 Screaming Eagle,wine and whiskey,wine,trading,premium_to_offering,-0.19615384615384612,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 16PETRUS,2016 Château Pétrus,wine and whiskey,wine,trading,premium_to_offering,-0.1923076923076923,,Live Rally market cap compared with SEC offering cap.,2026-07-02
-03TACHE,2003 Domaine de la Romanée-Conti La Tâche,wine and whiskey,wine,trading,premium_to_offering,-0.18999999999999995,,Live Rally market cap compared with SEC offering cap.,2026-07-02

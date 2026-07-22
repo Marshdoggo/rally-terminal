@@ -53,7 +53,7 @@ rally-karuizawa,KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whi
 rally-keller,KELLER,Helen Keller 1892 Book (Inscribed),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-kerouac,KEROUAC,Jack Kerouac - On the Road (Signed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-lotf,LOTF,William Golding - Lord of the Flies (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
-rally-lotr,LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-lotr,LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,trading,active_tradable,True,True,False,True,24,2020-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-macallan1,MACALLAN1,Macallan 30-Year-Old Blue Label Scotch Whisky,wine and whiskey,trading,active_tradable,True,True,False,True,19,2021-12-31,2026-06-30,True,True,True,included,True,True,True,False
 rally-macallan2,MACALLAN2,Macallan 40-Year-Old Whisky,wine and whiskey,trading,active_tradable,True,True,False,True,18,2022-03-31,2026-06-30,True,True,True,included,True,True,True,False
 rally-macallan3,MACALLAN3,1938 Macallan Red Ribbon Whisky,wine and whiskey,trading,active_tradable,True,True,False,True,16,2022-09-30,2026-06-30,True,True,True,included,True,True,True,False
