@@ -1,5 +1,5 @@
 {
-  "as_of": "2026-07-22",
+  "as_of": "2026-07-02",
   "purpose": "Rally-first alternative asset universe with secondary comp NAV support.",
   "diagnostics": [
     {
@@ -675,9 +675,9 @@
       "hardware": "",
       "offering_date": "2020-12-01",
       "offering_market_cap_usd": 93000.0,
-      "current_market_cap_usd": NaN,
+      "current_market_cap_usd": 41075.0,
       "acquisition_cost_usd": null,
-      "last_trade_price": NaN,
+      "last_trade_price": 2.65,
       "bid_price": null,
       "ask_price": null,
       "share_count": 15500.0,
@@ -696,8 +696,8 @@
       "nav_high_usd": null,
       "nav_confidence": 0.0,
       "discount_to_secondary_nav": null,
-      "premium_to_offering": NaN,
-      "rally_return_since_offering": NaN,
+      "premium_to_offering": -0.5583333333333333,
+      "rally_return_since_offering": -0.5583333333333333,
       "comp_market_momentum_90d": null,
       "comp_market_momentum_180d": null,
       "comp_market_momentum_365d": null,

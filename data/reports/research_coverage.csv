@@ -13,7 +13,7 @@ rally-16screag,16SCREAG,2016 Screaming Eagle,wine and whiskey,True,True,True,202
 rally-17dujac,17DUJAC,2017 Domaine Dujac Wine Collection,wine and whiskey,True,True,True,2021-06-17,2025-03-27,15,14,0,0,0,,,,207.0,True,True,,15,,15,,2021-06-30,2025-03-31,,,15,14
 rally-59bond,59BOND,Ian Fleming - Goldfinger (Dedication Copy),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-59jfk,59JFK,John F. Kennedy - Profiles in Courage (Inscribed to Frank Sinatra),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-62bond,62BOND,Ian Fleming - The Spy Who Loved Me (Inscribed to RFK),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-62bond,62BOND,Ian Fleming - The Spy Who Loved Me (Inscribed to RFK),books,True,True,True,2021-05-12,2026-06-26,21,21,0,0,0,,,,125.0,True,True,,1,,21,,2021-06-30,2026-06-30,,,21,0
 rally-79stella,79STELLA,1979 Rolex Coral Stella Dial Day-Date,watches,True,True,True,2021-04-15,2026-06-26,22,22,0,0,0,,,,97.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
 rally-7orlex,70RLEX,1970 Rolex Watch,watches,True,True,True,2020-05-12,2023-09-27,10,10,0,0,0,,,,486.0,True,True,,11,,10,,2020-06-30,2023-09-30,,,10,10
 rally-93daytona,93DAYTONA,1993 Rolex Zenith Daytona Inverted 6,watches,True,True,True,2021-01-05,2026-06-30,23,23,0,0,0,,,,147.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23

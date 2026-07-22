@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 980 |
-| Processed price history | 923 |
-| General Rally index rows | 430 |
+| Normalized manual price observations | 1002 |
+| Processed price history | 944 |
+| General Rally index rows | 436 |
 | Quarterly Rally index rows | 304 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -150,6 +150,11 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (HUCKFINN, 2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-huckfinn` (`#HUCKFINN`), Mark Twain's Adventures of Huckleberry Finn, First Edition. The history preserves the actual observed Rally dates from the April 2021 offering reference value through the June 29, 2026 Q2 observation at $5.40 per share / $10,800 total value. Market caps are validated against the existing 2,000-share master record. The October 28, 2021 and January 24, 2022 observations are normalized to the September 30, 2021 and December 31, 2021 periods, respectively, as nearest available after-quarter observations. No Q2 2025 observation is imputed because none was supplied. HUCKFINN now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (62BOND, 2026-07-22)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-62bond` (`#62BOND`), Ian Fleming's The Spy Who Loved Me, Inscribed to RFK. The history preserves the actual observed Rally dates from the December 2020 offering reference value through the June 26, 2026 Q2 observation at $2.65 per share / $41,075 total value. Market caps are validated against the existing 15,500-share master record. 62BOND now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Development And Verification
 
