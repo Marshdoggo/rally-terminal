@@ -46,7 +46,7 @@ rally-gwtw,GWTW,Gone with the Wind (Inscribed First Printing),books,trading,acti
 rally-hgwells,HGWELLS,H.G. Wells - The Time Machine (Inscribed First Edition),books,trading,active_tradable,True,True,False,True,19,2021-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-himalaya,HIMALAYA,Hermès 30cm Himalaya Birkin,handbags,trading,active_tradable,True,True,False,True,25,2020-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-holmes,HOLMES,Arthur Conan Doyle - Adventures & Memoirs of Sherlock Holmes,books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
-rally-huckfinn,HUCKFINN,Mark Twain - Adventures of Huckleberry Finn (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-huckfinn,HUCKFINN,Mark Twain - Adventures of Huckleberry Finn (First Edition),books,trading,active_tradable,True,True,False,True,20,2021-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-irobot,IROBOT,"Isaac Asimov - I, Robot (First Edition)",books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-jekyll,JEKYLL,Dr. Jekyll and Mr. Hyde (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-karuizawa,KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whiskey,trading,active_tradable,True,True,False,True,19,2021-12-31,2026-06-30,True,True,True,included,True,True,True,False
