@@ -18,7 +18,7 @@ rally-79stella,79STELLA,1979 Rolex Coral Stella Dial Day-Date,watches,trading,ac
 rally-7orlex,70RLEX,1970 Rolex Watch,watches,sold,exited,True,False,True,True,12,2019-12-31,2023-12-31,True,True,True,included,True,True,True,True
 rally-93daytona,93DAYTONA,1993 Rolex Zenith Daytona Inverted 6,watches,trading,active_tradable,True,True,False,True,24,2020-09-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-aghowl,AGHOWL,Allen Ginsberg - Howl and Other Poems (Inscribed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
-rally-alice,ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-alice,ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,trading,active_tradable,True,True,False,True,23,2020-09-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-aproak,APROAK,Audemars Piguet Royal Oak,watches,sold,exited,True,False,True,True,6,2019-12-31,2021-06-30,True,True,True,included,True,True,True,True
 rally-baro,BARO,Barosaurus Skeleton,fossils,sold,exited,True,False,True,False,0,,,False,True,True,included,False,False,False,True
