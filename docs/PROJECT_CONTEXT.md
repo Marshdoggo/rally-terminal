@@ -1,6 +1,6 @@
 # Rally Terminal Project Context
 
-Last audited: 2026-07-20
+Last audited: 2026-07-22
 Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1
 
 ## Purpose And Product State
@@ -38,10 +38,10 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 846 |
-| Processed price history | 795 |
-| General Rally index rows | 402 |
-| Quarterly Rally index rows | 254 |
+| Normalized manual price observations | 869 |
+| Processed price history | 817 |
+| General Rally index rows | 410 |
+| Quarterly Rally index rows | 300 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
@@ -120,6 +120,10 @@ The normalized Rally inputs now include authored wine-and-whiskey exit coverage 
 ## Pending Buyout Offer Coverage Update (2026-07-20)
 
 The normalized Rally inputs now include authored quarterly price observations for `rally-deaton`, the Deaton Triceratops Skull fossil asset, from its January 2021 offering context through the June 22, 2026 last close before a pending buyout vote. The asset is marked `exit_announced`, with pending offer metadata for a proposed $600,000 / $52.631579 per-share buyout and 54% yes vote snapshot. Because the offer has not been approved and completed, Deaton is not modeled as a realized exit, settled buyout, or terminal payout observation.
+
+## Manual Books Price Coverage Update (2026-07-22)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-alice` (`#ALICE`), Lewis Carroll — Alice's Adventures in Wonderland, First Edition. The history preserves the actual observed Rally dates from the September 2020 offering context through the June 25, 2026 Q2 observation at $2.00 per share; a later conversational approximately $1.50 note is intentionally excluded from the current historical build. The verbally supplied first 2021 observation (`2-02-21`) is stored in ISO form as February 2, 2021 and marked unverified/ambiguous in the row notes rather than silently treated as a higher-precision source. ALICE now has sufficient quarterly price history to participate in the Books quarterly index where the prototype methodology permits.
 
 ## Development And Verification
 
