@@ -38,10 +38,10 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 869 |
-| Processed price history | 817 |
-| General Rally index rows | 410 |
-| Quarterly Rally index rows | 300 |
+| Normalized manual price observations | 893 |
+| Processed price history | 840 |
+| General Rally index rows | 416 |
+| Quarterly Rally index rows | 302 |
 | SEC series context | 0 |
 | Rally exits | 0 |
 | Comparable sales universe | 6 |
@@ -124,6 +124,11 @@ The normalized Rally inputs now include authored quarterly price observations fo
 ## Manual Books Price Coverage Update (2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-alice` (`#ALICE`), Lewis Carroll — Alice's Adventures in Wonderland, First Edition. The history preserves the actual observed Rally dates from the September 2020 offering context through the June 25, 2026 Q2 observation at $2.00 per share; a later conversational approximately $1.50 note is intentionally excluded from the current historical build. The verbally supplied first 2021 observation (`2-02-21`) is stored in ISO form as February 2, 2021 and marked unverified/ambiguous in the row notes rather than silently treated as a higher-precision source. ALICE now has sufficient quarterly price history to participate in the Books quarterly index where the prototype methodology permits.
+
+
+## Manual Books Price Coverage Update (SHKSPR4, 2026-07-22)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-shkspr4` (`#SHKSPR4`), Shakespeare's Comedies, Histories, and Tragedies. The history preserves the actual observed Rally dates from the July 2020 offering context through the June 24, 2026 Q2 observation at $75.00 per share / $75,000 total value. Market caps are validated against the existing 1,000-share master record. The February 7, 2022 observation is normalized to the December 31, 2021 period as the nearest available after-quarter observation so the March 28, 2022 quote remains the Q1 2022 observation. SHKSPR4 now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Development And Verification
 
