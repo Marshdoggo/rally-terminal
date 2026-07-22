@@ -5254,5 +5254,17 @@
     "started_at": "2026-07-22T20:37:32Z",
     "status": "completed",
     "warning_count": 0
+  },
+  {
+    "accepted_rows": 1023,
+    "completed_at": "2026-07-22T21:22:56Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "newton_prices.csv",
+    "input_hash": "f0264413b17fa7d98999bf1e6853e92c58d49378e04cea3ab77ccb12b3cc0198",
+    "rejected_rows": 0,
+    "run_id": "d2f9cfc592f19098",
+    "started_at": "2026-07-22T21:22:56Z",
+    "status": "completed",
+    "warning_count": 23
   }
 ]
