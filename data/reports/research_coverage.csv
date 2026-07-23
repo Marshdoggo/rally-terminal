@@ -65,7 +65,7 @@ rally-newton,NEWTON,Isaac Newton - Principia (First Edition),books,True,True,Tru
 rally-newworld,NEWWORLD,Aldous Huxley - Brave New World (First Edition),books,True,True,True,2022-10-17,2026-07-22,17,17,0,0,0,,,,95.0,True,True,,18,,17,,2022-09-30,2026-09-30,,,17,17
 rally-pappy1,PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,True,True,True,2022-12-28,2026-06-26,15,15,0,0,0,,,,95.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
 rally-picnic,PICNIC,Hermès 35cm Picnic Kelly,handbags,True,True,True,2021-04-29,2026-06-29,21,21,0,0,0,,,,208.0,True,True,,22,,21,,2021-03-31,2026-06-30,,,21,21
-rally-rabbit,RABBIT,The Tale of Peter Rabbit (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-rabbit,RABBIT,The Tale of Peter Rabbit (First Edition),books,True,True,True,2023-03-13,2026-07-09,15,15,0,0,0,,,,109.0,True,True,,1,,15,,2023-03-31,2026-07-09,,,15,0
 rally-riviera,RIVIERA,1965 Rolex 1601 Datejust Joyera Riviera,watches,True,True,True,2021-09-30,2026-06-26,20,20,0,0,0,,,,95.0,True,True,,21,,20,,2021-09-30,2026-06-30,,,20,20
 rally-rlexpepsi,RLEXPEPSI,Rolex GMT-Master II Pepsi Jubilee,watches,True,True,True,2020-03-17,2026-06-29,26,26,0,0,0,,,,152.0,True,True,,27,,26,,2020-03-31,2026-06-30,,,26,26
 rally-roosevelt,ROOSEVELT,Theodore Roosevelt - African Game Trails (Signed First Edition),books,True,True,True,2020-06-09,2026-06-30,24,24,0,0,0,,,,157.0,True,True,,25,,24,,2020-06-30,2026-06-30,,,24,24

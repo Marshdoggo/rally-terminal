@@ -38,8 +38,8 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1235 |
-| Processed price history | 1165 |
+| Normalized manual price observations | 1251 |
+| Processed price history | 1180 |
 | General Rally index rows | 458 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
@@ -209,6 +209,11 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (WILDTHING, 2026-07-23)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-wildthing` (`#WILDTHING`), Maurice Sendak's Where the Wild Things Are, Inscribed First Edition. The history preserves the actual observed Rally dates from the October 2021 offering reference value through the June 25, 2026 Q2 observation at $6.95 per share / $13,900 total value. Market caps are validated against the existing 2,000-share master record. No observations are imputed for missing quarters. WILDTHING now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (RABBIT, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed Rally chart coverage for existing Books asset `rally-rabbit` (`#RABBIT`), Beatrix Potter's The Tale of Peter Rabbit, First Edition. The history preserves the actual supplied observation dates from the August 2022 offering reference value through the June 30, 2026 Q2 observation at $2.45 per share / $24,500 total value, with market caps validated against the existing 10,000-share master record. A dated July 9, 2026 post-quarter observation at $4.75 per share / $47,500 total value is retained as a weekly/non-quarterly research row and is intentionally not used as the Q2 2026 quarterly observation. The supplied latest-trade note at $4.70 per share / $47,000 total value is omitted because no precise observed_at date was supplied. RABBIT now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 
