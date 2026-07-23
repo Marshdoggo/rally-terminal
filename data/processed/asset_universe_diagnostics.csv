@@ -19,7 +19,7 @@ rally-7orlex,70RLEX,1970 Rolex Watch,watches,sold,exited,True,False,True,True,12
 rally-93daytona,93DAYTONA,1993 Rolex Zenith Daytona Inverted 6,watches,trading,active_tradable,True,True,False,True,24,2020-09-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-aghowl,AGHOWL,Allen Ginsberg - Howl and Other Poems (Inscribed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-alice,ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,trading,active_tradable,True,True,False,True,23,2020-09-30,2026-06-30,True,True,True,included,True,True,True,False
-rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,trading,active_tradable,True,True,False,True,22,2020-12-31,2026-06-30,True,True,True,included,True,True,True,False
 rally-aproak,APROAK,Audemars Piguet Royal Oak,watches,sold,exited,True,False,True,True,6,2019-12-31,2021-06-30,True,True,True,included,True,True,True,True
 rally-baro,BARO,Barosaurus Skeleton,fossils,sold,exited,True,False,True,False,0,,,False,True,True,included,False,False,False,True
 rally-birkinblu,BIRKINBLU,Hermès 25cm Blue Lizard Birkin,handbags,sold,exited,True,False,True,True,22,2019-12-31,2025-06-30,True,True,True,included,True,True,True,True

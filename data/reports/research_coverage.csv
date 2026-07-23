@@ -19,7 +19,7 @@ rally-7orlex,70RLEX,1970 Rolex Watch,watches,True,True,True,2020-05-12,2023-09-2
 rally-93daytona,93DAYTONA,1993 Rolex Zenith Daytona Inverted 6,watches,True,True,True,2021-01-05,2026-06-30,23,23,0,0,0,,,,147.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
 rally-aghowl,AGHOWL,Allen Ginsberg - Howl and Other Poems (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-alice,ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,True,True,True,2021-02-02,2026-06-25,22,21,0,0,1,,,,133.0,True,True,,23,,22,,2021-03-31,2026-06-30,,,22,22
-rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-anmlfarm,ANMLFARM,George Orwell - Animal Farm (First Edition),books,True,True,True,2021-02-23,2026-07-23,22,22,0,0,0,,,,157.0,True,True,,1,,22,,2021-03-31,2026-07-23,,,22,0
 rally-aproak,APROAK,Audemars Piguet Royal Oak,watches,True,True,True,2020-06-02,2021-05-10,5,5,0,0,0,,,,105.0,True,True,,6,,5,,2020-06-30,2021-06-30,,,5,5
 rally-baro,BARO,Barosaurus Skeleton,fossils,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-birkinblu,BIRKINBLU,Hermès 25cm Blue Lizard Birkin,handbags,True,True,True,2020-04-28,2025-03-24,20,20,0,0,0,,,,145.0,True,True,,21,,20,,2020-06-30,2025-03-31,,,20,20

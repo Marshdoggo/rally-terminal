@@ -2,6 +2,7 @@ ticker,name,category,subcategory,status,metric,value,source_url,notes,last_updat
 PAPPY1,Pappy Van Winkle Bourbon Assortment,wine and whiskey,bourbon,trading,premium_to_offering,3.6500000000000004,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 CHURCHILL,Winston Churchill - The Second World War (Signed First Edition),books,rare books,trading,premium_to_offering,2.15,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 LOTR,J.R.R. Tolkien - The Lord of the Rings Trilogy (First Edition),books,rare books,trading,premium_to_offering,1.5862068965517242,,Live Rally market cap compared with SEC offering cap.,2026-07-02
+ANMLFARM,George Orwell - Animal Farm (First Edition),books,rare books,trading,premium_to_offering,1.3450000000000002,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 ALICE,Lewis Carroll - Alice's Adventures in Wonderland (First Edition),books,rare books,trading,premium_to_offering,1.0,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 MEGALODON,Megalodon Fossil,fossils,shark,trading,premium_to_offering,-0.7025,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 MARX,Karl Marx - Das Kapital (First Edition),books,rare books,trading,premium_to_offering,-0.6933333333333334,,Live Rally market cap compared with SEC offering cap.,2026-07-02
@@ -23,4 +24,3 @@ BIRKINBOR,Hermès 35cm Bordeaux Crocodile Birkin,handbags,birkin_crocodile,tradi
 KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whiskey,japanese whisky,trading,premium_to_offering,-0.35,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 SHKSPR4,"Shakespeare - Comedies, Histories & Tragedies",books,rare books,trading,premium_to_offering,-0.34782608695652173,,Live Rally market cap compared with SEC offering cap.,2026-07-02
 RIVIERA,1965 Rolex 1601 Datejust Joyera Riviera,watches,rolex,trading,premium_to_offering,-0.33999999999999997,,Live Rally market cap compared with SEC offering cap.,2026-07-02
-HIMALAYA,Hermès 30cm Himalaya Birkin,handbags,birkin_himalaya,trading,premium_to_offering,-0.32999999999999996,,Live Rally market cap compared with SEC offering cap.,2026-07-02
