@@ -81,5 +81,5 @@ rally-twocities,TWOCITIES,Charles Dickens - A Tale of Two Cities (First Edition)
 rally-ulysses,ULYSSES,James Joyce - Ulysses (Matisse Signed),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-walden,WALDEN,Henry David Thoreau - Walden (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-wildthing,WILDTHING,Where the Wild Things Are (Inscribed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
-rally-wzrdofoz,WZRDOFOZ,The Wonderful Wizard of Oz (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-wzrdofoz,WZRDOFOZ,The Wonderful Wizard of Oz (First Edition),books,trading,active_tradable,True,True,False,True,19,2021-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-yoko,YOKO,Yoko Ono - Grapefruit (Signed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
