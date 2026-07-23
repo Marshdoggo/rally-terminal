@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1066 |
-| Processed price history | 1005 |
-| General Rally index rows | 446 |
+| Normalized manual price observations | 1085 |
+| Processed price history | 1023 |
+| General Rally index rows | 448 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -170,6 +170,11 @@ The normalized Rally price observations now include manually transcribed chart c
 ## Manual Books Price Coverage Update (ROOSEVELT, 2026-07-22)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-roosevelt` (`#ROOSEVELT`), Theodore Roosevelt - African Game Trails (Signed First Edition). The history preserves the actual observed Rally dates from the March 2020 offering reference value through the June 30, 2026 Q2 observation at $19.80 per share / $19,800 total value. Market caps are validated against the existing 1,000-share master record. The April 13, 2021 and January 31, 2022 observations are normalized to the March 31, 2021 and December 31, 2021 periods, respectively, as nearest available after-quarter observations. ROOSEVELT now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (WZRDOFOZ, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-wzrdofoz` (`#WZRDOFOZ`), The Wonderful Wizard of Oz, First Edition. The history preserves the actual observed Rally dates from the April 2021 offering reference value through the June 29, 2026 Q2 observation at $6.15 per share / $36,900 total value. Market caps are validated against the existing 6,000-share master record. No Q4 2022 observation is imputed because none was supplied. WZRDOFOZ now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 
