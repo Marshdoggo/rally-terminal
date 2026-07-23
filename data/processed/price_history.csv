@@ -655,6 +655,23 @@ date,asset_id,bid,ask,last,volume,market_cap_usd,source,event_type,precision_sta
 2025-12-30,rally-karuizawa,,,3.0,0,39000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2025-12-30T00:00:00Z,2025-12-31,quarterly
 2026-03-27,rally-karuizawa,,,3.0,0,39000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-03-27T00:00:00Z,2026-03-31,quarterly
 2026-06-29,rally-karuizawa,,,3.25,0,42250.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-06-29T00:00:00Z,2026-06-30,quarterly
+2022-10-03,rally-keller,,,5.0,0,15000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2022-10-03T00:00:00Z,2022-09-30,quarterly
+2022-12-29,rally-keller,,,3.95,0,11850.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2022-12-29T00:00:00Z,2022-12-31,quarterly
+2023-03-30,rally-keller,,,2.95,0,8850.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2023-03-30T00:00:00Z,2023-03-31,quarterly
+2023-06-29,rally-keller,,,3.95,0,11850.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2023-06-29T00:00:00Z,2023-06-30,quarterly
+2023-09-28,rally-keller,,,3.85,0,11550.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2023-09-28T00:00:00Z,2023-09-30,quarterly
+2023-12-29,rally-keller,,,1.95,0,5850.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2023-12-29T00:00:00Z,2023-12-31,quarterly
+2024-03-27,rally-keller,,,2.95,0,8850.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2024-03-27T00:00:00Z,2024-03-31,quarterly
+2024-06-26,rally-keller,,,2.5,0,7500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2024-06-26T00:00:00Z,2024-06-30,quarterly
+2024-09-30,rally-keller,,,3.75,0,11250.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2024-09-30T00:00:00Z,2024-09-30,quarterly
+2024-12-30,rally-keller,,,2.5,0,7500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2024-12-30T00:00:00Z,2024-12-31,quarterly
+2025-03-31,rally-keller,,,3.55,0,10650.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2025-03-31T00:00:00Z,2025-03-31,quarterly
+2025-06-30,rally-keller,,,3.0,0,9000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2025-06-30T00:00:00Z,2025-06-30,quarterly
+2025-09-29,rally-keller,,,3.0,0,9000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2025-09-29T00:00:00Z,2025-09-30,quarterly
+2025-12-29,rally-keller,,,2.5,0,7500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2025-12-29T00:00:00Z,2025-12-31,quarterly
+2026-03-30,rally-keller,,,2.0,0,6000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2026-03-30T00:00:00Z,2026-03-31,quarterly
+2026-06-29,rally-keller,,,2.5,0,7500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2026-06-29T00:00:00Z,2026-06-30,quarterly
+2026-07-08,rally-keller,,,3.55,0,10650.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided KELLER manual price history,2026-07-08T00:00:00Z,2026-09-30,weekly
 2020-09-29,rally-lotr,,,32.0,0,32000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Manually transcribed Rally LOTR price history supplied 2026-07-22,2020-09-29T00:00:00Z,2020-09-30,quarterly
 2020-12-29,rally-lotr,,,35.5,0,35500.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Manually transcribed Rally LOTR price history supplied 2026-07-22,2020-12-29T00:00:00Z,2020-12-31,quarterly
 2021-04-13,rally-lotr,,,50.0,0,50000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Manually transcribed Rally LOTR price history supplied 2026-07-22,2021-04-13T00:00:00Z,2021-03-31,quarterly
