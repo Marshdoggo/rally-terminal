@@ -5362,5 +5362,101 @@
     "started_at": "2026-07-23T17:23:20Z",
     "status": "completed",
     "warning_count": 0
+  },
+  {
+    "accepted_rows": 84,
+    "completed_at": "2026-07-23T17:30:47Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets_empty.csv",
+    "input_hash": "a77abfc4dde75a7c38a97c23d2d54a058329d21d558af7a20fdd205cfd2689bc",
+    "rejected_rows": 0,
+    "run_id": "66db09a3f5cbed92",
+    "started_at": "2026-07-23T17:30:47Z",
+    "status": "completed",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 1102,
+    "completed_at": "2026-07-23T17:30:47Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "gwtw_prices.csv",
+    "input_hash": "ecc3d56baa0719eb0e6219cf04c1a9e0511a524986bd9abcca3d0c1aa0bada7c",
+    "rejected_rows": 0,
+    "run_id": "38eb843ac83a3c6b",
+    "started_at": "2026-07-23T17:30:47Z",
+    "status": "completed",
+    "warning_count": 18
+  },
+  {
+    "accepted_rows": 1,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets.csv",
+    "input_hash": "a746fb7d3f0dbc8bf5d2a5ee682e7ddfd35a990caf4232d71c803646646052a0",
+    "rejected_rows": 0,
+    "run_id": "001003d8d66083ea",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 1,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets.csv",
+    "input_hash": "a746fb7d3f0dbc8bf5d2a5ee682e7ddfd35a990caf4232d71c803646646052a0",
+    "rejected_rows": 0,
+    "run_id": "001003d8d66083ea",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 1,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "prices.csv",
+    "input_hash": "3d0562e3bfd18b4caeca798af561fd04c5a9a64c465bd4b92c840263e1982620",
+    "rejected_rows": 0,
+    "run_id": "f664f25f425ab98e",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 0,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets.csv",
+    "input_hash": "c0168d7c3eb45682b278ccce443e770dc6259c3704a45d297a781232473f626d",
+    "rejected_rows": 1,
+    "run_id": "51245fd498017f2c",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed_with_rejections",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 1,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets.csv",
+    "input_hash": "a746fb7d3f0dbc8bf5d2a5ee682e7ddfd35a990caf4232d71c803646646052a0",
+    "rejected_rows": 0,
+    "run_id": "001003d8d66083ea",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed",
+    "warning_count": 0
+  },
+  {
+    "accepted_rows": 1,
+    "completed_at": "2026-07-23T17:33:51Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "assets.csv",
+    "input_hash": "a746fb7d3f0dbc8bf5d2a5ee682e7ddfd35a990caf4232d71c803646646052a0",
+    "rejected_rows": 0,
+    "run_id": "001003d8d66083ea",
+    "started_at": "2026-07-23T17:33:51Z",
+    "status": "completed",
+    "warning_count": 0
   }
 ]

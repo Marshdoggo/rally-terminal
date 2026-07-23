@@ -39,3 +39,5 @@ b47a839dd1cf1875,lotr_price_history.csv,fe16f55879bc6a287c7e81fbba5b8da69547e945
 d2f9cfc592f19098,newton_prices.csv,f0264413b17fa7d98999bf1e6853e92c58d49378e04cea3ab77ccb12b3cc0198,2026-07-22T21:22:56Z,2026-07-22T21:22:56Z,1023,0,23,manual-import-v2-quarterly,completed
 21005a6ccb40c2a1,rally_asset_master_manual.csv,a77abfc4dde75a7c38a97c23d2d54a058329d21d558af7a20fdd205cfd2689bc,2026-07-23T17:20:09Z,2026-07-23T17:20:09Z,84,0,0,manual-import-v2-quarterly,completed
 12d8281993e6b9fa,rally_quarterly_prices_manual.csv,2e38cc28e1f83ec6183f7c8bedd9d30c144df2c16d941d5c7367706e46f99383,2026-07-23T17:20:09Z,2026-07-23T17:20:09Z,1085,0,21,manual-import-v2-quarterly,completed
+66db09a3f5cbed92,assets_empty.csv,a77abfc4dde75a7c38a97c23d2d54a058329d21d558af7a20fdd205cfd2689bc,2026-07-23T17:30:47Z,2026-07-23T17:30:47Z,84,0,0,manual-import-v2-quarterly,completed
+38eb843ac83a3c6b,gwtw_prices.csv,ecc3d56baa0719eb0e6219cf04c1a9e0511a524986bd9abcca3d0c1aa0bada7c,2026-07-23T17:30:47Z,2026-07-23T17:30:47Z,1102,0,18,manual-import-v2-quarterly,completed
