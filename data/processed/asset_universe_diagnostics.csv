@@ -39,7 +39,7 @@ rally-dune,DUNE,Frank Herbert - Dune (Inscribed First Edition),books,trading,act
 rally-faubourg,FAUBOURG,Hermès Faubourg,handbags,sold,exited,True,False,True,True,11,2020-09-30,2023-06-30,True,True,True,included,True,True,True,True
 rally-faubourg2,FAUBOURG2,Hermès Faubourg 2,handbags,sold,exited,True,False,True,True,16,2021-03-31,2025-03-31,True,True,True,included,True,True,True,True
 rally-frost,FROST,Robert Frost - A Boy's Will (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
-rally-gatsby,GATSBY,The Great Gatsby (Signed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-gatsby,GATSBY,The Great Gatsby (Signed First Edition),books,trading,active_tradable,True,True,False,True,23,2020-09-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-gmtblack1,GMTBLACK1,1983 Rolex GMT-Master Nipple Dial,watches,trading,active_tradable,True,True,False,True,25,2020-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-grapes,GRAPES,John Steinbeck - The Grapes of Wrath (Inscribed First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-gwtw,GWTW,Gone with the Wind (Inscribed First Printing),books,trading,active_tradable,True,True,False,True,17,2022-03-31,2026-06-30,True,True,True,included,True,True,True,False

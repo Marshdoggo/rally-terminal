@@ -38,8 +38,8 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1157 |
-| Processed price history | 1091 |
+| Normalized manual price observations | 1180 |
+| Processed price history | 1113 |
 | General Rally index rows | 454 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
@@ -191,6 +191,11 @@ The normalized Rally price observations now include manually transcribed Rally c
 ## Manual Books Price Coverage Update (JEKYLL, 2026-07-23)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-jekyll` (`#JEKYLL`), Robert Louis Stevenson's Dr. Jekyll and Mr. Hyde, First Edition. The history preserves the actual observed Rally dates from the August 2022 offering reference value through the June 30, 2026 Q2 observation at $2.80 per share / $14,000 total value. Market caps are validated against the existing 5,000-share master record. No observations are imputed for missing quarters. JEKYLL now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (GATSBY, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed Rally chart coverage for existing Books asset `rally-gatsby` (`#GATSBY`), The Great Gatsby (Signed First Edition). The history preserves actual observed Rally dates from the September 2020 offering reference value through the June 26, 2026 Q2 observation at $24.00 per share / $96,000 total value. Market caps are validated against the existing 4,000-share master record. The January 3, 2022 observation is normalized to the December 31, 2021 period as the nearest available after-quarter observation so the March 29, 2022 quote remains the Q1 2022 observation. No observations are imputed for missing quarters. GATSBY now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 
