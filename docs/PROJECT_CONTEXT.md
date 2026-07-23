@@ -38,9 +38,9 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1196 |
-| Processed price history | 1128 |
-| General Rally index rows | 456 |
+| Normalized manual price observations | 1216 |
+| Processed price history | 1147 |
+| General Rally index rows | 458 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
 | Rally exits | 0 |
@@ -201,6 +201,10 @@ The normalized Rally price observations now include manually transcribed Rally c
 ## Manual Books Price Coverage Update (TREASURE, 2026-07-23)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-treasure` (`#TREASURE`), Robert Louis Stevenson's Treasure Island, First Edition. The history preserves the actual observed Rally dates from the May 2022 offering reference value through the June 29, 2026 Q2 observation at $3.10 per share / $13,950 total value. Market caps are validated against the existing 4,500-share master record. No observations are imputed for missing quarters, including Q3 2022. TREASURE now has sufficient secondary quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+## Manual Books Price Coverage Update (MARX, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-marx` (`#MARX`), Karl Marx's Das Kapital, First Edition. The history preserves the actual observed Rally dates from the October 2021 offering reference value through the June 25, 2026 Q2 observation at $4.60 per share / $36,800 total value. Market caps are validated against the existing 8,000-share master record. The February 22, 2022 observation is normalized to the December 31, 2021 period as the nearest available after-quarter observation so the March 29, 2022 quote remains the Q1 2022 observation. No observations are imputed for missing quarters. MARX now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 
