@@ -1,6 +1,6 @@
 # Rally Terminal Project Context
 
-Last audited: 2026-07-22
+Last audited: 2026-07-23
 Verification baseline: Python 3.11, Streamlit 1.51.0, pandas 2.3.3, lxml 6.1.1
 
 ## Purpose And Product State
@@ -38,8 +38,8 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1216 |
-| Processed price history | 1147 |
+| Normalized manual price observations | 1235 |
+| Processed price history | 1165 |
 | General Rally index rows | 458 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
@@ -205,6 +205,10 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (MARX, 2026-07-23)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-marx` (`#MARX`), Karl Marx's Das Kapital, First Edition. The history preserves the actual observed Rally dates from the October 2021 offering reference value through the June 25, 2026 Q2 observation at $4.60 per share / $36,800 total value. Market caps are validated against the existing 8,000-share master record. The February 22, 2022 observation is normalized to the December 31, 2021 period as the nearest available after-quarter observation so the March 29, 2022 quote remains the Q1 2022 observation. No observations are imputed for missing quarters. MARX now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+## Manual Books Price Coverage Update (WILDTHING, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-wildthing` (`#WILDTHING`), Maurice Sendak's Where the Wild Things Are, Inscribed First Edition. The history preserves the actual observed Rally dates from the October 2021 offering reference value through the June 25, 2026 Q2 observation at $6.95 per share / $13,900 total value. Market caps are validated against the existing 2,000-share master record. No observations are imputed for missing quarters. WILDTHING now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 

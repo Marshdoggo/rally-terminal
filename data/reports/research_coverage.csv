@@ -80,6 +80,6 @@ rally-treasure,TREASURE,Treasure Island (First Edition),books,True,True,True,202
 rally-twocities,TWOCITIES,Charles Dickens - A Tale of Two Cities (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-ulysses,ULYSSES,James Joyce - Ulysses (Matisse Signed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-walden,WALDEN,Henry David Thoreau - Walden (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-wildthing,WILDTHING,Where the Wild Things Are (Inscribed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-wildthing,WILDTHING,Where the Wild Things Are (Inscribed First Edition),books,True,True,True,2022-03-29,2026-06-25,18,18,0,0,0,,,,95.0,True,True,,19,,18,,2022-03-31,2026-06-30,,,18,18
 rally-wzrdofoz,WZRDOFOZ,The Wonderful Wizard of Oz (First Edition),books,True,True,True,2021-10-05,2026-06-29,18,18,0,0,0,,,,183.0,True,True,,19,,18,,2021-12-31,2026-06-30,,,18,18
 rally-yoko,YOKO,Yoko Ono - Grapefruit (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
