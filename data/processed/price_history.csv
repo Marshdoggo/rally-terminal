@@ -560,6 +560,22 @@ date,asset_id,bid,ask,last,volume,market_cap_usd,source,event_type,precision_sta
 2025-12-30,rally-gmtblack1,,,21.0,0,21000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2025-12-30T00:00:00Z,2025-12-31,quarterly
 2026-03-27,rally-gmtblack1,,,27.6,0,27600.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-03-27T00:00:00Z,2026-03-31,quarterly
 2026-06-30,rally-gmtblack1,,,28.5,0,28500.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-06-30T00:00:00Z,2026-06-30,quarterly
+2022-09-26,rally-gwtw,,,4.0,0,20000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2022-09-26T00:00:00Z,2022-09-30,quarterly
+2022-12-30,rally-gwtw,,,4.85,0,24250.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2022-12-30T00:00:00Z,2022-12-31,quarterly
+2023-03-29,rally-gwtw,,,3.25,0,16250.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2023-03-29T00:00:00Z,2023-03-31,quarterly
+2023-06-30,rally-gwtw,,,3.3,0,16500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2023-06-30T00:00:00Z,2023-06-30,quarterly
+2023-09-26,rally-gwtw,,,4.0,0,20000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2023-09-26T00:00:00Z,2023-09-30,quarterly
+2023-12-29,rally-gwtw,,,2.9,0,14500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2023-12-29T00:00:00Z,2023-12-31,quarterly
+2024-03-28,rally-gwtw,,,2.5,0,12500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2024-03-28T00:00:00Z,2024-03-31,quarterly
+2024-06-25,rally-gwtw,,,2.55,0,12750.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2024-06-25T00:00:00Z,2024-06-30,quarterly
+2024-09-26,rally-gwtw,,,2.75,0,13750.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2024-09-26T00:00:00Z,2024-09-30,quarterly
+2024-12-27,rally-gwtw,,,2.95,0,14750.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2024-12-27T00:00:00Z,2024-12-31,quarterly
+2025-03-31,rally-gwtw,,,2.55,0,12750.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2025-03-31T00:00:00Z,2025-03-31,quarterly
+2025-06-26,rally-gwtw,,,2.6,0,13000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2025-06-26T00:00:00Z,2025-06-30,quarterly
+2025-09-26,rally-gwtw,,,1.9,0,9500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2025-09-26T00:00:00Z,2025-09-30,quarterly
+2025-12-29,rally-gwtw,,,4.0,0,20000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2025-12-29T00:00:00Z,2025-12-31,quarterly
+2026-03-26,rally-gwtw,,,3.75,0,18750.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2026-03-26T00:00:00Z,2026-03-31,quarterly
+2026-06-26,rally-gwtw,,,3.4,0,17000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally GWTW price history,2026-06-26T00:00:00Z,2026-06-30,quarterly
 2021-11-01,rally-hgwells,,,5.85,0,43875.0,manual:chart_observation:chart_estimate:manual_research,chart_observation,chart_estimate,User supplied Rally quarterly chart transcription for #HGWELLS,2021-11-01T00:00:00Z,2021-09-30,quarterly
 2022-03-29,rally-hgwells,,,4.0,0,30000.0,manual:chart_observation:chart_estimate:manual_research,chart_observation,chart_estimate,User supplied Rally quarterly chart transcription for #HGWELLS,2022-03-29T00:00:00Z,2022-03-31,quarterly
 2022-06-27,rally-hgwells,,,4.25,0,31875.0,manual:chart_observation:chart_estimate:manual_research,chart_observation,chart_estimate,User supplied Rally quarterly chart transcription for #HGWELLS,2022-06-27T00:00:00Z,2022-06-30,quarterly

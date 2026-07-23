@@ -38,8 +38,8 @@ Current generated snapshot after removing legacy demo/SEC-synthesized rows from 
 | Canonical asset master | 84 |
 | Rally asset decision universe | 84 |
 | Normalized manual assets | 84 |
-| Normalized manual price observations | 1085 |
-| Processed price history | 1023 |
+| Normalized manual price observations | 1102 |
+| Processed price history | 1039 |
 | General Rally index rows | 448 |
 | Quarterly Rally index rows | 306 |
 | SEC series context | 0 |
@@ -175,6 +175,11 @@ The normalized Rally price observations now include manually transcribed quarter
 ## Manual Books Price Coverage Update (WZRDOFOZ, 2026-07-23)
 
 The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-wzrdofoz` (`#WZRDOFOZ`), The Wonderful Wizard of Oz, First Edition. The history preserves the actual observed Rally dates from the April 2021 offering reference value through the June 29, 2026 Q2 observation at $6.15 per share / $36,900 total value. Market caps are validated against the existing 6,000-share master record. No Q4 2022 observation is imputed because none was supplied. WZRDOFOZ now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
+
+
+## Manual Books Price Coverage Update (GWTW, 2026-07-23)
+
+The normalized Rally price observations now include manually transcribed quarterly chart coverage for existing Books asset `rally-gwtw` (`#GWTW`), Gone with the Wind (Inscribed First Printing). The history preserves the actual observed Rally dates from the February 2022 offering reference value through the June 26, 2026 Q2 observation at $3.40 per share / $17,000 total value. Market caps are validated against the existing 5,000-share master record. No observations are imputed for missing quarters. GWTW now has sufficient quarterly price and market-cap history to participate in the Books equal-weight and market-cap-weighted historical index prototypes where the methodology permits.
 
 ## Market Table Return Screening Update (2026-07-22)
 
