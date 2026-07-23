@@ -5458,5 +5458,17 @@
     "started_at": "2026-07-23T17:33:51Z",
     "status": "completed",
     "warning_count": 0
+  },
+  {
+    "accepted_rows": 1179,
+    "completed_at": "2026-07-23T18:14:46Z",
+    "importer_version": "manual-import-v2-quarterly",
+    "input_filename": "rally_gatsby_price_history.csv",
+    "input_hash": "37ce667017f2116f63e39926bc02c08c940664d6c7795eac76460ce3d4cc9465",
+    "rejected_rows": 1,
+    "run_id": "962a1cadc161f1fd",
+    "started_at": "2026-07-23T18:14:46Z",
+    "status": "completed_with_rejections",
+    "warning_count": 27
   }
 ]
