@@ -48,7 +48,7 @@ rally-himalaya,HIMALAYA,Hermès 30cm Himalaya Birkin,handbags,True,True,True,202
 rally-holmes,HOLMES,Arthur Conan Doyle - Adventures & Memoirs of Sherlock Holmes,books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-huckfinn,HUCKFINN,Mark Twain - Adventures of Huckleberry Finn (First Edition),books,True,True,True,2021-10-28,2026-06-29,19,19,0,0,0,,,,184.0,True,True,,3,,19,,2021-09-30,2026-06-30,,,19,2
 rally-irobot,IROBOT,"Isaac Asimov - I, Robot (First Edition)",books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-jekyll,JEKYLL,Dr. Jekyll and Mr. Hyde (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-jekyll,JEKYLL,Dr. Jekyll and Mr. Hyde (First Edition),books,True,True,True,2022-12-28,2026-06-30,15,15,0,0,0,,,,97.0,True,True,,16,,15,,2022-12-31,2026-06-30,,,15,15
 rally-karuizawa,KARUIZAWA,Karuizawa Aqua of Life 50-Year-Old Whisky,wine and whiskey,True,True,True,2022-03-31,2026-06-29,18,18,0,0,0,,,,94.0,True,True,,19,,18,,2022-03-31,2026-06-30,,,18,18
 rally-keller,KELLER,Helen Keller 1892 Book (Inscribed),books,True,True,True,2022-10-03,2026-07-08,17,17,0,0,0,,,,96.0,True,True,,18,,17,,2022-09-30,2026-09-30,,,17,17
 rally-kerouac,KEROUAC,Jack Kerouac - On the Road (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
