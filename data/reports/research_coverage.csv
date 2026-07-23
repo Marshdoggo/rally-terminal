@@ -28,7 +28,7 @@ rally-birkintan,BIRKINTAN,Hermès 30cm Tangerine Ostrich Birkin,handbags,True,Tr
 rally-bond1,BOND1,Ian Fleming - Casino Royale (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-bondwatch,BONDWATCH,Pierce Brosnan Omega Seamaster James Bond Film-Worn Watch,watches,True,True,True,2022-10-10,2026-06-29,16,16,0,0,0,,,,95.0,True,True,,17,,16,,2022-09-30,2026-06-30,,,16,16
 rally-bradbury,BRADBURY,Ray Bradbury - Fahrenheit 451 (Signed First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
-rally-brosgrimm,BROSGRIMM,Grimms' Fairy Tales (Inscribed),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
+rally-brosgrimm,BROSGRIMM,Grimms' Fairy Tales (Inscribed),books,True,True,True,2022-01-24,2026-07-23,20,20,0,0,0,,,,96.0,True,True,,21,,20,,2021-12-31,2026-07-23,,,20,20
 rally-catcher,CATCHER,J.D. Salinger - The Catcher in the Rye (First Edition),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
 rally-churchill,CHURCHILL,Winston Churchill - The Second World War (Signed First Edition),books,True,True,True,2020-11-17,2026-06-24,23,23,0,0,0,,,,141.0,True,True,,24,,23,,2020-12-31,2026-06-30,,,23,23
 rally-congress,CONGRESS,Journals of the Continental Congress (1774–1775),books,True,True,True,,,0,0,0,0,0,,,,,False,False,missing_secondary_price_observation; missing_observed_market_cap,3,,0,,,,,,0,0
