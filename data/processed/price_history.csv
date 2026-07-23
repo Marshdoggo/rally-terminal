@@ -802,6 +802,25 @@ date,asset_id,bid,ask,last,volume,market_cap_usd,source,event_type,precision_sta
 2025-12-29,rally-macallan3,,,6.3,0,25830.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2025-12-29T00:00:00Z,2025-12-31,quarterly
 2026-03-27,rally-macallan3,,,6.3,0,25830.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-03-27T00:00:00Z,2026-03-31,quarterly
 2026-06-26,rally-macallan3,,,6.3,0,25830.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2026-06-26T00:00:00Z,2026-06-30,quarterly
+2022-02-22,rally-marx,,,14.0,0,112000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2022-02-22T00:00:00Z,2021-12-31,quarterly
+2022-03-29,rally-marx,,,10.2,0,81600.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2022-03-29T00:00:00Z,2022-03-31,quarterly
+2022-06-27,rally-marx,,,9.0,0,72000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2022-06-27T00:00:00Z,2022-06-30,quarterly
+2022-09-29,rally-marx,,,7.5,0,60000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2022-09-29T00:00:00Z,2022-09-30,quarterly
+2022-12-30,rally-marx,,,7.0,0,56000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2022-12-30T00:00:00Z,2022-12-31,quarterly
+2023-03-31,rally-marx,,,8.5,0,68000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2023-03-31T00:00:00Z,2023-03-31,quarterly
+2023-06-28,rally-marx,,,7.95,0,63600.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2023-06-28T00:00:00Z,2023-06-30,quarterly
+2023-09-29,rally-marx,,,7.3,0,58400.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2023-09-29T00:00:00Z,2023-09-30,quarterly
+2023-12-29,rally-marx,,,6.65,0,53200.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2023-12-29T00:00:00Z,2023-12-31,quarterly
+2024-03-26,rally-marx,,,6.25,0,50000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2024-03-26T00:00:00Z,2024-03-31,quarterly
+2024-06-28,rally-marx,,,6.0,0,48000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2024-06-28T00:00:00Z,2024-06-30,quarterly
+2024-09-30,rally-marx,,,7.1,0,56800.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2024-09-30T00:00:00Z,2024-09-30,quarterly
+2024-12-27,rally-marx,,,7.0,0,56000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2024-12-27T00:00:00Z,2024-12-31,quarterly
+2025-03-27,rally-marx,,,5.5,0,44000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2025-03-27T00:00:00Z,2025-03-31,quarterly
+2025-06-30,rally-marx,,,6.5,0,52000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2025-06-30T00:00:00Z,2025-06-30,quarterly
+2025-09-26,rally-marx,,,5.9,0,47200.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2025-09-26T00:00:00Z,2025-09-30,quarterly
+2025-12-30,rally-marx,,,5.05,0,40400.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2025-12-30T00:00:00Z,2025-12-31,quarterly
+2026-03-27,rally-marx,,,5.2,0,41600.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2026-03-27T00:00:00Z,2026-03-31,quarterly
+2026-06-25,rally-marx,,,4.6,0,36800.0,manual:chart_observation:exact:manual_research,chart_observation,exact,User-provided MARX manual Rally price history,2026-06-25T00:00:00Z,2026-06-30,quarterly
 2022-12-30,rally-megalodon,,,4.5,0,135000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2022-12-30T00:00:00Z,2022-12-31,quarterly
 2023-03-29,rally-megalodon,,,4.75,0,142500.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2023-03-29T00:00:00Z,2023-03-31,quarterly
 2023-06-30,rally-megalodon,,,5.0,0,150000.0,manual:chart_observation:exact:rally_app_chart,chart_observation,exact,Rally App,2023-06-30T00:00:00Z,2023-06-30,quarterly
