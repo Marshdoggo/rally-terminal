@@ -1128,6 +1128,24 @@ date,asset_id,bid,ask,last,volume,market_cap_usd,source,event_type,precision_sta
 2025-12-29,rally-treasure,,,2.85,0,12825.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally TREASURE price history,2025-12-29T00:00:00Z,2025-12-31,quarterly
 2026-03-27,rally-treasure,,,3.0,0,13500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally TREASURE price history,2026-03-27T00:00:00Z,2026-03-31,quarterly
 2026-06-29,rally-treasure,,,3.1,0,13950.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally TREASURE price history,2026-06-29T00:00:00Z,2026-06-30,quarterly
+2022-03-29,rally-wildthing,,,8.75,0,17500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2022-03-29T00:00:00Z,2022-03-31,quarterly
+2022-06-24,rally-wildthing,,,7.0,0,14000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2022-06-24T00:00:00Z,2022-06-30,quarterly
+2022-09-27,rally-wildthing,,,7.0,0,14000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2022-09-27T00:00:00Z,2022-09-30,quarterly
+2022-12-30,rally-wildthing,,,6.5,0,13000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2022-12-30T00:00:00Z,2022-12-31,quarterly
+2023-03-28,rally-wildthing,,,7.15,0,14300.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2023-03-28T00:00:00Z,2023-03-31,quarterly
+2023-06-30,rally-wildthing,,,5.25,0,10500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2023-06-30T00:00:00Z,2023-06-30,quarterly
+2023-09-26,rally-wildthing,,,6.2,0,12400.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2023-09-26T00:00:00Z,2023-09-30,quarterly
+2023-12-29,rally-wildthing,,,4.1,0,8200.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2023-12-29T00:00:00Z,2023-12-31,quarterly
+2024-03-26,rally-wildthing,,,6.25,0,12500.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2024-03-26T00:00:00Z,2024-03-31,quarterly
+2024-06-28,rally-wildthing,,,7.15,0,14300.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2024-06-28T00:00:00Z,2024-06-30,quarterly
+2024-09-30,rally-wildthing,,,7.0,0,14000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2024-09-30T00:00:00Z,2024-09-30,quarterly
+2024-12-27,rally-wildthing,,,5.2,0,10400.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2024-12-27T00:00:00Z,2024-12-31,quarterly
+2025-03-31,rally-wildthing,,,5.35,0,10700.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2025-03-31T00:00:00Z,2025-03-31,quarterly
+2025-06-27,rally-wildthing,,,5.05,0,10100.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2025-06-27T00:00:00Z,2025-06-30,quarterly
+2025-09-29,rally-wildthing,,,5.0,0,10000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2025-09-29T00:00:00Z,2025-09-30,quarterly
+2025-12-31,rally-wildthing,,,7.35,0,14700.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2025-12-31T00:00:00Z,2025-12-31,quarterly
+2026-03-30,rally-wildthing,,,6.95,0,13900.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2026-03-30T00:00:00Z,2026-03-31,quarterly
+2026-06-25,rally-wildthing,,,6.95,0,13900.0,manual:chart_observation:exact:manual_research,chart_observation,exact,Rally App manually transcribed chart,2026-06-25T00:00:00Z,2026-06-30,quarterly
 2021-10-05,rally-wzrdofoz,,,14.65,0,87900.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally WZRDOFOZ price history,2021-10-05T00:00:00Z,2021-12-31,quarterly
 2022-03-29,rally-wzrdofoz,,,8.5,0,51000.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally WZRDOFOZ price history,2022-03-29T00:00:00Z,2022-03-31,quarterly
 2022-06-28,rally-wzrdofoz,,,7.3,0,43800.0,manual:chart_observation:exact:manual_research,chart_observation,exact,user-provided manual Rally WZRDOFOZ price history,2022-06-28T00:00:00Z,2022-06-30,quarterly
