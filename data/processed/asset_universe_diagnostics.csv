@@ -76,7 +76,7 @@ rally-soblack,SOBLACK,Hermès 30cm So Black Birkin,handbags,trading,active_trada
 rally-steg,STEG,BCQ-24 Stegosaurus Skeleton,fossils,sold,exited,True,False,True,False,0,,,False,True,True,included,False,False,False,True
 rally-tkam,TKAM,Harper Lee - To Kill a Mockingbird (Signed First Edition),books,trading,active_tradable,False,True,False,False,0,,,False,True,False,not_production_asset,False,False,False,False
 rally-tornek,TORNEK,Tornek-Rayville TR-900,watches,trading,active_tradable,True,True,False,True,21,2020-12-31,2026-06-30,True,True,True,included,True,True,True,False
-rally-treasure,TREASURE,Treasure Island (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
+rally-treasure,TREASURE,Treasure Island (First Edition),books,trading,active_tradable,True,True,False,True,16,2022-06-30,2026-06-30,True,True,True,included,True,True,True,False
 rally-twocities,TWOCITIES,Charles Dickens - A Tale of Two Cities (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-ulysses,ULYSSES,James Joyce - Ulysses (Matisse Signed),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
 rally-walden,WALDEN,Henry David Thoreau - Walden (First Edition),books,trading,active_tradable,True,True,False,False,0,,,False,True,True,included,False,False,False,False
